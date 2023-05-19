@@ -1,24 +1,13 @@
-# README
+# Takin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install for developpers
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+``` shell
+git clone git@github.com:ueno12345/Takin.git
+cd Takin
+bundle install
+bundle exec rake db:migrate RAILS_ENV=development
+# 以下追加予定
+# Insert dummy data:
+# bin/rails runner scripts/create_dummy_data.rb
+```
