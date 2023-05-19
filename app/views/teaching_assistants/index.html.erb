@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Teaching assistants</h1>
+
+<div id="teaching_assistants">
+  <% @teaching_assistants.each do |teaching_assistant| %>
+    <%= render teaching_assistant %>
+    <p>
+      <%= link_to "Show this teaching assistant", teaching_assistant %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New teaching assistant", new_teaching_assistant_path %>
