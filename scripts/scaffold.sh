@@ -4,6 +4,7 @@
 
 rails=./bin/rails
 
+$rails generate scaffold user account_name:string password:string admin_flag:string --force
 $rails generate scaffold course year:integer term:string number:string name:string instructor:string time_budget:integer description:string --force
 $rails generate scaffold teaching_assistant year:integer number:string name:string grade:string labo:string description:string --force
 $rails generate scaffold assignment course:references teaching_assistant:references description:string --force

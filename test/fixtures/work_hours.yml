@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  dtstart: 2023-05-19 17:58:41
-  dtend: 2023-05-19 17:58:41
+  dtstart: 2023-05-22 14:35:46
+  dtend: 2023-05-22 14:35:46
   actual_working_minutes: 1
   assignment: one
 
 two:
-  dtstart: 2023-05-19 17:58:41
-  dtend: 2023-05-19 17:58:41
+  dtstart: 2023-05-22 14:35:46
+  dtend: 2023-05-22 14:35:46
   actual_working_minutes: 1
   assignment: two
