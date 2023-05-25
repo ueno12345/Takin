@@ -1,0 +1,10 @@
+<h1>新規科目マスタデータ削除</h1>
+
+<div id="courses">
+  <% @courses.each do |course| %>
+    <%= render course %>
+    <p>
+      <%= button_to "削除", course, method: :delete %>
+    </p>
+  <% end %>
+</div>

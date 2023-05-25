@@ -2,18 +2,14 @@
 
 <h1>科目一覧画面</h1>
 
-<%= form_tag import_courses_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "インポート" %>
-<% end %>
-
 <div id="courses">
   <% @courses.each do |course| %>
     <%= render course %>
     <p>
-      <%= link_to "Show this course", course %>
+      <%= link_to "詳細", course %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New course", new_course_path %>
+<%= link_to "新規科目データを追加", new_course_path %>
+<%= link_to "科目マスタデータ削除", remove_courses_path %>

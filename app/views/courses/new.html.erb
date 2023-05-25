@@ -1,9 +1,14 @@
-<h1>New course</h1>
+<h1>新規科目マスタデータ追加</h1>
 
 <%= render "form", course: @course %>
 
 <br>
 
+<%= form_tag import_courses_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "登録" %>
+<% end %>
+
 <div>
-  <%= link_to "Back to courses", courses_path %>
+  <%= link_to "科目一覧に戻る", courses_path %>
 </div>

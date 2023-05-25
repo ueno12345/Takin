@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :teaching_assistants do
     collection {post :import}
   end
+
+  get '/courses/remove', to: 'courses#remove', as: 'remove_courses'
   resources :courses do
     collection {post :import}
   end
