@@ -1,6 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Teaching assistants</h1>
+<h1>TA一覧画面</h1>
+
+<%= form_tag import_teaching_assistants_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
 
 <div id="teaching_assistants">
   <% @teaching_assistants.each do |teaching_assistant| %>

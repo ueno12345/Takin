@@ -1,6 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Courses</h1>
+<h1>科目一覧画面</h1>
+
+<%= form_tag import_courses_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
 
 <div id="courses">
   <% @courses.each do |course| %>
