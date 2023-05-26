@@ -4,6 +4,11 @@
 
 <br>
 
+<%= form_tag import_teaching_assistants_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "登録" %>
+<% end %>
+
 <div>
-  <%= link_to "Back to teaching assistants", teaching_assistants_path %>
+  <%= link_to "TA一覧に戻る", teaching_assistants_path %>
 </div>

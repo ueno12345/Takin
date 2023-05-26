@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :users
   resources :work_hours
   resources :assignments
+  
+  get '/teaching_assistants/remove', to: 'teaching_assistants#remove', as: 'remove_teaching_assistants'
   resources :teaching_assistants do
     collection {post :import}
   end

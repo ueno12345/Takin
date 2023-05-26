@@ -1,0 +1,10 @@
+<h1>新規TAマスタデータ削除</h1>
+
+<div id="teaching_assistants">
+  <% @teaching_assistants.each do |teaching_assistant| %>
+    <%= render teaching_assistant %>
+    <p>
+      <%= button_to "削除", teaching_assistant, method: :delete %>
+    </p>
+  <% end %>
+</div>
