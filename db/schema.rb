@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_053541) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_064120) do
   create_table "assignments", force: :cascade do |t|
     t.integer "course_id", null: false
-    t.integer "teaching_assistant_id", null: false
+    t.integer "teaching_assistant_id"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,23 +22,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_053541) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.integer "year"
-    t.string "term"
-    t.string "number"
-    t.string "name"
-    t.string "instructor"
-    t.integer "time_budget"
+    t.integer "year", null: false
+    t.string "term", null: false
+    t.string "number", null: false
+    t.string "name", null: false
+    t.string "instructor", null: false
+    t.integer "time_budget", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "teaching_assistants", force: :cascade do |t|
-    t.integer "year"
-    t.string "number"
-    t.string "name"
-    t.string "grade"
-    t.string "labo"
+    t.integer "year", null: false
+    t.string "number", null: false
+    t.string "name", null: false
+    t.string "grade", null: false
+    t.string "labo", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
