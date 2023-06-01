@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_064120) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_072826) do
   create_table "assignments", force: :cascade do |t|
     t.integer "course_id", null: false
     t.integer "teaching_assistant_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_064120) do
   create_table "users", force: :cascade do |t|
     t.string "account_name"
     t.string "password"
-    t.string "admin_flag"
+    t.boolean "admin_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
