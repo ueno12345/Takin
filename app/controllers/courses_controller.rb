@@ -61,6 +61,11 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def import
+    Course.import(params[:file])
+    redirect_to courses_url, notice: "新規TAマスタデータを追加しました"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
