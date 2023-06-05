@@ -63,7 +63,7 @@ class TeachingAssistantsController < ApplicationController
 
   def import
     TeachingAssistant.import(params[:file])
-    redirect_to teaching_assistants_url, notice: "aa"
+    redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました"
   end
 
   private
