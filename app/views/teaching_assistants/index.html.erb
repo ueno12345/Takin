@@ -2,6 +2,9 @@
 
 <h1>TA一覧画面</h1>
 
+<%= link_to "TAマスタデータを追加", new_teaching_assistant_path %>
+<%= link_to "TAマスタデータ削除", remove_teaching_assistants_path %>
+
 <div id="teaching_assistants">
   <% @teaching_assistants.each do |teaching_assistant| %>
     <%= render teaching_assistant %>
@@ -10,6 +13,3 @@
     </p>
   <% end %>
 </div>
-
-<%= link_to "新規科目データを追加", new_teaching_assistant_path %>
-<%= link_to "科目マスタデータ削除", remove_teaching_assistants_path %>

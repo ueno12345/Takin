@@ -45,17 +45,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_072826) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "account_name", null: false
-    t.string "password", null: false
-    t.boolean "admin_flag", default: false, null: false
+    t.string "account_name"
+    t.string "password"
+    t.boolean "admin_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "work_hours", force: :cascade do |t|
-    t.datetime "dtstart", null: false
-    t.datetime "dtend", null: false
-    t.integer "actual_working_minutes", null: false
+    t.datetime "dtstart"
+    t.datetime "dtend"
+    t.integer "actual_working_minutes"
     t.integer "assignment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

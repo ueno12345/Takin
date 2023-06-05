@@ -61,6 +61,11 @@ class TeachingAssistantsController < ApplicationController
     @teaching_assistants = TeachingAssistant.all
   end
 
+  def import
+    TeachingAssistant.import(params[:file])
+    redirect_to teaching_assistants_url, notice: "aa"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teaching_assistant
