@@ -2,6 +2,7 @@
   <a class="navbar-brand">Takin</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      <li><%= link_to "HOME", top_page_path, method: :get, class: "nav-link" %></li>
       <li><%= link_to "TA一覧", teaching_assistants_path, method: :get, class: "nav-link" %></li>
       <li><%= link_to "科目一覧", courses_path, method: :get, class: "nav-link" %></li>
       <li><%= link_to "科目TA割当(開発用なので後で消す)", assignments_path, method: :get, class: "nav-link" %></li>

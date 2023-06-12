@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/top_page', to: 'top_page#index', as: 'top_page'
   resources :users
   resources :work_hours
   resources :assignments
