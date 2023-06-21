@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   resources :assignments
   resources :work_hours  
 
-  get '/teaching_assistants/remove', to: 'teaching_assistants#remove', as: 'remove_teaching_assistants'
-  delete '/teaching_assistants/remove', to: 'teaching_assistants#destroy'
+  get '/teaching_assistants/index_destroy', to: 'teaching_assistants#index_destroy', as: 'index_destroy_teaching_assistants'
+  delete '/teaching_assistants/index_destroy', to: 'teaching_assistants#destroy'
   resources :teaching_assistants do
     collection {post :import}
   end
 
-  get '/courses/remove', to: 'courses#remove', as: 'remove_courses'
-  delete '/courses/remove', to: 'courses#destroy'
+  get '/courses/index_destroy', to: 'courses#index_destroy', as: 'index_destroy_courses'
+  delete '/courses/index_destroy', to: 'courses#destroy'
   resources :courses do
     resources :assignments
     collection {post :import}

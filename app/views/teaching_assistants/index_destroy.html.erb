@@ -1,6 +1,8 @@
 <h1>新規TAマスタデータ削除</h1>
 
-<%= form_tag remove_teaching_assistants_path, method: :delete do %>
+<div><%= flash[:notice] %></div>
+
+<%= form_tag index_destroy_teaching_assistants_path, method: :delete do %>
   <%= submit_tag '選択したものをすべて削除' %>
 
   <table border = "1">

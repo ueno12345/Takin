@@ -52,10 +52,10 @@ class TeachingAssistantsController < ApplicationController
   def destroy
     @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
     @teaching_assistants.destroy_all
-    redirect_to remove_teaching_assistants_path, notice: 'TAが削除されました。'
+    redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました"
   end
 
-  def remove
+  def index_destroy
     @teaching_assistants = TeachingAssistant.all
   end
 

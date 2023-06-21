@@ -49,14 +49,13 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1 or /courses/1.json
   def destroy
     @courses = Course.where(id: params[:course_ids])
     @courses.destroy_all
-    redirect_to remove_courses_path, notice: '科目が削除されました。'
+    redirect_to index_destroy_courses_path, notice: "科目が削除されました"
   end
 
-  def remove
+  def index_destroy
     @courses = Course.all
   end
 
