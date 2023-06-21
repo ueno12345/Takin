@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+#  before_action :set_course, only: %i[ show edit update ]
 
   # GET /courses or /courses.json
   def index
@@ -51,12 +51,9 @@ class CoursesController < ApplicationController
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
-    @course.destroy
-
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @courses = Course.where(id: params[:course_ids])
+    @courses.destroy_all
+    redirect_to remove_courses_path, notice: '科目が削除されました。'
   end
 
   def remove

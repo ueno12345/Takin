@@ -1,10 +1,51 @@
 <h1>新規TAマスタデータ削除</h1>
 
-<div id="teaching_assistants">
-  <% @teaching_assistants.each do |teaching_assistant| %>
-    <%= render teaching_assistant %>
-    <p>
-      <%= button_to "削除", teaching_assistant, method: :delete %>
-    </p>
-  <% end %>
-</div>
+<%= form_tag remove_teaching_assistants_path, method: :delete do %>
+  <%= submit_tag '選択したものをすべて削除' %>
+
+  <table border = "1">
+    <tr>
+    <th>削除者選択</th>
+    <th>対象年度</th>
+    <th>TA名</th>
+    <th>学生番号</th>
+    <th>学年</th>
+    <th>研究室</th>
+    <th>備考</th>
+    </tr>
+    <div id="teaching_assistants">
+      <% @teaching_assistants.each do |teaching_assistant| %>
+        <tr>
+          <td>
+            <%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.year %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.name %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.number %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.grade %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.labo %>
+          </td>
+
+          <td>
+            <%= teaching_assistant.description%>
+          </td>
+        </tr>
+      <% end %>
+    </div>
+  </table>
+<% end %>
+

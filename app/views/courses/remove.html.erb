@@ -1,34 +1,50 @@
 <h1>新規科目マスタデータ削除</h1>
 
-<div id="courses">
-<% @courses.each do |course| %>
-  <tr>
-    <td>
-      <%= course.year %>
-    </td>
+<%= form_tag remove_courses_path, method: :delete do %>
+  <%= submit_tag '選択したものをすべて削除' %>
 
-    <td>
-      <%= course.term %>
-    </td>
+  <table border = "1">
+    <tr>
+    <th>削除科目選択</th>
+    <th>対象年度</th>
+    <th>学期</th>
+    <th>講義番号</th>
+    <th>講義科目名</th>
+    <th>担当教員</th>
+    <th>TA可能割当総時間(分)</th>
+    </tr>
+    <div id="courses">
+      <% @courses.each do |course| %>
+        <tr>
+          <td>
+            <%= check_box_tag 'course_ids[]', course.id %>
+          </td>
 
-    <td>
-       <%= course.number %>
-    </td>
+          <td>
+            <%= course.year %>
+          </td>
 
-    <td>
-      <%= course.name %>
-    </td>
+          <td>
+            <%= course.term %>
+          </td>
 
-    <td>
-      <%= course.instructor %>
-    </td>
+          <td>
+            <%= course.number %>
+          </td>
 
-    <td>
-      <%= course.time_budget %>
-    </td>
+          <td>
+            <%= course.name %>
+          </td>
 
-    <td>
-      <%= link_to "編集", course %>
-      <%= link_to "閲覧", course %>
-    </td>
-  </tr>
+          <td>
+            <%= course.instructor %>
+          </td>
+
+          <td>
+            <%= course.time_budget %>
+          </td>
+        </tr>
+      <% end %>
+    </div>
+  </table>
+<% end %>

@@ -1,5 +1,5 @@
 class TeachingAssistantsController < ApplicationController
-  before_action :set_teaching_assistant, only: %i[ show edit update destroy ]
+  before_action :set_teaching_assistant, only: %i[ show edit update ]
 
   # GET /teaching_assistants or /teaching_assistants.json
   def index
@@ -49,14 +49,10 @@ class TeachingAssistantsController < ApplicationController
     end
   end
 
-  # DELETE /teaching_assistants/1 or /teaching_assistants/1.json
   def destroy
-    @teaching_assistant.destroy
-
-    respond_to do |format|
-      format.html { redirect_to teaching_assistants_url, notice: "Teaching assistant was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
+    @teaching_assistants.destroy_all
+    redirect_to remove_teaching_assistants_path, notice: 'TAが削除されました。'
   end
 
   def remove
