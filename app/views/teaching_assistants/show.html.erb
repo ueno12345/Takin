@@ -1,10 +1,53 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @teaching_assistant %>
+<h1>TA一覧個人画面 : <%= @teaching_assistant.name %></h1>
+
+<%= link_to "TA一覧画面へ", teaching_assistants_path %>
 
 <div>
-  <%= link_to "編集", edit_teaching_assistant_path(@teaching_assistant) %> |
-  <%= link_to "TA一覧", teaching_assistants_path %>
-
-  <%= button_to "削除", @teaching_assistant, method: :delete %>
+  帳票出力
 </div>
+<div>
+  対象年度: <%= @teaching_assistant.year %>
+  学年: <%= @teaching_assistant.grade %>
+  学生番号: <%= @teaching_assistant.number %>
+  割当総時間: 
+</div>
+
+
+<table border = "1">
+  <tr>
+    <th>講義名</th>
+    <th>対象学期</th>
+    <th>開始時刻</th>
+    <th>終了時刻</th>
+    <th>合計勤務時間(分)</th>
+  </tr>
+  <div id="assignments">
+    <% @assignments.each do |assignment| %>
+        <% assignment.work_hours.each do|work_hour| %>
+        <tr>
+          <td>
+            <%= assignment.course.name %>
+          </td>
+
+          <td>
+            <%= assignment.course.term %>
+          </td>
+
+          <td>
+            <%= work_hour.dtstart %>
+          </td>
+
+          <td>
+            <%= work_hour.dtend %>
+          </td>
+
+          <td>
+            <%= work_hour.actual_working_minutes %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </div>
+</table>

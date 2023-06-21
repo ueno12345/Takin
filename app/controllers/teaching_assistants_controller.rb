@@ -8,6 +8,8 @@ class TeachingAssistantsController < ApplicationController
 
   # GET /teaching_assistants/1 or /teaching_assistants/1.json
   def show
+    @teaching_assistant = TeachingAssistant.find(params[:id])
+    @assignments = @teaching_assistant.assignments.where(teaching_assistant_id: @teaching_assistant.id)
   end
 
   # GET /teaching_assistants/new

@@ -1,10 +1,60 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @course %>
+<h1>TA時間割当(閲覧)</h1>
+
+<%= link_to "TA時間割当編集へ", course_assignments_path(@course) %>
+
+<%= link_to "科目一覧画面へ", courses_path %>
 
 <div>
-  <%= link_to "編集", edit_course_path(@course) %> |
-  <%= link_to "科目一覧", courses_path %>
-
-  <%= button_to "削除", @course, method: :delete %>
+  <span>
+    <%= @course.name %>
+  </span>
+  担当教員: <%= @course.instructor %>
+  対象年度: <%= @course.year %>
+  開講学期: <%= @course.term %>
+  割当可能総時間: <%= @course.time_budget %>
 </div>
+
+
+<table border = "1">
+  <tr>
+    <th>開始時刻</th>
+    <th>終了時刻</th>
+    <th>合計勤務時間(分)</th>
+    <th>TA名</th>
+    <th>TA可能割当総時間(分)</th>
+    <th>操作</th>
+  </tr>
+  <div id="assignments">
+    <% @assignments.each do |assignment| %>
+        <% assignment.work_hours.each do|work_hour| %>
+        <tr>
+          <td>
+            <%= work_hour.dtstart %>
+          </td>
+
+          <td>
+            <%= work_hour.dtend %>
+          </td>
+
+          <td>
+            <%= work_hour.actual_working_minutes %>
+          </td>
+
+          <td>
+            <%= assignment.teaching_assistant.name %>
+          </td>
+
+          <td>
+            <%= @course.time_budget %>
+          </td>
+
+          <td>
+            帳票出力
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </div>
+</table>

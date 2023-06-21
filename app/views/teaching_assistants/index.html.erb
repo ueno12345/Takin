@@ -2,14 +2,57 @@
 
 <h1>TA一覧画面</h1>
 
-<%= link_to "TAマスタデータを追加", new_teaching_assistant_path %>
-<%= link_to "TAマスタデータ削除", remove_teaching_assistants_path %>
+<%= link_to "TAデータを追加", new_teaching_assistant_path %>
+<%= link_to "TAデータ削除", remove_teaching_assistants_path %>
 
-<div id="teaching_assistants">
-  <% @teaching_assistants.each do |teaching_assistant| %>
-    <%= render teaching_assistant %>
-    <p>
-      <%= link_to "詳細", teaching_assistant %>
-    </p>
-  <% end %>
-</div>
+<table border = "1">
+  <tr>
+  <th>対象年度</th>
+  <th>TA名</th>
+  <th>学生番号</th>
+  <th>学年</th>
+  <th>研究室</th>
+  <th>備考</th>
+  <th>操作</th>
+  </tr>
+  <div id="courses">
+    <% @teaching_assistants.each do |teaching_assistant| %>
+      <tr>
+        <td>
+          <%= teaching_assistant.year %>
+        </td>
+
+        <td>
+          <%= teaching_assistant.name %>
+        </td>
+
+        <td>
+           <%= teaching_assistant.number %>
+        </td>
+
+        <td>
+          <%= teaching_assistant.grade %>
+        </td>
+
+        <td>
+          <%= teaching_assistant.labo %>
+        </td>
+
+        <td>
+          <%= teaching_assistant.description %>
+        </td>
+
+        <td class="d-flex">
+          <div>
+            帳票<br>出力
+          </div>
+          <div>
+            <%= link_to teaching_assistant_path(teaching_assistant) do %>
+              個人<br>画面
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </div>
+</table>

@@ -3,7 +3,8 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments or /assignments.json
   def index
-    @assignments = Assignment.all
+    @course = Course.find(params[:course_id])
+    @assignments = @course.assignments.where(course_id: @course.id)
   end
 
   # GET /assignments/1 or /assignments/1.json
@@ -17,7 +18,9 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
-  end
+    @course = Course.find(params[:course_id])
+    @assignment = @course.assignments.find(params[:assignment_id])
+  end  
 
   # POST /assignments or /assignments.json
   def create
