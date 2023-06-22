@@ -1,0 +1,18 @@
+<footer class="footer" style="background-color: #c0c0c0;">
+  <div class="d-flex">
+    <div>
+      <li>岡大関係サイトへ</li>
+      <li><%= link_to "ソフトウェア開発法ホームページ", "http://sdm.swlab.cs.okayama-u.ac.jp" %></li>
+    </div>
+    <div>
+      <li>サービス</li>
+      <li><%= link_to "HOME", top_page_path %></li>
+      <li><%= link_to "TA一覧", teaching_assistants_path %></li>
+      <li><%= link_to "科目一覧", courses_path  %></li>
+      <li><%= link_to "新規TAマスタデータ追加", new_teaching_assistant_path %></li>
+      <li><%= link_to "TAマスタデータ削除", index_destroy_teaching_assistants_path %></li>
+      <li><%= link_to "新規科目マスタデータ追加", new_course_path %></li>
+      <li><%= link_to "科目マスタデータ削除", index_destroy_courses_path %></li>
+    </div>
+  </div>
+</footer>
