@@ -6,47 +6,33 @@
 <%= link_to "科目マスタデータ削除", index_destroy_courses_path %>
 
 <table class="table table-bordered">
-  <tr>
-  <th>対象年度</th>
-  <th>学期</th>
-  <th>講義番号</th>
-  <th>講義科目名</th>
-  <th>担当教員</th>
-  <th>TA可能割当総時間(分)</th>
-  <th>操作</th>
-  </tr>
-  <div id="courses">
-    <% @courses.each do |course| %>
-      <tr>
-        <td>
-          <%= course.year %>
-        </td>
-
-        <td>
-          <%= course.term %>
-        </td>
-
-        <td>
-           <%= course.number %>
-        </td>
-
-        <td>
-          <%= course.name %>
-        </td>
-
-        <td>
-          <%= course.instructor %>
-        </td>
-
-        <td>
-          <%= course.time_budget %>
-        </td>
-
-        <td>
-          <%= link_to "編集", course_assignments_path(course) %>
-          <%= link_to "閲覧", course_path(course) %>
-        </td>
-      </tr>
-    <% end %>
-  </div>
+  <thead class="table-primary">
+    <tr>
+    <th>対象年度</th>
+    <th>学期</th>
+    <th>講義番号</th>
+    <th>講義科目名</th>
+    <th>担当教員</th>
+    <th>TA可能割当総時間(分)</th>
+    <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div id="courses">
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= course.year %></td>
+          <td><%= course.term %></td>
+          <td><%= course.number %></td>
+          <td><%= course.name %></td>
+          <td><%= course.instructor %></td>
+          <td><%= course.time_budget %></td>
+          <td>
+            <%= link_to "編集", course_assignments_path(course) %>
+            <%= link_to "閲覧", course_path(course) %>
+          </td>
+        </tr>
+      <% end %>
+    </div>
+  </tbody>
 </table>

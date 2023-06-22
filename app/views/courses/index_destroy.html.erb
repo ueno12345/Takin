@@ -6,47 +6,31 @@
   <%= submit_tag '選択したものをすべて削除' %>
 
   <table class="table table-bordered">
-    <tr>
-    <th>削除科目選択</th>
-    <th>対象年度</th>
-    <th>学期</th>
-    <th>講義番号</th>
-    <th>講義科目名</th>
-    <th>担当教員</th>
-    <th>TA可能割当総時間(分)</th>
-    </tr>
-    <div id="courses">
-      <% @courses.each do |course| %>
-        <tr>
-          <td>
-            <%= check_box_tag 'course_ids[]', course.id %>
-          </td>
-
-          <td>
-            <%= course.year %>
-          </td>
-
-          <td>
-            <%= course.term %>
-          </td>
-
-          <td>
-            <%= course.number %>
-          </td>
-
-          <td>
-            <%= course.name %>
-          </td>
-
-          <td>
-            <%= course.instructor %>
-          </td>
-
-          <td>
-            <%= course.time_budget %>
-          </td>
-        </tr>
-      <% end %>
-    </div>
+    <thead class="table-primary">
+      <tr>
+      <th>削除科目選択</th>
+      <th>対象年度</th>
+      <th>学期</th>
+      <th>講義番号</th>
+      <th>講義科目名</th>
+      <th>担当教員</th>
+      <th>TA可能割当総時間(分)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div id="courses">
+        <% @courses.each do |course| %>
+          <tr>
+            <td><%= check_box_tag 'course_ids[]', course.id %></td>
+            <td><%= course.year %></td>
+            <td><%= course.term %></td>
+            <td><%= course.number %></td>
+            <td><%= course.name %></td>
+            <td><%= course.instructor %></td>
+            <td><%= course.time_budget %></td>
+          </tr>
+        <% end %>
+      </div>
+    </tbody>
   </table>
 <% end %>

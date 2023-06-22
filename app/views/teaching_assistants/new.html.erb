@@ -1,14 +1,38 @@
 <h1>新規TAマスタデータ追加</h1>
 
-<%= render "form", teaching_assistant: @teaching_assistant %>
-
-<br>
-
-<%= form_tag import_teaching_assistants_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "登録" %>
-<% end %>
-
 <div>
   <%= link_to "TA一覧に戻る", teaching_assistants_path %>
 </div>
+
+<%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
+
+<br>
+
+<div id="import_form" style="display: none;">
+  <%= form_tag import_teaching_assistants_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "登録" %>
+  <% end %>
+</div>
+
+<div id="individual_registration_form" style="display: none;">
+  <%= render "form", teaching_assistant: @teaching_assistant %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    const registrationTypeSelect = document.getElementById("registration_type_select");
+    const importForm = document.getElementById("import_form");
+    const individualRegistrationForm = document.getElementById("individual_registration_form");
+
+    registrationTypeSelect.addEventListener("change", function(){
+      if(registrationTypeSelect.value === "TA一括登録"){
+        importForm.style.display = "block";
+        individualRegistrationForm.style.display = "none";
+      }else if(registrationTypeSelect.value === "TA個別登録"){
+        importForm.style.display = "none";
+        individualRegistrationForm.style.display = "block";
+      }
+    });
+  });
+</script>

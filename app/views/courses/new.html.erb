@@ -1,14 +1,38 @@
 <h1>新規科目マスタデータ追加</h1>
 
-<%= render "form", course: @course %>
-
-<br>
-
-<%= form_tag import_courses_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "登録" %>
-<% end %>
-
 <div>
   <%= link_to "科目一覧に戻る", courses_path %>
 </div>
+
+<%= select_tag :registration_type, options_for_select(["科目一括登録", "科目個別登録"]), id: "registration_type_select" %>
+
+<br>
+
+<div id="import_form" style="display: none;">
+  <%= form_tag import_courses_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "登録" %>
+  <% end %>
+</div>
+
+<div id="individual_registration_form" style="display: none;">
+  <%= render "form", course: @course %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    const registrationTypeSelect = document.getElementById("registration_type_select");
+    const importForm = document.getElementById("import_form");
+    const individualRegistrationForm = document.getElementById("individual_registration_form");
+
+    registrationTypeSelect.addEventListener("change", function(){
+      if (registrationTypeSelect.value === "科目一括登録"){
+        importForm.style.display = "block";
+        individualRegistrationForm.style.display = "none";
+      }else if(registrationTypeSelect.value === "科目個別登録"){
+        importForm.style.display = "none";
+        individualRegistrationForm.style.display = "block";
+      }
+    });
+  });
+</script>
