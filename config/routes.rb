@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/courses/index_destroy', to: 'courses#index_destroy', as: 'index_destroy_courses'
   delete '/courses/index_destroy', to: 'courses#destroy'
+  delete '/courses/:course_id/assignments/:assignment_id/work_hours/:id', to: 'assignments#destroy', as: 'destroy_course_assignments'
   resources :courses do
     resources :assignments
     collection {post :import}

@@ -15,7 +15,7 @@
 </div>
 
 
-<table border = "1">
+<table class="table table-bordered">
   <tr>
     <th>開始時刻</th>
     <th>終了時刻</th>
@@ -49,7 +49,7 @@
           </td>
 
           <td>
-            帳票出力 削除
+            帳票出力 <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger', form: { style: 'display: inline' } %>
           </td>
         </tr>
       <% end %>

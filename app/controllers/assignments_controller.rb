@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: %i[ show edit update destroy ]
+  before_action :set_assignment, only: %i[ show edit update ]
 
   # GET /assignments or /assignments.json
   def index
@@ -50,14 +50,11 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE /assignments/1 or /assignments/1.json
   def destroy
-    @assignment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to assignments_url, notice: "Assignment was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @assignment = Assignment.find(params[:assignment_id])
+    @work_hour = @assignment.work_hours.find(params[:id])
+    @work_hour.destroy
+    redirect_to course_assignments_path, notice: "割当時間が削除されました"
   end
 
   private
