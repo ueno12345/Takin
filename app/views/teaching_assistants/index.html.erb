@@ -29,11 +29,15 @@
           <td><%= teaching_assistant.description %></td>
           <td class="d-flex">
             <div>
-              帳票<br>出力
+            <%= link_to 'Download Excel', teaching_assistants_output_ticket_path, target: '_blank' %>
+
+            <%= link_to "https://google.com" do %>
+              <%= render partial: 'layouts/button',locals: {class_name: "output-button",button_name:"帳票出力" , url:"https://google.com", bg_color:"green", text_color:"white"} %>
+            <% end %>
             </div>
             <div>
               <%= link_to teaching_assistant_path(teaching_assistant) do %>
-                個人<br>画面
+                <%= render partial: 'layouts/button',locals: {class_name:"private-button",button_name:"個人画面" , url:"", bg_color:"blue", text_color:"white"} %>
               <% end %>
             </div>
           </td>

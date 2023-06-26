@@ -2,13 +2,14 @@
 
 <div>
   <%= link_to "TA一覧に戻る", teaching_assistants_path %>
+  これでOKまる！！
 </div>
 
 <%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
 
 <br>
 
-<div id="import_form" style="display: none;">
+<div id="import_form" style="display: ;">
   <%= form_tag import_teaching_assistants_path, multipart: true do %>
     <%= file_field_tag :file %>
     <%= submit_tag "登録" %>

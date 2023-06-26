@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :assignments
   resources :work_hours  
 
+  post '/teaching_assistants/output_ticket', to: 'teaching_assistants#output_ticket' 
   get '/teaching_assistants/index_destroy', to: 'teaching_assistants#index_destroy', as: 'index_destroy_teaching_assistants'
   delete '/teaching_assistants/index_destroy', to: 'teaching_assistants#destroy'
   resources :teaching_assistants do

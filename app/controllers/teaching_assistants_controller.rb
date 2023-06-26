@@ -1,3 +1,6 @@
+# require 'rubyXL'
+# require 'axlsx'
+
 class TeachingAssistantsController < ApplicationController
   before_action :set_teaching_assistant, only: %i[ show edit update ]
 
@@ -73,5 +76,13 @@ class TeachingAssistantsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def teaching_assistant_params
       params.require(:teaching_assistant).permit(:year, :number, :name, :grade, :labo, :description)
+    end
+
+    # 帳票出力処理を行う
+    def output_ticket
+      # RubyXL::Parser.parse("path/to/excel/form1.xlsx")
+      # 新規エクセルファイルを作成
+      workbook = RubyXL::Workbook.new
+      workbook.write("path/to/desired/Excel/file.xlsx")
     end
 end
