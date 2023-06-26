@@ -29,7 +29,8 @@
           <td><%= teaching_assistant.description %></td>
           <td class="d-flex">
             <div>
-            <%= link_to 'Download Excel', teaching_assistants_output_ticket_path, target: '_blank' %>
+            <%= teaching_assistant.id %>
+            <%= link_to 'D Excel', ta_assignments_output_ticket_path , data: { "turbo-method": :get }, class: "no-underline"%> 
 
             <%= link_to "https://google.com" do %>
               <%= render partial: 'layouts/button',locals: {class_name: "output-button",button_name:"帳票出力" , url:"https://google.com", bg_color:"green", text_color:"white"} %>

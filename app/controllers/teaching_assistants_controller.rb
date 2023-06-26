@@ -1,4 +1,5 @@
-# require 'rubyXL'
+require 'rubyXL'
+# require 'rubyXL/convenience_methods'
 # require 'axlsx'
 
 class TeachingAssistantsController < ApplicationController
@@ -67,6 +68,28 @@ class TeachingAssistantsController < ApplicationController
     redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました"
   end
 
+  # 帳票出力処理を行う
+  def output_ticket
+    file = "public/excel/Book1.xlsx"
+    workbook = RubyXL::Parser.parse(file)
+    workbook.write("public/excel/test100.xlsx")
+    # file = RubyXL::Workbook.new
+    # worksheet = file[0]
+    # worksheet.add_cell(0,1,"bbbb")
+
+    # send_data(workbook.stream.string, type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename: 'modified.xlsx')
+    file_path = Rails.root.join('public','excel', 'form1.xlsx') # ダウンロードするエクセルファイルのパスを指定
+
+    send_file(file_path, filename: 'form1.xlsx',type: 'application/vnd.ms-excel', disposition: 'attachment')
+
+    # send_file(file_path)
+
+    # download_file_name = "public/txt/test.txt"
+    # send_file(download_file_name)
+
+    redirect_to teaching_assistants_path, notice: 'Form submitted successfully.' # リダイレクト
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teaching_assistant
@@ -76,13 +99,5 @@ class TeachingAssistantsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def teaching_assistant_params
       params.require(:teaching_assistant).permit(:year, :number, :name, :grade, :labo, :description)
-    end
-
-    # 帳票出力処理を行う
-    def output_ticket
-      # RubyXL::Parser.parse("path/to/excel/form1.xlsx")
-      # 新規エクセルファイルを作成
-      workbook = RubyXL::Workbook.new
-      workbook.write("path/to/desired/Excel/file.xlsx")
     end
 end
