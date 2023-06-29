@@ -3,12 +3,14 @@
 <h1>TA時間割当(編集)</h1>
 
 <%= link_to "科目一覧画面へ", courses_path %>
-<%= link_to "科目一覧画面へ", courses_path %>
 <td>
 <br>
-<%= link_to "TA候補選択", new_assignment_path, class: "btn btn-primary"%>
-<%= link_to "勤務追加", work_hours_path, class: "btn btn-primary"%>
+<%= link_to "TA候補選択", new_assignment_path(course_id: @course.id), class: "btn btn-primary" %>
+<%= button_to "勤務追加", work_hours_path, method: :post, params: { work_hour: { assignment_id: 1 } }, class: "btn btn-primary", id: "work-hour-button" %>
 </td>
+
+<%#= button_to "登録", update_multiple_work_hours_path, params: {assignment_ids: @assignments.pluck(:id), authenticity_token: form_authenticity_token}, method: :PATCH, class: "btn btn-primary" %>
+<%#= link_to "勤務追加手動", work_hours_path, class: "btn btn-primary"%>
 
 <div>
   <span>
@@ -31,21 +33,143 @@
       <th>操作</th>
     </tr>
   </thead>
-  <tbody>
-    <div id="assignments">
+
+  <%= form_with(url: update_multiple_work_hours_path, method: :post, local: true) do |form| %>
+    <tbody id="assignments_and_work_hours">
       <% @assignments.each do |assignment| %>
-          <% assignment.work_hours.each do|work_hour| %>
-          <tr>
-            <td><%= work_hour.dtstart %></td>
-            <td><%= work_hour.dtend %></td>
-            <td><%= work_hour.actual_working_minutes %></td>
-            <td><%= assignment.teaching_assistant.name %></td>
-            <td>
-              帳票出力 <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger', form: { style: 'display: inline' } %>
-            </td>
-          </tr>
+        <% assignment.work_hours.each do |work_hour| %>
+          <%= form.fields_for 'work_hours[]', work_hour do |wh_form| %>
+            <%= wh_form.hidden_field :id, value: work_hour.id %><!-- 追加した行 -->
+            <%= wh_form.hidden_field :assignment_id, value: assignment.id %><!-- 追加した行 -->
+            <tr>
+              <td>
+              <%#= wh_form.label :dtstart, style: "display: block" %>
+              <%= wh_form.datetime_field :dtstart, value: work_hour.dtstart&.strftime('%Y-%m-%dT%H:%M') %>
+              </td>
+              <td>
+                <%#= wh_form.label :dtend, style: "display: block" %>
+                <%= wh_form.datetime_field :dtend, value: work_hour.dtend&.strftime('%Y-%m-%dT%H:%M') %>
+              </td>
+              <td>
+                <%#= wh_form.label :actual_working_minutes, style: "display: block" %>
+                <%= wh_form.number_field :actual_working_minutes, value: work_hour.actual_working_minutes %>
+              </td>
+              <td><%= assignment.teaching_assistant.name %></td>
+              <td>
+              <%= link_to "削除", work_hour_path(work_hour), method: :delete, class: 'btn btn-danger', id: "delete_buttom_#{work_hour.id}" %>
+              <%#= button_to "削除", work_hour_path(work_hour), method: :delete, class: 'btn btn-danger' %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       <% end %>
-    </div>
-  </tbody>
+    </tbody>
+    <%= form.submit "登録", class: "btn btn-primary" ,id: "save_buttom"%>
+  <% end %>  
 </table>
+
+
+<script>// 削除ボタン連携
+  document.addEventListener('DOMContentLoaded', function() {
+    var deleteButtons = document.querySelectorAll('.btn.btn-danger');
+
+    deleteButtons.forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        if (!confirm('編集を保存していない場合，データが失われます．\n新規作成してもよろしいですか？')) {
+          e.preventDefault(); // ボタンのデフォルトの動作をキャンセル
+        }
+      });
+    });
+  });
+</script>
+
+
+<script>// 遷移系統
+  <%= raw <<~JS.strip %>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('work-hour-button').addEventListener('click', function(e) {
+        if (!confirm('編集を保存していない場合，データが失われます．\n新規作成してもよろしいですか？')) {
+          e.preventDefault(); // ボタンのデフォルトの動作をキャンセル
+        }
+      });
+    });
+  JS
+</script>
+
+
+<script>
+  <%= raw <<~JS.strip %>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('delete-buttom').addEventListener('click', function(e) {
+        if (!confirm('編集を保存していない場合，他の編集データが失われます．\n削除してもよろしいですか？')) {
+          e.preventDefault(); // ボタンのデフォルトの動作をキャンセル
+        }
+      });
+    });
+  JS
+</script>
+
+
+<script> // 保存条件
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('save_buttom').addEventListener('click', function(e) {
+      var dtstartElements = document.querySelectorAll('input[name$="[dtstart]"]');
+      var dtendElements = document.querySelectorAll('input[name$="[dtend]"]');
+      var actualWorkingMinutesElements = document.querySelectorAll('input[name$="[actual_working_minutes]"]');
+
+      for (var i = 0; i < dtstartElements.length; i++) {
+        var dtstartValue = dtstartElements[i].value;
+        var dtendValue = dtendElements[i].value;
+        var actualWorkingMinutesValue = actualWorkingMinutesElements[i].value;
+        var actualWorkingMinutes = actualWorkingMinutesValue ? parseInt(actualWorkingMinutesValue) : null;
+
+        // Check if both dates are either set or not set
+        if ((dtstartValue && !dtendValue) || (!dtstartValue && dtendValue)) {
+          alert('片方の日時のみ指定することはできません。');
+          e.preventDefault();
+          return;
+        }
+
+        // If both dates are set
+        if (dtstartValue && dtendValue) {
+          var start = new Date(dtstartValue);
+          var end = new Date(dtendValue);
+
+          // 終了日時が開始日時より後の日時であることを確認
+          if (end < start) {
+            alert('終了日時は開始日時より後の日時を設定してください。');
+            e.preventDefault();
+            return;
+          }
+
+          // 日付が日を跨いでいないことを確認
+          if (start.getDate() !== end.getDate() || start.getMonth() !== end.getMonth() || start.getFullYear() !== end.getFullYear()) {
+            alert('開始日と終了日は同じ日に設定してください。');
+            e.preventDefault();
+            return;
+          }
+
+          // 実務時間が半角数字であり、かつマイナスでないことを確認
+          if (actualWorkingMinutes !== null && (!/^\d+$/.test(actualWorkingMinutesValue) || actualWorkingMinutes < 0)) {
+            alert('実務時間は半角数字で入力してください。');
+            e.preventDefault();
+            return;
+          }
+
+          // 実務時間が開始と終了の間の時間を超えていないことを確認
+          if (actualWorkingMinutes !== null) {
+            var totalMinutes = (end - start) / (1000 * 60);
+            if (totalMinutes < actualWorkingMinutes) {
+              alert('実際の勤務時間は開始と終了の間の時間を超えることはできません。');
+              e.preventDefault();
+              return;
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+
+
+

@@ -25,6 +25,8 @@
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description %>
   </div>
+  <%= form.hidden_field :course_id, value: @course.id %>
+
 
   <div>
     <%= form.submit %>

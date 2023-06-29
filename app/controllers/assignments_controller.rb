@@ -5,6 +5,7 @@ class AssignmentsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @assignments = @course.assignments.where(course_id: @course.id)
+    #redirect_to course_assignments_path
   end
 
   # GET /assignments/1 or /assignments/1.json
@@ -13,8 +14,11 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new
+    @course = Course.find(params[:course_id])
+    @assignment = @course.assignments.build
+    #@assignment = Assignment.new
   end
+  
 
   # GET /assignments/1/edit
   def edit
@@ -49,6 +53,7 @@ class AssignmentsController < ApplicationController
       end
     end
   end
+  
 
   def destroy
     @assignment = Assignment.find(params[:assignment_id])
