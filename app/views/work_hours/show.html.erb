@@ -4,7 +4,8 @@
 
 <div>
   <%= link_to "Edit this work hour", edit_work_hour_path(@work_hour) %> |
-  <%= link_to "Back to work hours", work_hours_path %>
+  <%= link_to "Back to 編集", course_assignments_path(@work_hour.assignment.course_id) %>
+  <%#= link_to "Back to 閲覧", course_path(@work_hour.assignment.course_id) %>
 
   <%= button_to "Destroy this work hour", @work_hour, method: :delete %>
 </div>

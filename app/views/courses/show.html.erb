@@ -6,6 +6,8 @@
 
 <%= link_to "科目一覧画面へ", courses_path %>
 
+<%= link_to "割当勤務時間", new_work_hour_path(@course), method: :get %>
+
 <div>
   <span>
     <%= @course.name %>

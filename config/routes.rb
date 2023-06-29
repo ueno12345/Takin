@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get '/top_page', to: 'top_page#index', as: 'top_page'
   resources :users
   resources :assignments
-  resources :work_hours  
 
   get '/teaching_assistants/index_destroy', to: 'teaching_assistants#index_destroy', as: 'index_destroy_teaching_assistants'
   delete '/teaching_assistants/index_destroy', to: 'teaching_assistants#destroy'
@@ -17,6 +16,11 @@ Rails.application.routes.draw do
     resources :assignments
     collection {post :import}
   end
+  
+  resources :work_hours  
+  #resources :courses do
+  #  resources :work_hours  
+  #end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
