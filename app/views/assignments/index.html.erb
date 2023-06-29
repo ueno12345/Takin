@@ -3,7 +3,8 @@
 <h1>TA時間割当(編集)</h1>
 
 <%= link_to "科目一覧画面へ", courses_path %>
-<%= link_to "勤務追加", new_work_hour_path(@course), method: :get %>
+<%#= link_to "勤務追加", new_work_hour_path(@course), method: :get %>
+<%= link_to "勤務追加", new_course_work_hour_path, method: :get %>
 
 
 <div>
@@ -37,7 +38,8 @@
             <td><%= work_hour.actual_working_minutes %></td>
             <td><%= assignment.teaching_assistant.name %></td>
             <td>
-              <%= link_to "編集", edit_work_hour_path(work_hour), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
+              <%#= link_to "編集", edit_work_hour_path(work_hour), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
+              <%= link_to "編集", edit_course_work_hour_path(course_id: work_hour.assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
               <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom' %>
             </td>
           </tr>

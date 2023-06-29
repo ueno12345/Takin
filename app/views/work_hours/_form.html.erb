@@ -1,4 +1,5 @@
-<%= form_with(model: work_hour) do |form| %>
+<%= form_with(model: [@course, @work_hour]) do |form| %>
+<%#= form_with(model: work_hour) do |form| %>
   <% if work_hour.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(work_hour.errors.count, "error") %> prohibited this work_hour from being saved:</h2>
@@ -29,9 +30,24 @@
   <div>
     <%= form.label :assignment_id, style: "display: block" %>
     <%= form.text_field :assignment_id %>
+    <%#= form.collection_select :teaching_assistant_id, TeachingAssistant.where(id: @course.assignments.pluck(:teaching_assistant_id)), :id, :name, { include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }, style: "display: block" %>
+    <%#= form.collection_select :teaching_assistant_id, Assignment.where(course_id: @course.id).includes(:teaching_assistant), :teaching_assistant_id, 'teaching_assistant.name', { include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }, style: "display: block" %>
+    <%#= 上記は，1.現在のcouseで紐づいているassignmentを全部取ってくる. 2. そのassignmentsのteaching_assistant_idから全TAの名前. 3.これらのアシスタントから名前を抽出し，それをフォームのドロップダウンで表示. 4.newの場合はデフォルトでダミーが選択される%>
+
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+
+
+<script>
+// collection_select メソッドの引数を次のように設定しています。
+// 第1引数：フォームの属性に設定する項目の名前（:teaching_assistant_id）
+// 第2引数：選択肢のデータ（Assignment.where(course_id: @course.id).includes(:teaching_assistant)）
+// 第3引数：選択肢の値として使用する属性（:teaching_assistant_id）
+// 第4引数：選択肢の表示名として使用する属性（'teaching_assistant.name'）
+// 第5引数：オプションハッシュ（{ include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }）
+<\script>
