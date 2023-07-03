@@ -29,10 +29,9 @@
 
   <div>
     <%= form.label :assignment_id, style: "display: block" %>
-    <%= form.text_field :assignment_id %>
-    <%#= form.collection_select :teaching_assistant_id, TeachingAssistant.where(id: @course.assignments.pluck(:teaching_assistant_id)), :id, :name, { include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }, style: "display: block" %>
-    <%#= form.collection_select :teaching_assistant_id, Assignment.where(course_id: @course.id).includes(:teaching_assistant), :teaching_assistant_id, 'teaching_assistant.name', { include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }, style: "display: block" %>
-    <%#= 上記は，1.現在のcouseで紐づいているassignmentを全部取ってくる. 2. そのassignmentsのteaching_assistant_idから全TAの名前. 3.これらのアシスタントから名前を抽出し，それをフォームのドロップダウンで表示. 4.newの場合はデフォルトでダミーが選択される%>
+    <%#= form.text_field :assignment_id %>
+    <%= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+    <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, selected: (@work_hour.new_record? && @assignments.find { |a| a.teaching_assistant_id == 1 }&.id) %>
 
   </div>
 

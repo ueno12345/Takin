@@ -14,6 +14,8 @@ class WorkHoursController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
     @work_hour = WorkHour.new
+    @assignments = @course.assignments.includes(:teaching_assistant)
+
   end
   #def new
   #  @course = Course.find(params[:course_id])
@@ -25,6 +27,7 @@ class WorkHoursController < ApplicationController
   def edit
     @course = Course.find(params[:course_id])
     @work_hour = WorkHour.find(params[:id])
+    @assignments = @course.assignments.includes(:teaching_assistant)
   end
   
 
@@ -33,6 +36,10 @@ class WorkHoursController < ApplicationController
     @course = Course.find(params[:course_id])
     @work_hour = WorkHour.new(work_hour_params)
 
+    if @work_hour.assignment_id.blank?
+      @work_hour.assignment_id = @course.assignments.find { |a| a.teaching_assistant_id == 1 }&.id
+    end
+  
     respond_to do |format|
       if @work_hour.save
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully created." }
@@ -43,6 +50,8 @@ class WorkHoursController < ApplicationController
       end
     end
   end
+
+
 
   # PATCH/PUT /work_hours/1 or /work_hours/1.json
   def update
