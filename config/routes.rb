@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :users
   resources :assignments
 
+  # 帳票出力用の処理URL
+  post '/assignments/output', to: 'assignments#output', as: 'ta_assignment_output_csv'
   get '/teaching_assistants/index_destroy', to: 'teaching_assistants#index_destroy', as: 'index_destroy_teaching_assistants'
   delete '/teaching_assistants/index_destroy', to: 'teaching_assistants#destroy'
   resources :teaching_assistants do

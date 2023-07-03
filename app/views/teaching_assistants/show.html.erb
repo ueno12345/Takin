@@ -4,9 +4,12 @@
 
 <%= link_to "TA一覧画面へ", teaching_assistants_path %>
 
-<div>
+<%# <div>
   帳票出力
-</div>
+</div> %>
+
+<%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post } %>
+
 <div>
   対象年度: <%= @teaching_assistant.year %>
   学年: <%= @teaching_assistant.grade %>

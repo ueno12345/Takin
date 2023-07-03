@@ -62,6 +62,46 @@ class AssignmentsController < ApplicationController
     redirect_to course_assignments_path, notice: "割当時間が削除されました"
   end
 
+  def output
+    @teaching_assistant = TeachingAssistant.find(params[:teaching_assistant_id])
+    
+    # ============== #
+    # 様式1作成
+    # ============== #
+    file_form1 = "public/excel/form1.xlsx"
+    workbook_form1 = RubyXL::Parser.parse(file_form1)
+    worksheet_form1 = workbook_form1[1]
+
+    # 氏名追加処理
+    worksheet_form1.add_cell(9, 20, @teaching_assistant.name)
+    # worksheet[9][20].change_border(:bottom, "medium")
+    worksheet_form1.add_cell(18, 2, @teaching_assistant.name)
+
+    # 学生番号追加処理
+    worksheet_form1.add_cell(18, 21, @teaching_assistant.number)
+
+    # 所属分岐
+    # if(@teaching_assistant.grade == "M1"){
+
+    # }
+
+    workbook_form1.write("public/excel/writed_form1.xlsx")
+
+    # ============== #
+    # 様式2作成
+    # ============== #
+    file_form2 = "public/excel/form2.xlsx"
+    workbook_form2 = RubyXL::Parser.parse(file_form2)
+    worksheet_form2 = workbook_form2[1]
+
+    workbook_form2.write("public/excel/writed_form2.xlsx")
+
+    # redirect_to teaching_assistant_path(@teaching_assistant), notice: "CSVOKまる？？"
+    # file_path = Rails.root.join('public', 'excel','form1.xlsx')
+    # send_file "test.xlsx" , type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'inline'
+    # send_file("public/excel/test100.xlsx", filename: 'test.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
