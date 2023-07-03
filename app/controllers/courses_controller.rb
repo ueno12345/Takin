@@ -24,15 +24,22 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
-
+    #@CourseID = Course.find(params[:id])
+    
     respond_to do |format|
       if @course.save
         format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
+        @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
+        @assignment.save
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
+      
+      #@assignment = Assignment.new({course_id:"1", teaching_assistant_id:"0", description:"dammy"})
+      #render template: "assignments/index"  
+
     end
   end
 
