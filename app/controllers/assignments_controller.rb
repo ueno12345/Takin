@@ -81,9 +81,33 @@ class AssignmentsController < ApplicationController
     worksheet_form1.add_cell(18, 21, @teaching_assistant.number)
 
     # 所属分岐
-    # if(@teaching_assistant.grade == "M1"){
+    if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then
+      worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+      worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
+      worksheet_form1.add_cell(19, 15, "前")
 
-    # }
+    elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then
+      worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+      worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
+      worksheet_form1.add_cell(19, 15, "後")
+
+    else
+      worksheet_form1.add_cell(22, 14, @teaching_assistant.grade)
+    end
+
+    # 割り当てられた講義
+    @assignments = Assignment.where(teaching_assistant_id: @teaching_assistant.id)
+    count = 0;
+    
+    @assignments.each do |assignment|
+      @work_hours = WorkHour.where(assignment_id: assignment.id)
+      @work_hours.each do |work_hour|
+
+        puts "-----------------"
+        puts work_hour.dtstart.strftime('%Y-%m-%d %H:%M') 
+        puts "-----------------"
+      end
+    end
 
     workbook_form1.write("public/excel/writed_form1.xlsx")
 
