@@ -7,8 +7,9 @@
 <%# <div>
   帳票出力
 </div> %>
+<a href="/excel/form1.xlsx" target="_blank" download>TEST </a>
 
-<%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post } %>
+<%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
 
 <div>
   対象年度: <%= @teaching_assistant.year %>

@@ -175,6 +175,17 @@ class AssignmentsController < ApplicationController
       end
 
       workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+
+      # file_path = Rails.root.join('public', 'excel', 'form2.xlsx')
+      # send_file file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+      file_path = "./public/excel/form2.xlsx"
+      # puts "================"
+      # puts  file_path
+      # puts "================"
+      # file_path = Rails.root + "#{first}-#{file_change_count}.xlsx"
+      # file_path = Rails.root + "/public/excel/form2.xlsx"
+      send_file(file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
     end
 
     def WriteForm2
@@ -247,13 +258,13 @@ class AssignmentsController < ApplicationController
           line = months_start[month][0] + week_count*2
           row = months_start[month][1]+day_of_week[work_hour.dtstart.wday]
 
-          puts "==============="
-          puts work_hour.dtstart
-          puts "line #{line}"
-          puts "row #{row}"
-          puts "week_count #{week_count}"
-          puts "add_num #{add_num}"
-          puts "==============="
+          # puts "==============="
+          # puts work_hour.dtstart
+          # puts "line #{line}"
+          # puts "row #{row}"
+          # puts "week_count #{week_count}"
+          # puts "add_num #{add_num}"
+          # puts "==============="
           
           if  worksheet_form2[line][row].value != "" then
             writed_data = worksheet_form2[line][row].value

@@ -28,12 +28,12 @@
           <td><%= teaching_assistant.labo %></td>
           <td><%= teaching_assistant.description %></td>
           <td class="d-flex">
-            <div>
-              帳票<br>出力
+            <div class="mr-6 ml-4">
+            <%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
             </div>
             <div>
-              <%= link_to teaching_assistant_path(teaching_assistant) do %>
-                個人<br>画面
+              <%= link_to teaching_assistant_path(teaching_assistant),class: 'btn btn-success' do %>
+                個人画面
               <% end %>
             </div>
           </td>
