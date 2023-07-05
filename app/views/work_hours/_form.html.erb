@@ -1,4 +1,4 @@
-
+<%# 非同期で編集モード時に表示変更するコード %>
 <%= turbo_frame_tag work_hour do %>
   <%= bootstrap_form_with(model: [@course, @work_hour]) do |form| %>
       <% if work_hour.errors.any? %>

@@ -3,9 +3,9 @@
 <h1>TA時間割当(編集)</h1>
 
   <%= link_to "科目一覧画面へ", courses_path %>
-  <%= link_to "勤務追加", new_course_work_hour_path, method: :get %>
+  <%#= link_to "勤務追加", new_course_work_hour_path, method: :get %>
+  <%= link_to "勤務追加", new_course_work_hour_path, class: "btn btn-outline-primary", data: { turbo_frame: "new_work_hour" }  %>
   <%= link_to "候補追加", new_course_assignment_path, method: :get %>
-
 
 <div>
     <span>
@@ -23,12 +23,15 @@
   </div>
   <div class="card-body mx-3">
     <div class="row py-2">
-      <div class="col-2 my-auto">開始時刻</div>
-      <div class="col-2 my-auto">終了時刻</div>
-      <div class="col-2 my-auto">合計勤務時間(分)</div>
-      <div class="col-2 my-auto">TA名</div>
-      <div class="col-2 my-auto">操作</div>
+      <div class="col my-auto">開始時刻</div>
+      <div class="col my-auto">終了時刻</div>
+      <div class="col my-auto">合計勤務時間(分)</div>
+      <div class="col my-auto">TA名</div>
+      <div class="col my-auto">操作</div>
     </div>
+    <%# 表の表示部分を他のファイルで行ってまとめました． 非同期処理のためのタグもそっちで追加 
+    tableタグではうまくいかなたったので，divタグで表を作ってます．デザイン乃村先生なので修正する． %>
+    <%= turbo_frame_tag "new_work_hour" %>
     <%= render partial: 'assignment_view' %>
   </div>
 </div>

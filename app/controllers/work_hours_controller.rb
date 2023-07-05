@@ -44,6 +44,10 @@ class WorkHoursController < ApplicationController
       if @work_hour.save
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully created." }
         format.json { render :show, status: :created, location: @work_hour }
+
+        # pass notice to create.turbo_stream.erb
+        #  flash.now.notice = "Assignment was successfully created."
+        format.turbo_stream {} # will be rendered by create.turbo_stream.erb
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @work_hour.errors, status: :unprocessable_entity }

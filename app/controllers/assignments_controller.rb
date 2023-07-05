@@ -20,10 +20,9 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
-    # @work_hour = WorkHour.find(params[id:])
-    @course = Course.find(params[course_id:])
-    @assignment = @course.assignments.find(params[assignment_id:])
-    @work_hour = @assignment.work_hours.find(params[id:])
+    # @course = Course.find(params[course_id:])
+    # @assignment = @course.assignments.find(params[assignment_id:])
+    # @work_hour = @assignment.work_hours.find(params[id:])
   end  
 
   # POST /assignments or /assignments.json
@@ -57,11 +56,12 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  # (非同期時の調べ物)割当の削除ボタンを押すとこの処理に来る
   def destroy
-    @assignment = Assignment.find(params[:assignment_id])
-    @work_hour = @assignment.work_hours.find(params[:id])
-    @work_hour.destroy
-    redirect_to course_assignments_path, notice: "割当時間が削除されました"
+    # @assignment = Assignment.find(params[:assignment_id])
+    # @work_hour = @assignment.work_hours.find(params[:id])
+    # @work_hour.destroy
+    # redirect_to course_assignments_path, notice: "割当時間が削除されました"
   end
 
   def output
