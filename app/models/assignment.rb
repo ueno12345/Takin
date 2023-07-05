@@ -3,6 +3,9 @@ class Assignment < ApplicationRecord
   belongs_to :teaching_assistant
   has_many :work_hours, dependent: :destroy
 
+  validates :description,
+  length: {maximum: 128}
+
   def self.ransackable_attributes(auth_object = nil)
     ["course_id", "created_at", "description", "id", "teaching_assistant_id", "updated_at"]
   end

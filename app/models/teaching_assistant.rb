@@ -1,6 +1,19 @@
 class TeachingAssistant < ApplicationRecord
   has_many :assignments, dependent: :nullify
 
+  validates :year,
+  numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :number,
+  format: {with: /\A[a-zA-Z0-9]{6}\z/, message: "は半角英数字6文字で入力してください"}
+  validates :grade,
+  length: {maximum: 2}
+  validates :name,
+  length: {maximum: 128}
+  validates :labo,
+  length: {maximum: 128}
+  validates :description,
+  length: {maximum: 128}
+
   def self.ransackable_attributes(auth_object = nil)
     ["year", "name", "number", "grade", "labo", "description"]
   end
