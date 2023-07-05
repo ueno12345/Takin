@@ -4,6 +4,7 @@
   <%= link_to "TA一覧に戻る", teaching_assistants_path %>
 </div>
 
+<%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
 <div id="import_form" style="display: block;">
   <%= form_tag import_teaching_assistants_path, multipart: true do %>
     <%= file_field_tag :file %>
@@ -64,8 +65,6 @@
     </div>
   <% end %>
 </form>
-
-<%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
 
 <br>
 
