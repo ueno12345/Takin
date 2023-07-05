@@ -20,8 +20,10 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
-    @course = Course.find(params[:course_id])
-    @assignment = @course.assignments.find(params[:assignment_id])
+    # @work_hour = WorkHour.find(params[id:])
+    @course = Course.find(params[course_id:])
+    @assignment = @course.assignments.find(params[assignment_id:])
+    @work_hour = @assignment.work_hours.find(params[id:])
   end  
 
   # POST /assignments or /assignments.json

@@ -1,52 +1,44 @@
-<%= form_with(model: [@course, @work_hour]) do |form| %>
-<%#= form_with(model: work_hour) do |form| %>
-  <% if work_hour.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(work_hour.errors.count, "error") %> prohibited this work_hour from being saved:</h2>
 
-      <ul>
-        <% work_hour.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= turbo_frame_tag work_hour do %>
+  <%= bootstrap_form_with(model: [@course, @work_hour]) do |form| %>
+      <% if work_hour.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(work_hour.errors.count, "error") %> prohibited this work_hour from being saved:</h2>
+
+          <ul>
+            <% work_hour.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    <div class="row py-2 border-top">
+
+      <div class="col">
+        <%#= form.label :dtstart, style: "display: block" %>
+        <%= form.datetime_field :dtstart %>
+      </div>
+
+      <div class="col">
+        <%#= form.label :dtend, style: "display: block" %>
+        <%= form.datetime_field :dtend %>
+      </div>
+
+      <div class="col">
+        <%#= form.label :actual_working_minutes, style: "display: block" %>
+        <%= form.number_field :actual_working_minutes %>
+      </div>
+
+      <div class="col">
+        <%#= form.label :assignment_id, style: "display: block" %>
+        <%= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+      </div>
+
+      <div class="col">
+        <%= form.submit %>
+      </div>
+
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :dtstart, style: "display: block" %>
-    <%= form.datetime_field :dtstart %>
-  </div>
-
-  <div>
-    <%= form.label :dtend, style: "display: block" %>
-    <%= form.datetime_field :dtend %>
-  </div>
-
-  <div>
-    <%= form.label :actual_working_minutes, style: "display: block" %>
-    <%= form.number_field :actual_working_minutes %>
-  </div>
-
-  <div>
-    <%= form.label :assignment_id, style: "display: block" %>
-    <%#= form.text_field :assignment_id %>
-    <%= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
-    <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, selected: (@work_hour.new_record? && @assignments.find { |a| a.teaching_assistant_id == 1 }&.id) %>
-
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
-
-
-
-<script>
-// collection_select メソッドの引数を次のように設定しています。
-// 第1引数：フォームの属性に設定する項目の名前（:teaching_assistant_id）
-// 第2引数：選択肢のデータ（Assignment.where(course_id: @course.id).includes(:teaching_assistant)）
-// 第3引数：選択肢の値として使用する属性（:teaching_assistant_id）
-// 第4引数：選択肢の表示名として使用する属性（'teaching_assistant.name'）
-// 第5引数：オプションハッシュ（{ include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }）
-<\script>

@@ -8,7 +8,7 @@
 
 <br>
 
-<div id="import_form" style="display: none;">
+<div id="import_form" style="display: block;">
   <%= form_tag import_teaching_assistants_path, multipart: true do %>
     <%= file_field_tag :file %>
     <%= submit_tag "登録" %>

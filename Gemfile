@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 # For style
 gem "bootstrap"
 gem "sassc"
+gem "bootstrap_form"
 
 
 # For covert CSV to PDF
