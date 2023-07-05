@@ -1,6 +1,14 @@
 class TeachingAssistant < ApplicationRecord
   has_many :assignments, dependent: :nullify
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["year", "name", "number", "grade", "labo", "description"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["assignments"]
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       teaching_assistant = find_by(id: row[0])

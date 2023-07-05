@@ -4,7 +4,8 @@ class AssignmentsController < ApplicationController
   # GET /assignments or /assignments.json
   def index
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.where(course_id: @course.id)
+    @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
+    @assignments = @q.result
   end
 
   # GET /assignments/1 or /assignments/1.json
@@ -15,7 +16,8 @@ class AssignmentsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
     @assignment = Assignment.new
-    @teaching_assistants = TeachingAssistant.all
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result
   end
 
   # GET /assignments/1/edit

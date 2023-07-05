@@ -3,18 +3,26 @@ class TeachingAssistantsController < ApplicationController
 
   # GET /teaching_assistants or /teaching_assistants.json
   def index
-    @teaching_assistants = TeachingAssistant.all
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result
+    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   # GET /teaching_assistants/1 or /teaching_assistants/1.json
   def show
     @teaching_assistant = TeachingAssistant.find(params[:id])
-    @assignments = @teaching_assistant.assignments.where(teaching_assistant_id: @teaching_assistant.id)
+    @q = @teaching_assistant.assignments.ransack(params[:q], teaching_assistant_id_eq: @teaching_assistant.id)
+    @assignments = @q.result
   end
 
   # GET /teaching_assistants/new
   def new
     @teaching_assistant = TeachingAssistant.new
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result
+    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   # GET /teaching_assistants/1/edit
@@ -27,8 +35,7 @@ class TeachingAssistantsController < ApplicationController
 
     respond_to do |format|
       if @teaching_assistant.save
-        format.html { redirect_to teaching_assistant_url(@teaching_assistant), notice: "Teaching assistant was successfully created." }
-        format.json { render :show, status: :created, location: @teaching_assistant }
+        format.html { redirect_to new_teaching_assistant_path, notice: "TAが追加されました" }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @teaching_assistant.errors, status: :unprocessable_entity }
@@ -56,7 +63,10 @@ class TeachingAssistantsController < ApplicationController
   end
 
   def index_destroy
-    @teaching_assistants = TeachingAssistant.all
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result
+    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   def import
