@@ -1,6 +1,14 @@
 class Course < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["year", "term", "number", "name", "instructor", "description", "assignment_course_name", "assignment_course_term", "work_hour_dtstart", "work_hour_dtend"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["assignments"]
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       course = find_by(id: row[0])

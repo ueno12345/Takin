@@ -7,6 +7,17 @@
 <%= link_to "候補追加", new_course_assignment_path, method: :get %>
 <%#= link_to "勤務追加", new_work_hour_path(@course), method: :get %>
 
+<form class="row g-3">
+  <%= search_form_for @q,url: course_assignments_path(params[:course_id]), html: {class:"row g-3"} do |f| %>
+    <div class="col-md-4">
+      <%= f.label :teaching_assistant_name_i_cont, "TA名" %>
+      <%= f.search_field :teaching_assistant_name_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-12">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</form>
 
 <div>
   <span>
@@ -17,7 +28,6 @@
   開講学期: <%= @course.term %>
   割当可能総時間: <%= @course.time_budget %>
 </div>
-
 
 <table class="table table-bordered">
   <thead class="table-primary">
@@ -40,7 +50,7 @@
             <td><%= assignment.teaching_assistant.name %></td>
             <td>
               <%#= link_to "編集", edit_work_hour_path(work_hour), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
-              <%= link_to "編集", edit_course_work_hour_path(course_id: work_hour.assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
+              <%= link_to "更新", edit_course_work_hour_path(course_id: work_hour.assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
               <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom' %>
             </td>
           </tr>
