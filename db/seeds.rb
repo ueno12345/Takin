@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+<<<<<<< HEAD
 # TeachingAssistant.create!(
 #       year: "00",
 #       number: "00",
@@ -73,3 +74,13 @@
 # 	actual_working_minutes: 60,
 # 	assignment_id: Assignment.find(1).id
 # )
+=======
+TeachingAssistant.create!(
+      year: "00",
+      number: "000000",
+      name: "ダミー君",
+      grade:"Z1", 
+      labo:"山内研究室",
+      description:"ダミーデータやで"
+    )
+>>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f

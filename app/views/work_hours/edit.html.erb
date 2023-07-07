@@ -1,5 +1,11 @@
 <h1>Editing work hour</h1>
 
+<% if flash[:error] %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
 <%= render "form", work_hour: @work_hour %>
 
 <br>

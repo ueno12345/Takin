@@ -5,9 +5,12 @@
 </div>
 
 <%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
+<<<<<<< HEAD
 
 <br>
 
+=======
+>>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f
 <div id="import_form" style="display: block;">
   <%= form_tag import_teaching_assistants_path, multipart: true do %>
     <%= file_field_tag :file %>
@@ -20,7 +23,7 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function(){
+  document.addEventListener("turbo:load", function(){
     const registrationTypeSelect = document.getElementById("registration_type_select");
     const importForm = document.getElementById("import_form");
     const individualRegistrationForm = document.getElementById("individual_registration_form");
@@ -36,3 +39,64 @@
     });
   });
 </script>
+
+<form class="row g-3">
+  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+    <div class="col-md-4">
+      <%= f.label :year_eq, "対象年度" %>
+      <%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"} %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :name_i_cont, "TA名" %>
+      <%= f.search_field :name_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :number_i_cont, "学生番号" %>
+      <%= f.search_field :number_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :grade_i_cont, "学年" %>
+      <%= f.search_field :grade_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :labo_i_cont, "研究室" %>
+      <%= f.search_field :labo_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :description_i_cont, "備考" %>
+      <%= f.search_field :description_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-12">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</form>
+
+<br>
+
+<table class="table table-bordered">
+  <thead class="table-primary">
+    <tr>
+    <th>対象年度</th>
+    <th>TA名</th>
+    <th>学生番号</th>
+    <th>学年</th>
+    <th>研究室</th>
+    <th>備考</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div id="courses">
+      <% @teaching_assistants.each do |teaching_assistant| %>
+        <tr>
+          <td><%= teaching_assistant.year %></td>
+          <td><%= teaching_assistant.name %></td>
+          <td><%= teaching_assistant.number %></td>
+          <td><%= teaching_assistant.grade %></td>
+          <td><%= teaching_assistant.labo %></td>
+          <td><%= teaching_assistant.description %></td>
+        </tr>
+      <% end %>
+    </div>
+  </tbody>
+</table>

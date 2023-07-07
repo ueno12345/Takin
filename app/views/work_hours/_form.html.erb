@@ -41,4 +41,35 @@
 
     </div>
   <% end %>
+<<<<<<< HEAD
 <% end %>
+=======
+
+  <div>
+    <%= form.label :dtstart, style: "display: block" %>
+    <%= form.datetime_field :dtstart %>
+  </div>
+
+  <div>
+    <%= form.label :dtend, style: "display: block" %>
+    <%= form.datetime_field :dtend %>
+  </div>
+
+  <div>
+    <%= form.label :actual_working_minutes, style: "display: block" %>
+    <%= form.number_field :actual_working_minutes %>
+  </div>
+
+  <div>
+    <%= form.label :assignment_id, style: "display: block" %>
+    <%#= form.text_field :assignment_id %>
+    <%= form.select :assignment_id, 
+        @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] },
+        include_blank: true %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+>>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f
