@@ -5,12 +5,6 @@
 </div>
 
 <%= select_tag :registration_type, options_for_select(["TA一括登録", "TA個別登録"]), id: "registration_type_select" %>
-<<<<<<< HEAD
-
-<br>
-
-=======
->>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f
 <div id="import_form" style="display: block;">
   <%= form_tag import_teaching_assistants_path, multipart: true do %>
     <%= file_field_tag :file %>
