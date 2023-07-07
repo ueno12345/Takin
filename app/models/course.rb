@@ -32,6 +32,8 @@ class Course < ApplicationRecord
       else
         course = self.new(year: row[1].to_i, term: row[2], number: row[3], name: row[4], instructor: row[5], time_budget: row[6], description: row[7])
         course.save
+        @assignment = Assignment.new({course_id:course.id, teaching_assistant_id:"1", description:"dammy"})
+        @assignment.save
       end
     end
   end
