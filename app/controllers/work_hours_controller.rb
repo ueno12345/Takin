@@ -61,6 +61,7 @@ class WorkHoursController < ApplicationController
   # PATCH/PUT /work_hours/1 or /work_hours/1.json
   def update
     @course = Course.find(params[:course_id])
+    @assignments = @course.assignments.includes(:teaching_assistant)
 
     if work_hour_params[:assignment_id].blank?
       assignment_id = @course.assignments.find { |a| a.teaching_assistant_id == 1 }&.id
@@ -69,6 +70,9 @@ class WorkHoursController < ApplicationController
     end
     
     respond_to do |format|
+      p "QQQQQQQQQQQQQQQQQQ"
+    puts @work_hour.inspect
+    p "AAAaAAAAAAAAAAAA"
     if @work_hour.update(work_hour_params.merge(assignment_id: assignment_id))
         #format.html { redirect_to work_hour_url(@work_hour), notice: "Work hour was successfully updated." }
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully updated." }

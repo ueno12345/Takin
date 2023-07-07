@@ -48,15 +48,3 @@
     <%= render partial: 'assignment_view' %>
   </div>
 </div>
-
-<script>
-  <%= raw <<~JS.strip %>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('delete-buttom').addEventListener('click', function(e) {
-        if (!confirm('編集を保存していない場合，他の編集データが失われます．\n削除してもよろしいですか？')) {
-          e.preventDefault(); // ボタンのデフォルトの動作をキャンセル
-        }
-      });
-    });
-  JS
-</script>
