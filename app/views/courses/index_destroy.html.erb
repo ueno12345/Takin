@@ -38,7 +38,7 @@
   <% end %>
 </form>
 
-<%= form_tag index_destroy_courses_path, method: :delete do %>
+<%= form_tag index_destroy_courses_path, method: :delete, data: {turbo_confirm: "選択した科目を本当に削除しますか？"} do %>
   <%= submit_tag '選択したものをすべて削除' %>
 
   <table class="table table-bordered">
