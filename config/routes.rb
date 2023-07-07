@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/top_page', to: 'top_page#index', as: 'top_page'
+  get '/top_page', to: 'sessions#index', as: 'top_page'
   resources :users
   resources :assignments
 

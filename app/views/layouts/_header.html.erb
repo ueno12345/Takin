@@ -8,7 +8,7 @@
       <li><%#= link_to "科目TA割当追加(開発用なので後で消す)", new_assignment_path, method: :get, class: "nav-link" %></li>
       <li><%#= link_to "割当勤務時間(開発用なので後で消す)", work_hours_path, method: :get, class: "nav-link" %></li>
       <li><%#= link_to "ユーザ(開発用なので後で消す)", users_path, method: :get, class: "nav-link" %></li>
-      <%= link_to "Log out", logout_path, data: { "turbo-method": :delete } %>
+      <li><%= button_to "ログアウト", logout_path, method: :delete, class: "nav-link" %></li>
     </ul>
   </div>
 </nav>

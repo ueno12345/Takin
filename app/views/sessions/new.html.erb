@@ -3,11 +3,13 @@
 
 <%= flash[:error] %>
 
-<%= form_with url: login_path %>
-ユーザ名:<%= text_field_tag :name %>
-<br> <br>
-パスワード:<%= password_field_tag :password %>
-<br> <br>
-<%= submit_tag 'ログイン' %>
+<div class="set_center_outer">
+    <%= form_with url: login_path %>
+    ユーザ名 :<%= text_field_tag :name %>
+    <br> <br>
+    パスワード:<%= password_field_tag :password %>
+    <br> <br>
+    <%= submit_tag 'ログイン' %>
+</div>
 
 <%= @notice %>
