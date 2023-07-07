@@ -58,32 +58,12 @@ class AssignmentsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   # (非同期時の調べ物)割当の削除ボタンを押すとこの処理に来る
-=======
-  def index_destroy
-    @course = Course.find(params[:course_id])
-    @assignments = Assignment.where(course_id: @course.id)
-    @teaching_assistants = []
-    
-    @assignments.each do |assignment|
-      teaching_assistant = TeachingAssistant.where(id: assignment.teaching_assistant_id)
-      @teaching_assistants.concat(teaching_assistant.to_a)
-    end
-  end
-
-  def TAdestroy
-    @assignments = Assignment.where(teaching_assistant_id: params[:teaching_assistant_ids])
-    @assignments.destroy_all
-    redirect_to index_destroy_course_assignments_path, notice: "TA候補が削除されました"
-  end
-
->>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f
   def destroy
-    # @assignment = Assignment.find(params[:assignment_id])
-    # @work_hour = @assignment.work_hours.find(params[:id])
-    # @work_hour.destroy
-    # redirect_to course_assignments_path, notice: "割当時間が削除されました"
+    @assignment = Assignment.find(params[:assignment_id])
+    @work_hour = @assignment.work_hours.find(params[:id])
+    @work_hour.destroy
+    redirect_to course_assignments_path, notice: "割当時間が削除されました"
   end
 
   def output
