@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 TeachingAssistant.create!(
       year: "00",
-      number: "00",
+      number: "000000",
       name: "ダミー君",
       grade:"Z1", 
       labo:"山内研究室",

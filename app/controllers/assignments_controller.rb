@@ -65,8 +65,6 @@ class AssignmentsController < ApplicationController
     @assignments.each do |assignment|
       teaching_assistant = TeachingAssistant.where(id: assignment.teaching_assistant_id)
       @teaching_assistants.concat(teaching_assistant.to_a)
-      p "AAAAAAAAAAAAAAAAAAAAAAAAAAA"
-      p @teaching_assistants
     end
   end
 
