@@ -1,0 +1,55 @@
+<h1>TA候補削除</h1>
+
+<div><%= flash[:notice] %></div>
+
+<%= form_tag index_destroy_course_assignments_path(@course), method: :delete do %>
+  <%= submit_tag '選択したTAをすべて候補から削除' %>
+
+  <table class="table table-bordered">
+    <thead class="table-primary">
+      <tr>
+      <th>TA候補者選択</th>
+      <th>対象年度</th>
+      <th>TA名</th>
+      <th>学生番号</th>
+      <th>学年</th>
+      <th>研究室</th>
+      <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div id="teaching_assistants">
+        <% @teaching_assistants.each do |teaching_assistant| %>
+          <tr>
+            <td>
+              <%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id %>
+            </td>
+            <td>
+              <%= teaching_assistant.year %>
+            </td>
+
+            <td>
+              <%= teaching_assistant.name %>
+            </td>
+
+            <td>
+              <%= teaching_assistant.number %>
+            </td>
+
+            <td>
+              <%= teaching_assistant.grade %>
+            </td>
+
+            <td>
+              <%= teaching_assistant.labo %>
+            </td>
+
+            <td>
+              <%= teaching_assistant.description%>
+            </td>
+          </tr>
+        <% end %>
+      </div>
+    </tbody>
+  </table>
+<% end %>

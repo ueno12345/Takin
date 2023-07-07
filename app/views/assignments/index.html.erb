@@ -5,6 +5,7 @@
 <%= link_to "科目一覧画面へ", courses_path %>
 <%= link_to "勤務追加", new_course_work_hour_path, method: :get %>
 <%= link_to "候補追加", new_course_assignment_path, method: :get %>
+<%= link_to "候補削除", index_destroy_course_assignments_path, method: :delete %>
 <%#= link_to "勤務追加", new_work_hour_path(@course), method: :get %>
 
 <form class="row g-3">
