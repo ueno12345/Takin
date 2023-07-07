@@ -30,23 +30,12 @@
   <div>
     <%= form.label :assignment_id, style: "display: block" %>
     <%#= form.text_field :assignment_id %>
-    <%= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
-    <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, selected: (@work_hour.new_record? && @assignments.find { |a| a.teaching_assistant_id == 1 }&.id) %>
-
+    <%= form.select :assignment_id, 
+        @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] },
+        include_blank: true %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
-
-
-
-<script>
-// collection_select メソッドの引数を次のように設定しています。
-// 第1引数：フォームの属性に設定する項目の名前（:teaching_assistant_id）
-// 第2引数：選択肢のデータ（Assignment.where(course_id: @course.id).includes(:teaching_assistant)）
-// 第3引数：選択肢の値として使用する属性（:teaching_assistant_id）
-// 第4引数：選択肢の表示名として使用する属性（'teaching_assistant.name'）
-// 第5引数：オプションハッシュ（{ include_blank: true, selected: (@work_hour.new_record? ? 1 : nil) }）
-<\script>

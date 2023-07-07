@@ -1,5 +1,7 @@
 class WorkHour < ApplicationRecord
   belongs_to :assignment
+  validates :dtstart, presence: true
+  validates :dtend, presence: true
 
   validates :actual_working_minutes,
   numericality: {only_integer: true, greater_than_or_equal_to: 0}
