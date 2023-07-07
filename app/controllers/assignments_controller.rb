@@ -1,4 +1,5 @@
 class AssignmentsController < ApplicationController
+  before_action :login, only: %i[ index show new create edit update deatroy]
   before_action :set_assignment, only: %i[ show edit update ]
 
   # GET /assignments or /assignments.json

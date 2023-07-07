@@ -11,10 +11,14 @@
   </head>
 
   <body class="d-flex flex-column">
-    <%= render partial: 'layouts/header' %>
-    <div class="" style="min-height: 537px">
-      <%= yield %>
+    <% unless current_page?(root_path) %>
+      <%= render partial: 'layouts/header' %>
+    <% end %>
+      <div class="" style="min-height: 537px">
+    <%= yield %>
     </div>
-    <%= render partial: 'layouts/footer' %>
+    <% unless current_page?(root_path) %>
+      <%= render partial: 'layouts/footer' %>
+    <% end %>
   </body>
 </html>

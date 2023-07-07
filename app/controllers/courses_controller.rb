@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
-#  before_action :set_course, only: %i[ show edit update ]
+  # login判定
+  before_action :login, only: %i[ index show new edit create update destroy index_destroy import]
+  before_action :admin_judge, only: %i[ new index_destroy import]
 
   # GET /courses or /courses.json
   def index

@@ -1,4 +1,5 @@
 class WorkHoursController < ApplicationController
+  before_action :login, only: %i[ index show new edit create update destroy]
   before_action :set_work_hour, only: %i[ show edit update destroy ]
 
   # GET /work_hours or /work_hours.json

@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # セッション管理
+  get "/login",  to: "sessions#new"
+  post "/login",  to: "sessions#create"
+  delete "/logout",  to: "sessions#destroy"
+
   # Defines the root path route ("/")
-   root "top_page#index"
+   root "sessions#new"
 end

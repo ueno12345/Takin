@@ -2,8 +2,10 @@
 
 <h1>TA一覧画面</h1>
 
-<%= link_to "TAデータを追加", new_teaching_assistant_path %>
-<%= link_to "TAデータ削除", index_destroy_teaching_assistants_path %>
+<% if session[:admin_flag] == true %>
+  <%= link_to "TAデータを追加", new_teaching_assistant_path %>
+  <%= link_to "TAデータ削除", index_destroy_teaching_assistants_path %>
+<% end %>
 
 <table class="table table-bordered">
   <thead class="table-primary">
