@@ -3,18 +3,26 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    @q = Course.ransack(params[:q])
+    @courses = @q.result
+    @select_years = Course.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   # GET /courses/1 or /courses/1.json
   def show
     @course = Course.find(params[:id])
-    @assignments = @course.assignments.where(course_id: @course.id)
+    @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
+    @assignments = @q.result
   end
 
   # GET /courses/new
   def new
     @course = Course.new
+    @q = Course.ransack(params[:q])
+    @courses = @q.result
+    @select_years = Course.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   # GET /courses/1/edit
@@ -28,8 +36,7 @@ class CoursesController < ApplicationController
     
     respond_to do |format|
       if @course.save
-        format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
+        format.html { redirect_to new_course_path, notice: "科目が追加されました" }
         @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
         @assignment.save
       else
@@ -39,7 +46,7 @@ class CoursesController < ApplicationController
       
       #@assignment = Assignment.new({course_id:"1", teaching_assistant_id:"0", description:"dammy"})
       #render template: "assignments/index"  
-
+      
     end
   end
 
@@ -63,7 +70,10 @@ class CoursesController < ApplicationController
   end
 
   def index_destroy
-    @courses = Course.all
+    @q = Course.ransack(params[:q])
+    @courses = @q.result
+    @select_years = Course.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   def import

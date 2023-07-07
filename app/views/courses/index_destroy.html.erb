@@ -2,7 +2,43 @@
 
 <div><%= flash[:notice] %></div>
 
-<%= form_tag index_destroy_courses_path, method: :delete do %>
+<div>
+  <%= link_to "科目一覧に戻る", courses_path %>
+</div>
+
+<form class="row g-3">
+  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+    <div class="col-md-4">
+      <%= f.label :year_eq, "対象年度" %>
+      <%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"} %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :term_i_cont, "学期" %>
+      <%= f.search_field :term_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :number_i_cont, "科目番号" %>
+      <%= f.search_field :number_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :name_i_cont, "授業科目名" %>
+      <%= f.search_field :name_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :instructor_i_cont, "担当教員" %>
+      <%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :description_i_cont, "備考" %>
+      <%= f.search_field :description_i_cont, placeholder: "条件を入力してください" %>
+    </div>
+    <div class="col-12">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</form>
+
+<%= form_tag index_destroy_courses_path, method: :delete, data: {turbo_confirm: "選択した科目を本当に削除しますか？"} do %>
   <%= submit_tag '選択したものをすべて削除' %>
 
   <table class="table table-bordered">
