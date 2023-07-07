@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 # For style
 gem "bootstrap"
 gem "sassc"
+gem "bootstrap_form"
 
 
 # For covert CSV to PDF
@@ -59,6 +60,12 @@ gem "prawn-table"
 
 # For importing CSV
 gem "roo"
+# gem "roo", "~> 2.8.0"
+# gem "prawn", "~> 2.3.0"
+# gem 'axlsx'
+gem 'wicked_pdf'
+
+gem 'rubyXL', '~> 3.4.3'
 
 # For sorting
 gem "ransack"

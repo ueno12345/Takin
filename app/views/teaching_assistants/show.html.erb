@@ -4,6 +4,22 @@
 
 <%= link_to "TA一覧画面へ", teaching_assistants_path %>
 
+<<<<<<< HEAD
+<%# <div>
+  帳票出力
+</div> %>
+<a href="/excel/form1.xlsx" target="_blank" download>TEST </a>
+
+<%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
+
+<div>
+  対象年度: <%= @teaching_assistant.year %>
+  学年: <%= @teaching_assistant.grade %>
+  学生番号: <%= @teaching_assistant.number %>
+  割当総時間: 
+</div>
+
+=======
 <form class="row g-3">
   <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
     <div class="col-md-4">
@@ -19,6 +35,7 @@
     </div>
   <% end %>
 </form>
+>>>>>>> 3e08bce6926688ceba467334ddb8d2c20598685f
 
 <table class="table table-bordered">
   <thead class="table-primary">

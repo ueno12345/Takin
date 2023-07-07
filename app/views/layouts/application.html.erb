@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="d-flex flex-column">
+  <body class="d-flex flex-column footerFixed">
     <%= render partial: 'layouts/header' %>
     <div class="" style="min-height: 537px">
       <%= yield %>
@@ -18,3 +18,11 @@
     <%= render partial: 'layouts/footer' %>
   </body>
 </html>
+
+
+<style>
+  .footerFixed{
+    min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+  }
+
+</style>

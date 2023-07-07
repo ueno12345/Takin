@@ -2,11 +2,11 @@
 
 <h1>TA時間割当(編集)</h1>
 
-<%= link_to "科目一覧画面へ", courses_path %>
-<%= link_to "勤務追加", new_course_work_hour_path, method: :get %>
-<%= link_to "候補追加", new_course_assignment_path, method: :get %>
-<%= link_to "候補削除", index_destroy_course_assignments_path, method: :delete %>
-<%#= link_to "勤務追加", new_work_hour_path(@course), method: :get %>
+  <%= link_to "科目一覧画面へ", courses_path %>
+  <%#= link_to "勤務追加", new_course_work_hour_path, method: :get %>
+  <%= link_to "勤務追加", new_course_work_hour_path, class: "btn btn-outline-primary", data: { turbo_frame: "new_work_hour" }  %>
+  <%= link_to "候補追加", new_course_assignment_path, method: :get %>
+  <%= link_to "候補削除", index_destroy_course_assignments_path, method: :delete %>
 
 <form class="row g-3">
   <%= search_form_for @q,url: course_assignments_path(params[:course_id]), html: {class:"row g-3"} do |f| %>
@@ -21,47 +21,33 @@
 </form>
 
 <div>
-  <span>
-    <%= @course.name %>
-  </span>
-  担当教員: <%= @course.instructor %>
-  対象年度: <%= @course.year %>
-  開講学期: <%= @course.term %>
-  割当可能総時間: <%= @course.time_budget %>
-</div>
+    <span>
+      <%= @course.name %>
+    </span>
+    担当教員: <%= @course.instructor %>
+    対象年度: <%= @course.year %>
+    開講学期: <%= @course.term %>
+    割当可能総時間: <%= @course.time_budget %>
+  </div>
 
-<table class="table table-bordered">
-  <thead class="table-primary">
-    <tr>
-      <th>開始時刻</th>
-      <th>終了時刻</th>
-      <th>合計勤務時間(分)</th>
-      <th>TA名</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <div id="assignments">
-      <% @assignments.each do |assignment| %>
-          <% assignment.work_hours.each do|work_hour| %>
-          <tr>
-            <td><%= work_hour.dtstart %></td>
-            <td><%= work_hour.dtend %></td>
-            <td><%= work_hour.actual_working_minutes %></td>
-            <td><%= assignment.teaching_assistant.name %></td>
-            <td>
-              <%#= link_to "編集", edit_work_hour_path(work_hour), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
-              <%= link_to "更新", edit_course_work_hour_path(course_id: work_hour.assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
-              <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom' %>
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
+<div class="card shadow mt-3">
+  <div class="card-header">
+    <%#= icon_with_text("table", "一覧") %>
+  </div>
+  <div class="card-body mx-3">
+    <div class="row py-2">
+      <div class="col my-auto">開始時刻</div>
+      <div class="col my-auto">終了時刻</div>
+      <div class="col my-auto">合計勤務時間(分)</div>
+      <div class="col my-auto">TA名</div>
+      <div class="col my-auto">操作</div>
     </div>
-  </tbody>
-</table>
-
-
+    <%# 表の表示部分を他のファイルで行ってまとめました． 非同期処理のためのタグもそっちで追加 
+    tableタグではうまくいかなたったので，divタグで表を作ってます．デザイン乃村先生なので修正する． %>
+    <%= turbo_frame_tag "new_work_hour" %>
+    <%= render partial: 'assignment_view' %>
+  </div>
+</div>
 
 <script>
   <%= raw <<~JS.strip %>
