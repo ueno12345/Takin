@@ -4,7 +4,7 @@ class TeachingAssistantsController < ApplicationController
   # GET /teaching_assistants or /teaching_assistants.json
   def index
     @q = TeachingAssistant.ransack(params[:q])
-    @teaching_assistants = @q.result
+    @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.pluck(:year).uniq
     @select_years.insert(0,"")
   end
@@ -13,14 +13,14 @@ class TeachingAssistantsController < ApplicationController
   def show
     @teaching_assistant = TeachingAssistant.find(params[:id])
     @q = @teaching_assistant.assignments.ransack(params[:q], teaching_assistant_id_eq: @teaching_assistant.id)
-    @assignments = @q.result
+    @assignments = @q.result(distinct: true)
   end
 
   # GET /teaching_assistants/new
   def new
     @teaching_assistant = TeachingAssistant.new
     @q = TeachingAssistant.ransack(params[:q])
-    @teaching_assistants = @q.result
+    @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.pluck(:year).uniq
     @select_years.insert(0,"")
   end
@@ -64,7 +64,7 @@ class TeachingAssistantsController < ApplicationController
 
   def index_destroy
     @q = TeachingAssistant.ransack(params[:q])
-    @teaching_assistants = @q.result
+    @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.pluck(:year).uniq
     @select_years.insert(0,"")
   end

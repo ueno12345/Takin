@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
-    @assignments = @q.result
+    @assignments = @q.result(distinct: true)
   end
 
   # GET /assignments/1 or /assignments/1.json
@@ -16,7 +16,9 @@ class AssignmentsController < ApplicationController
     @course = Course.find(params[:course_id])
     @assignment = Assignment.new
     @q = TeachingAssistant.ransack(params[:q])
-    @teaching_assistants = @q.result
+    @teaching_assistants = @q.result(distinct: true)
+    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years.insert(0,"")
   end
 
   # GET /assignments/1/edit
@@ -55,6 +57,21 @@ class AssignmentsController < ApplicationController
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def index_destroy
+    @course = Course.find(params[:course_id])
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result(distinct: true).joins(:assignments).where(assignments: {course_id: @course.id})
+    @select_years = TeachingAssistant.joins(:assignments).where(assignments: { course_id: @course.id }).pluck(:year).uniq
+    @select_years.insert(0,"")
+  end
+  
+
+  def TAdestroy
+    @assignments = Assignment.where(teaching_assistant_id: params[:teaching_assistant_ids])
+    @assignments.destroy_all
+    redirect_to index_destroy_course_assignments_path, notice: "TA候補が削除されました"
   end
 
   # (非同期時の調べ物)割当の削除ボタンを押すとこの処理に来る

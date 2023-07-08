@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @q = Course.ransack(params[:q])
-    @courses = @q.result
+    @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
     @select_years.insert(0,"")
   end
@@ -13,14 +13,14 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
-    @assignments = @q.result
+    @assignments = @q.result(distinct: true)
   end
 
   # GET /courses/new
   def new
     @course = Course.new
     @q = Course.ransack(params[:q])
-    @courses = @q.result
+    @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
     @select_years.insert(0,"")
   end
@@ -32,7 +32,6 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
-    #@CourseID = Course.find(params[:id])
     
     respond_to do |format|
       if @course.save
@@ -71,7 +70,7 @@ class CoursesController < ApplicationController
 
   def index_destroy
     @q = Course.ransack(params[:q])
-    @courses = @q.result
+    @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
     @select_years.insert(0,"")
   end

@@ -70,9 +70,6 @@ class WorkHoursController < ApplicationController
     end
     
     respond_to do |format|
-      p "QQQQQQQQQQQQQQQQQQ"
-    puts @work_hour.inspect
-    p "AAAaAAAAAAAAAAAA"
     if @work_hour.update(work_hour_params.merge(assignment_id: assignment_id))
         #format.html { redirect_to work_hour_url(@work_hour), notice: "Work hour was successfully updated." }
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully updated." }
