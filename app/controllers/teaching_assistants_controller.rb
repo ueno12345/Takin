@@ -1,4 +1,6 @@
 class TeachingAssistantsController < ApplicationController
+  before_action :login, only: %i[ index show new create edit update deatroy index_destroy import]
+  before_action :admin_judge, only: %i[ new index_destroy]
   before_action :set_teaching_assistant, only: %i[ show edit update ]
 
   # GET /teaching_assistants or /teaching_assistants.json

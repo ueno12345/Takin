@@ -1,5 +1,7 @@
 class AssignmentsController < ApplicationController
 
+  before_action :login, only: %i[ index show new create edit update deatroy]
+
   # GET /assignments or /assignments.json
   def index
     @course = Course.find(params[:course_id])
