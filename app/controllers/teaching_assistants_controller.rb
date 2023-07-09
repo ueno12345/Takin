@@ -37,7 +37,7 @@ class TeachingAssistantsController < ApplicationController
 
     respond_to do |format|
       if @teaching_assistant.save
-        format.html { redirect_to new_teaching_assistant_path, notice: "TAが追加されました" }
+        redirect_to new_teaching_assistant_path, notice: "TAが追加されました", flash: {color: :green}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @teaching_assistant.errors, status: :unprocessable_entity }
@@ -59,9 +59,13 @@ class TeachingAssistantsController < ApplicationController
   end
 
   def destroy
-    @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
-    @teaching_assistants.destroy_all
-    redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました"
+    if params[:teaching_assistant_ids].nil?
+      redirect_to index_destroy_teaching_assistants_path, notice: "削除したいTAを選択してください", flash: {color: :red}
+    else
+      @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
+      @teaching_assistants.destroy_all
+      redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました", flash: {color: :green}
+    end
   end
 
   def index_destroy
@@ -73,7 +77,11 @@ class TeachingAssistantsController < ApplicationController
 
   def import
     TeachingAssistant.import(params[:file])
-    redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました"
+    if params[:file].nil?
+      redirect_to new_teaching_assistant_url, notice: "登録するTAマスタデータCSVファイルを選択してください", flash: {color: :red}
+    else
+      redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました", flash: {color: :green}
+    end
   end
 
   private

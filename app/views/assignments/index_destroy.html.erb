@@ -1,6 +1,11 @@
+<% if flash[:color] == "red" %>
+  <div class="red-text"><%= flash[:notice] %></div>
+<% elsif flash[:color] == "green" %>
+  <div class="green-text"><%= flash[:notice] %></div>
+<% else %>
+  <div><%= flash[:notice] %></div>
+<% end %>
 <h1>TA候補削除</h1>
-
-<div><%= flash[:notice] %></div>
 
 <form class="row g-3">
   <%= search_form_for @q, html: {class:"row g-3"} do |f| %>

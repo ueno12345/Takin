@@ -35,20 +35,16 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to new_course_path, notice: "科目が追加されました" }
-        @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
-        @assignment.save
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-      
+    if @course.save
+      redirect_to new_course_path, notice: "科目が追加されました", flash: {color: :green}
+      @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
+      @assignment.save
+    else
+      redirect_to new_course_path, notice: "科目が追加されませんでした", flash: {color: :red}
+    end
+
       #@assignment = Assignment.new({course_id:"1", teaching_assistant_id:"0", description:"dammy"})
       #render template: "assignments/index"  
-      
-    end
   end
 
   # PATCH/PUT /courses/1 or /courses/1.json
@@ -65,9 +61,13 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @courses = Course.where(id: params[:course_ids])
-    @courses.destroy_all
-    redirect_to index_destroy_courses_path, notice: "科目が削除されました"
+    if params[:course_ids].nil?
+      redirect_to index_destroy_courses_path, notice: "削除したい科目を選択してください", flash: {color: :red}
+    else
+      @courses = Course.where(id: params[:course_ids])
+      @courses.destroy_all
+      redirect_to index_destroy_courses_path, notice: "科目が削除されました", flash: {color: :green}
+    end
   end
 
   def index_destroy
@@ -79,7 +79,11 @@ class CoursesController < ApplicationController
 
   def import
     Course.import(params[:file])
-    redirect_to courses_url, notice: "新規TAマスタデータを追加しました"
+    if params[:file].nil?
+      redirect_to new_course_url, notice: "登録する科目マスタデータCSVファイルを選択してください", flash: {color: :red}
+    else
+      redirect_to courses_url, notice: "新規科目マスタデータを追加しました", flash: {color: :green}
+    end
   end
 
   private

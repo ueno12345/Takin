@@ -1,3 +1,11 @@
+<% if flash[:color] == "red" %>
+  <div class="red-text"><%= flash[:notice] %></div>
+<% elsif flash[:color] == "green" %>
+  <div class="green-text"><%= flash[:notice] %></div>
+<% else %>
+  <div><%= flash[:notice] %></div>
+<% end %>
+
 <h1>新規科目マスタデータ追加</h1>
 
 <div>
@@ -7,7 +15,7 @@
 <%= select_tag :registration_type, options_for_select(["科目一括登録", "科目個別登録"]), id: "registration_type_select" %>
 <div id="import_form" style="display: block;">
   <%= form_tag import_courses_path, multipart: true do %>
-    <%= file_field_tag :file %>
+    <%= file_field_tag :file, accept: ".csv" %>
     <%= submit_tag "登録" %>
   <% end %>
 </div>

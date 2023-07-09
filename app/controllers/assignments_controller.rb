@@ -33,19 +33,21 @@ class AssignmentsController < ApplicationController
   # POST /assignments or /assignments.json
   def create
     @course = Course.find(params[:course_id]) 
-    @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
-    @teaching_assistants.each do |teaching_assistant|
-    @assignment = Assignment.new({course_id:@course.id,teaching_assistant_id:teaching_assistant.id, description:""})
-
-      if Assignment.where(course_id: @course.id).where(teaching_assistant_id: teaching_assistant.id).count >= 1
-        #データが重複しないようにif文ではじく
-        next
-      else
-      @assignment.save
+    if params[:teaching_assistant_ids].nil?
+      redirect_to new_course_assignment_path(@course), notice: "追加したいTA候補を選択してください", flash: {color: :red}
+    else  
+      @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
+      @teaching_assistants.each do |teaching_assistant|
+        @assignment = Assignment.new({course_id:@course.id,teaching_assistant_id:teaching_assistant.id, description:""})      
+        if Assignment.where(course_id: @course.id).where(teaching_assistant_id: teaching_assistant.id).count >= 1
+          #データが重複しないようにif文ではじく
+          next
+        else
+          @assignment.save
+        end
       end
+      redirect_to course_assignments_path(@course), notice: "TA候補が追加されました．", flash: {color: :green}
     end
-
-    redirect_to course_assignments_path(@course), notice: "TA候補が追加されました．"
   end
 
   # PATCH/PUT /assignments/1 or /assignments/1.json
@@ -71,9 +73,13 @@ class AssignmentsController < ApplicationController
   
 
   def TAdestroy
-    @assignments = Assignment.where(teaching_assistant_id: params[:teaching_assistant_ids])
-    @assignments.destroy_all
-    redirect_to index_destroy_course_assignments_path, notice: "TA候補が削除されました"
+    if params[:teaching_assistant_ids].nil?
+      redirect_to index_destroy_course_assignments_path, notice: "削除したいTA候補を選択してください", flash: {color: :red}
+    else
+      @assignments = Assignment.where(teaching_assistant_id: params[:teaching_assistant_ids])
+      @assignments.destroy_all
+      redirect_to index_destroy_course_assignments_path, notice: "TA候補が削除されました", flash: {color: :green}
+    end
   end
 
   # (非同期時の調べ物)割当の削除ボタンを押すとこの処理に来る
@@ -81,7 +87,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:assignment_id])
     @work_hour = @assignment.work_hours.find(params[:id])
     @work_hour.destroy
-    redirect_to course_assignments_path, notice: "割当時間が削除されました"
+    redirect_to course_assignments_path, notice: "割当時間が削除されました", flash: {color: :green}
   end
 
   def output
