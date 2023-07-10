@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_03_063618) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_08_034851) do
   create_table "assignments", force: :cascade do |t|
     t.integer "course_id", null: false
     t.integer "teaching_assistant_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_063618) do
     t.datetime "dtstart", null: false
     t.datetime "dtend", null: false
     t.integer "actual_working_minutes", null: false
-    t.integer "assignment_id", null: false
+    t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignment_id"], name: "index_work_hours_on_assignment_id"

@@ -86,14 +86,16 @@ class AssignmentsController < ApplicationController
 
   def output
     @teaching_assistant = TeachingAssistant.find(params[:teaching_assistant_id])
-
-    WriteForm1()
-
-    WriteForm2()
-
+    if params[:form] == '1'
+      WriteForm1()
+      file_path = Rails.root.join('public', 'excel','writed_form1.xlsx')
+      send_file file_path, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment'
+    else
+      WriteForm2()
+      file_path = Rails.root.join('public', 'excel','writed_form2.xlsx')
+      send_file file_path, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment'
+    end
     # redirect_to teaching_assistant_path(@teaching_assistant), notice: "CSVOKまる？？"
-    # file_path = Rails.root.join('public', 'excel','form1.xlsx')
-    # send_file "test.xlsx" , type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'inline'
     # send_file("public/excel/test100.xlsx", filename: 'test.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
   end
 
@@ -158,7 +160,8 @@ class AssignmentsController < ApplicationController
 
           if count == 15 then
             # とりあえず今まで作成したものを保存する
-            workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+            #workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+            workbook_form1.write("#{first}.xlsx")
             file_change_count +=1
             file_form1 = "public/excel/form1.xlsx"
             count = 0
@@ -192,18 +195,19 @@ class AssignmentsController < ApplicationController
         end
       end
 
-      workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+      #workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+      workbook_form1.write("#{first}.xlsx")
 
       # file_path = Rails.root.join('public', 'excel', 'form2.xlsx')
       # send_file file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 
-      file_path = "./public/excel/form2.xlsx"
+      #file_path = "./public/excel/form2.xlsx"
       # puts "================"
       # puts  file_path
       # puts "================"
       # file_path = Rails.root + "#{first}-#{file_change_count}.xlsx"
       # file_path = Rails.root + "/public/excel/form2.xlsx"
-      send_file(file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
+      #send_file(file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
     end
 
     def WriteForm2

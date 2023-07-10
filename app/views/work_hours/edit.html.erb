@@ -1,4 +1,6 @@
 <h1>Editing work hour</h1>
+<% @assignments = @course.assignments.includes(:teaching_assistant) %>
+<%# 非同期でデータを更新すると、新たにレンダリングされるビューの部分では、そのコントローラーアクションで設定したインスタンス変数が引き継がれない%>
 
 <% if flash[:error] %>
   <div class="alert alert-danger">

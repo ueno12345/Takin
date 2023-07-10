@@ -2,14 +2,12 @@
 
 <h1>TA個人画面 : <%= @teaching_assistant.name %></h1>
 
-<%= link_to "TA一覧画面へ", teaching_assistants_path %>
+<%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-info' %>
 
-<%# <div>
-  帳票出力
-</div> %>
-<a href="/excel/form1.xlsx" target="_blank" download>TEST </a>
+<%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
+<%= link_to "帳票出力1", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:1), class: 'btn btn-info' %>
+<%= link_to "帳票出力2", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:2), class: 'btn btn-info' %>
 
-<%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
 
 <div>
   対象年度: <%= @teaching_assistant.year %>
