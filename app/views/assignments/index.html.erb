@@ -36,17 +36,6 @@
   割当可能総時間: <%= @course.time_budget %>
 </div>
 
-<div>
-  割当済TA:
-  <% if @assignments.first.nil? || @assignments.first.teaching_assistant.name == "ダミー君" %>
-    なし
-  <% else %>
-    <% @assignments.each do |assignment| %>
-      <%= assignment.teaching_assistant.name %>
-    <% end %>
-  <% end %>
-</div>
-
 <div class="card shadow mt-3">
   <div class="card-header">
     <%#= icon_with_text("table", "一覧") %>
