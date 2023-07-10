@@ -19,7 +19,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
-    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
     @select_years.insert(0,"")
   end
 
@@ -67,7 +67,7 @@ class AssignmentsController < ApplicationController
     @course = Course.find(params[:course_id])
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true).joins(:assignments).where(assignments: {course_id: @course.id})
-    @select_years = TeachingAssistant.joins(:assignments).where(assignments: { course_id: @course.id }).pluck(:year).uniq
+    @select_years = TeachingAssistant.joins(:assignments).where.not(id: 1).where(assignments: { course_id: @course.id }).pluck(:year).uniq
     @select_years.insert(0,"")
   end
   

@@ -27,23 +27,24 @@
 </form>
 
 <div>
-    <span>
-      <%= @course.name %>
-    </span>
-    担当教員: <%= @course.instructor %>
-    対象年度: <%= @course.year %>
-    開講学期: <%= @course.term %>
-    割当可能総時間: <%= @course.time_budget %>
-  </div>
+  <span>
+    <%= @course.name %>
+  </span>
+  担当教員: <%= @course.instructor %>
+  対象年度: <%= @course.year %>
+  開講学期: <%= @course.term %>
+  割当可能総時間: <%= @course.time_budget %>
+</div>
 
 <div>
-    <span>
-      <%= @course.name %>
-    </span>
-    担当教員: <%= @course.instructor %>
-    対象年度: <%= @course.year %>
-    開講学期: <%= @course.term %>
-    割当可能総時間: <%= @course.time_budget %>
+  割当済TA:
+  <% if @assignments.first.nil? || @assignments.first.teaching_assistant.name == "ダミー君" %>
+    なし
+  <% else %>
+    <% @assignments.each do |assignment| %>
+      <%= assignment.teaching_assistant.name %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="card shadow mt-3">

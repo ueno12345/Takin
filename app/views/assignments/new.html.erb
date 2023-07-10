@@ -62,38 +62,37 @@
       <div id="teaching_assistants">
         <% @teaching_assistants.each do |teaching_assistant| %>
           <tr>
-          <% if Assignment.where(course_id: @course.id).where(teaching_assistant_id: teaching_assistant.id).count >= 1 %>
-            <td>
-              <%= "TA候補として登録済み" %>
-            </td>
+          <% if teaching_assistant.id == 1 %>
+            <% next %>
           <% else %>
-            <td>
-              <%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id %>
-            </td>
+            <% if Assignment.where(course_id: @course.id).where(teaching_assistant_id: teaching_assistant.id).count >= 1 %>
+              <td>
+                <%= "TA候補として登録済み" %>
+              </td>
+            <% else %>
+              <td>
+                <%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id %>
+              </td>
+            <% end %>
+              <td>
+                <%= teaching_assistant.year %>
+              </td>
+              <td>
+                <%= teaching_assistant.name %>
+              </td>
+              <td>
+                <%= teaching_assistant.number %>
+              </td>
+              <td>
+                <%= teaching_assistant.grade %>
+              </td>
+              <td>
+                <%= teaching_assistant.labo %>
+              </td>
+              <td>
+                <%= teaching_assistant.description%>
+              </td>
           <% end %>
-            <td>
-              <%= teaching_assistant.year %>
-            </td>
-
-            <td>
-              <%= teaching_assistant.name %>
-            </td>
-
-            <td>
-              <%= teaching_assistant.number %>
-            </td>
-
-            <td>
-              <%= teaching_assistant.grade %>
-            </td>
-
-            <td>
-              <%= teaching_assistant.labo %>
-            </td>
-
-            <td>
-              <%= teaching_assistant.description%>
-            </td>
           </tr>
         <% end %>
       </div>
