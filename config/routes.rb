@@ -31,7 +31,11 @@ Rails.application.routes.draw do
   # セッション管理
   get "/login",  to: "sessions#new"
   post "/login",  to: "sessions#create"
+  get "/admin_login",  to: "sessions#admin_new"
+  post "/admin_login",  to: "sessions#admin_create"
   delete "/logout",  to: "sessions#destroy"
+
+  get "/sessions/admin_new",  to: "sessions#admin_new"
 
   # Defines the root path route ("/")
    root "sessions#new"
