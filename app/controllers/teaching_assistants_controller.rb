@@ -7,7 +7,7 @@ class TeachingAssistantsController < ApplicationController
   def index
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
-    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
     @select_years.insert(0,"")
   end
 
@@ -23,7 +23,7 @@ class TeachingAssistantsController < ApplicationController
     @teaching_assistant = TeachingAssistant.new
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
-    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
     @select_years.insert(0,"")
   end
 
@@ -71,7 +71,7 @@ class TeachingAssistantsController < ApplicationController
   def index_destroy
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
-    @select_years = TeachingAssistant.pluck(:year).uniq
+    @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
     @select_years.insert(0,"")
   end
 

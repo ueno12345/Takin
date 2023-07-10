@@ -91,12 +91,16 @@
     <div id="courses">
       <% @teaching_assistants.each do |teaching_assistant| %>
         <tr>
-          <td><%= teaching_assistant.year %></td>
-          <td><%= teaching_assistant.name %></td>
-          <td><%= teaching_assistant.number %></td>
-          <td><%= teaching_assistant.grade %></td>
-          <td><%= teaching_assistant.labo %></td>
-          <td><%= teaching_assistant.description %></td>
+          <% if teaching_assistant.id == 1 %>
+            <% next %>
+          <% else %>
+            <td><%= teaching_assistant.year %></td>
+            <td><%= teaching_assistant.name %></td>
+            <td><%= teaching_assistant.number %></td>
+            <td><%= teaching_assistant.grade %></td>
+            <td><%= teaching_assistant.labo %></td>
+            <td><%= teaching_assistant.description %></td>
+          <% end %>
         </tr>
       <% end %>
     </div>
