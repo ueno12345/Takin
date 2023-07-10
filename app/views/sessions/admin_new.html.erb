@@ -1,12 +1,12 @@
 <div class="box">
     <% provide(:title, "ログイン") %>
     <br>
-    <h1 style="text-align:center">TA時間管理システム<br>(利用者ログイン)</h1>
+    <h1 style="text-align:center">TA時間管理システム<br>(管理者ログイン)</h1>
     <br>
 
     <div class="set_center_outer">
         <div class="red-text"><%= flash[:error] %></div>
-        <%= form_with url: login_path %>
+        <%= form_with url: admin_login_path %>
         <br>
         ユーザ名 ：<%= text_field_tag :name %>
         <br> <br>

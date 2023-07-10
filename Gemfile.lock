@@ -139,6 +139,8 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.0-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.15.0-x64-mingw-ucrt)
+      racc (~> 1.4)
     nokogiri (1.15.0-x86_64-linux)
       racc (~> 1.4)
     pdf-core (0.9.0)
@@ -217,6 +219,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.3-aarch64-linux)
+    sqlite3 (1.6.3-x64-mingw-ucrt)
     sqlite3 (1.6.3-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
@@ -230,6 +233,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2023.3)
+      tzinfo (>= 1.0.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -251,6 +256,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES
