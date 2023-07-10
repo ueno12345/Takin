@@ -1,6 +1,12 @@
-<h1>新規科目マスタデータ削除</h1>
+<% if flash[:color] == "red" %>
+  <div class="red-text"><%= flash[:notice] %></div>
+<% elsif flash[:color] == "green" %>
+  <div class="green-text"><%= flash[:notice] %></div>
+<% else %>
+  <div><%= flash[:notice] %></div>
+<% end %>
 
-<div><%= flash[:notice] %></div>
+<h1>新規科目マスタデータ削除</h1>
 
 <div>
   <%= link_to "科目一覧に戻る", courses_path %>

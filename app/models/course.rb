@@ -25,6 +25,8 @@ class Course < ApplicationRecord
   end
 
   def self.import(file)
+    return if file.nil?
+
     CSV.foreach(file.path, headers: true) do |row|
       course = find_by(year: row[1].to_i, number: row[3])
       if course

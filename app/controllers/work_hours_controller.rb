@@ -16,12 +16,7 @@ class WorkHoursController < ApplicationController
     @course = Course.find(params[:course_id])
     @work_hour = WorkHour.new
     @assignments = @course.assignments.includes(:teaching_assistant)
-  end
-  #def new
-  #  @course = Course.find(params[:course_id])
-  #  @work_hour = @course.work_hours.build
-  #end
-  
+  end  
 
   # GET /work_hours/1/edit
   def edit
