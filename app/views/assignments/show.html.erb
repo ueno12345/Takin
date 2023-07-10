@@ -1,10 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @assignment %>
+<%#= render @assignment %>
+<%= render "assignment_view", {assignment: @assignment, work_hour: @work_hour }%>
 
 <div>
-  <%= link_to "Edit this assignment", edit_assignment_path(@assignment) %> |
-  <%= link_to "Back to assignments", assignments_path %>
+  <%#= link_to "Edit this assignment", edit_assignment_path(@assignment) %> |
+  <%#= link_to "Back to assignments", assignments_path %>
 
-  <%= button_to "Destroy this assignment", @assignment, method: :delete %>
+  <%#= button_to "Destroy this assignment", @assignment, method: :delete %>
 </div>

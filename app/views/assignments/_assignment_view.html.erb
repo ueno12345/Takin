@@ -1,7 +1,7 @@
 
 <%# <div id="assignments"> %>
-<% @assignments.each do |assignment| %>
-		<% assignment.work_hours.each do|work_hour| %>
+<%# @assignments.each do |assignment| %>
+		<%# assignment.work_hours.each do|work_hour| %>
 			<%= turbo_frame_tag work_hour do %>
 			<div class="row py-2 border-top">
 				<div class="col my-auto"><%= work_hour.dtstart %></div>
@@ -11,9 +11,9 @@
 				<div class="col my-auto">
 					<%#= link_to "編集", edit_assignment_path(assignment, work_hour, course_id: assignment.course_id, assignment_id: assignment.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
 					<%= link_to "編集", edit_course_work_hour_path(course_id: assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary', form: { style: 'display: inline' } %>
-					<%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom' %>
+					<%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %>
 				</div>
 			</div>
 		<% end %>
-	<% end %>
-<% end %>
+	<%# end %>
+<%# end %>

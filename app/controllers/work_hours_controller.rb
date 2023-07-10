@@ -36,7 +36,11 @@ class WorkHoursController < ApplicationController
     @course = Course.find(params[:course_id])
     @work_hour = WorkHour.new(work_hour_params)
     @assignments = @course.assignments.includes(:teaching_assistant)
+    # @assignment = Assignment.where(assignment_id: @work_hour.id).first
 
+    puts "=================="
+    # puts @assignment
+    puts "=================="
 
     if @work_hour.assignment_id.blank?
       @work_hour.assignment_id = @course.assignments.find { |a| a.teaching_assistant_id == 1 }&.id
@@ -44,15 +48,18 @@ class WorkHoursController < ApplicationController
   
     respond_to do |format|
       if @work_hour.save
+        # format.turbo_stream {} # will be rendered by create.turbo_stream.erb
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully created." }
         format.json { render :show, status: :created, location: @work_hour }
+        format.turbo_stream
 
         # pass notice to create.turbo_stream.erb
         #  flash.now.notice = "Assignment was successfully created."
-        format.turbo_stream {} # will be rendered by create.turbo_stream.erb
+        # format.turbo_stream {} # will be rendered by create.turbo_stream.erb
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @work_hour.errors, status: :unprocessable_entity }
+        format.turbo_stream
       end
     end
   end
@@ -84,11 +91,14 @@ class WorkHoursController < ApplicationController
 
   # DELETE /work_hours/1 or /work_hours/1.json
   def destroy
-    @work_hour.destroy
+    # @work_hour.destroy
+    # flash.now.notice = "ねこを削除しました。"
 
     respond_to do |format|
-      format.html { redirect_to work_hours_url, notice: "Work hour was successfully destroyed." }
+      # format.turbo_stream
+      format.html { redirect_to course_assignments_path, notice: "Work hour was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 

@@ -81,7 +81,17 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:assignment_id])
     @work_hour = @assignment.work_hours.find(params[:id])
     @work_hour.destroy
-    redirect_to course_assignments_path, notice: "割当時間が削除されました"
+
+    respond_to do |format|
+      # format.turbo_stream
+      format.html { redirect_to course_assignments_path, notice: "Work hour was successfully destroyed." }
+      format.json { head :no_content }
+      puts "========================="
+      puts format.turbo_stream
+      format.turbo_stream
+      puts "========================="
+    end
+    # redirect_to course_assignments_path, notice: "割当時間が削除されました"
   end
 
   def output

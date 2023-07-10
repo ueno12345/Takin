@@ -1,0 +1,9 @@
+<%# Cat詳細（`#cat_1`となる要素）を削除する %>
+<%#= turbo_stream.remove @work_hour %>
+
+<%# Flashを表示 %>
+<%#= turbo_stream_flash %>
+
+<%= turbo_frame_tag @work_hour %>
+
+<% end %>
