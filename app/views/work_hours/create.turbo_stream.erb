@@ -1,2 +1,3 @@
+<%# 非同期で新規作成時に表示する %>
 <%= turbo_stream.prepend "assignments", @work_hour %>
 <%= turbo_stream.update "new_work_hour", "" %>

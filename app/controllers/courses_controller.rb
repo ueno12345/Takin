@@ -29,6 +29,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    # ============#
+    # 使用してない =#
+    # ============#
   end
 
   # POST /courses or /courses.json

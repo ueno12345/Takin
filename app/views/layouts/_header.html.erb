@@ -10,7 +10,7 @@
       <li><%#= link_to "ユーザ(開発用なので後で消す)", users_path, method: :get, class: "nav-link" %></li>
     </ul>
 
-    <%= link_to logout_path, method: :delete, class: "nav-link" do %>
+    <%= button_to logout_path, method: :delete, class: "nav-link" do %>
       <%= image_tag("user.jpg", alt: "ログアウト", width: 40, height: 40) %>
     <% end %>
   </div>
