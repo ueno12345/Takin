@@ -2,6 +2,7 @@ class AssignmentsController < ApplicationController
 
   before_action :login, only: %i[ index show new create edit update deatroy]
 
+  # 使用中
   # GET /assignments or /assignments.json
   def index
     @course = Course.find(params[:course_id])
@@ -25,6 +26,9 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
+    # ============#
+    # 使用してない =#
+    # ============#
     # @course = Course.find(params[course_id:])
     # @assignment = @course.assignments.find(params[assignment_id:])
     # @work_hour = @assignment.work_hours.find(params[id:])
@@ -87,7 +91,14 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:assignment_id])
     @work_hour = @assignment.work_hours.find(params[:id])
     @work_hour.destroy
-    redirect_to course_assignments_path, notice: "割当時間が削除されました", flash: {color: :green}
+
+    respond_to do |format|
+      # format.turbo_stream
+      format.html { redirect_to course_assignments_path, notice: "Work hour was successfully destroyed." }
+      format.json { head :no_content }
+      # redirect_to course_assignments_path, notice: "割当時間が削除されました", flash: {color: :green}
+      format.turbo_stream
+    end
   end
 
   def output

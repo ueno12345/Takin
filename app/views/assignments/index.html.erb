@@ -6,11 +6,13 @@
   <div><%= flash[:notice] %></div>
 <% end %>
 
+<p style="color: green"><%= notice %></p>
+
 <h1>TA時間割当(編集)</h1>
 
   <%= link_to "科目一覧画面へ", courses_path %>
   <%#= link_to "勤務追加", new_course_work_hour_path, method: :get %>
-  <%= link_to "勤務追加", new_course_work_hour_path, class: "btn btn-outline-primary", data: { turbo_frame: "new_work_hour" }  %>
+  <%= link_to "勤務追加", new_course_work_hour_path, class: "btn btn-outline-primary", data: { turbo_frame: dom_id(WorkHour.new)  }  %>
   <%= link_to "候補追加", new_course_assignment_path, class: "btn btn-outline-primary", method: :get %>
   <%= link_to "候補削除", index_destroy_course_assignments_path, class: "btn btn-outline-primary", method: :delete %>
 
@@ -27,14 +29,14 @@
 </form>
 
 <div>
-  <span>
-    <%= @course.name %>
-  </span>
-  担当教員: <%= @course.instructor %>
-  対象年度: <%= @course.year %>
-  開講学期: <%= @course.term %>
-  割当可能総時間: <%= @course.time_budget %>
-</div>
+    <span>
+      <%= @course.name %>
+    </span>
+    担当教員: <%= @course.instructor %>
+    対象年度: <%= @course.year %>
+    開講学期: <%= @course.term %>
+    割当可能総時間: <%= @course.time_budget %>
+  </div>
 
 <div class="card shadow mt-3">
   <div class="card-header">
@@ -50,7 +52,13 @@
     </div>
     <%# 表の表示部分を他のファイルで行ってまとめました． 非同期処理のためのタグもそっちで追加 
     tableタグではうまくいかなたったので，divタグで表を作ってます．デザイン乃村先生なので修正する． %>
-    <%= turbo_frame_tag "new_work_hour" %>
-    <%= render partial: 'assignment_view' %>
+    <%= turbo_frame_tag WorkHour.new %>
+    <div id="assignments">
+    <% @assignments.each do |assignment| %>
+      <% assignment.work_hours.each do|work_hour| %>
+        <%= render partial: 'assignment_view', locals:{ assignment: assignment,work_hour: work_hour } %>
+      <% end %>
+    <% end %>
+    </div>
   </div>
 </div>
