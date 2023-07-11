@@ -1,19 +1,2 @@
-<h1>Editing work hour</h1>
-<% @assignments = @course.assignments.includes(:teaching_assistant) %>
-<%# 非同期でデータを更新すると、新たにレンダリングされるビューの部分では、そのコントローラーアクションで設定したインスタンス変数が引き継がれない%>
-
-<% if flash[:error] %>
-  <div class="alert alert-danger">
-    <%= flash[:error] %>
-  </div>
-<% end %>
-
+<%# 非同期の編集時の表示する %>
 <%= render "form", work_hour: @work_hour %>
-
-<br>
-
-<div>
-  <%#= link_to "Show this work hour", @work_hour %> |
-  <%#= link_to "Back to work hours", work_hours_path %>
-  <%= link_to "Back to work hours", course_assignments_path %>
-</div>

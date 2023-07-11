@@ -1,3 +1,4 @@
+<%# TAマスタデータ削除画面 %>
 <% if flash[:color] == "red" %>
   <div class="red-text"><%= flash[:notice] %></div>
 <% elsif flash[:color] == "green" %>
@@ -6,7 +7,7 @@
   <div><%= flash[:notice] %></div>
 <% end %>
 
-<h1>新規TAマスタデータ削除</h1>
+<h1>TAマスタデータ削除</h1>
 
 <form class="row g-3">
   <%= search_form_for @q, html: {class:"row g-3"} do |f| %>

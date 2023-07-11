@@ -41,13 +41,13 @@ class WorkHoursController < ApplicationController
       if @work_hour.save
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully created." }
         format.json { render :show, status: :created, location: @work_hour }
-
-        # pass notice to create.turbo_stream.erb
-        #  flash.now.notice = "Assignment was successfully created."
-        format.turbo_stream {} # will be rendered by create.turbo_stream.erb
+        # 非同期で入れ替えるコードを記入[create.turbo_frame.erb]
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @work_hour.errors, status: :unprocessable_entity }
+
+        format.turbo_stream
       end
     end
   end
@@ -84,6 +84,8 @@ class WorkHoursController < ApplicationController
     respond_to do |format|
       format.html { redirect_to work_hours_url, notice: "Work hour was successfully destroyed." }
       format.json { head :no_content }
+      # 非同期で入れ替えるコードを記入[destroy.turbo_frame.erb]
+      format.turbo_stream
     end
   end
 

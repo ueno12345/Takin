@@ -29,6 +29,9 @@ class TeachingAssistantsController < ApplicationController
 
   # GET /teaching_assistants/1/edit
   def edit
+    # ============#
+    # 使用してない =#
+    # ============#
   end
 
   # POST /teaching_assistants or /teaching_assistants.json

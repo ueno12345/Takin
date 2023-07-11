@@ -16,12 +16,12 @@
     <div class="row py-2 border-top">
 
       <div class="col">
-        <%#= form.label :dtstart, style: "display: block" %>
+        <%#= form.label :開始時刻, style: "display: block" %>
         <%= form.datetime_field :dtstart %>
       </div>
 
       <div class="col">
-        <%#= form.label :dtend, style: "display: block" %>
+        <%#= form.label :終了時刻, style: "display: block" %>
         <%= form.datetime_field :dtend %>
       </div>
 
@@ -31,12 +31,18 @@
       </div>
 
       <div class="col">
-        <%= form.select :assignment_id, @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, include_blank: 'Select Assignment' %>
-
+        <%#= form.label :assignment_id, style: "display: block" %>
+        <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+        <%= form.select :assignment_id, @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+        <%#= form.select :assignment_id, 
+        @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] },
+        include_blank: true %>
       </div>
 
       <div class="col">
         <%= form.submit %>
+        <%= link_to "戻る", course_assignments_path, class:"btn btn-warning" %>
+        <%#= link_to "Back", @work_hour, class: "btn btn-sm btn-outline-secondary" %>
       </div>
 
     </div>
