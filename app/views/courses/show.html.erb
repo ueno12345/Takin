@@ -21,7 +21,22 @@
   担当教員: <%= @course.instructor %>
   対象年度: <%= @course.year %>
   開講学期: <%= @course.term %>
-  割当可能総時間: <%= @course.time_budget %>
+  割当可能総時間: 
+  <% sum = 0 %>
+  <% @assignments.each do|assignment| %>
+    <% assignment.work_hours.each do|work_hour| %>
+      <% if work_hour.nil? %>
+        <% next %>
+      <% else %>
+        <% if @course.time_budget >= work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
+          <% sum = work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
+        <% else %>
+          <% break %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= @course.time_budget - sum %>
 </div>
 
 <form class="row g-3">
@@ -46,18 +61,14 @@
     </tr>
     <div id="assignments">
       <% @assignments.each do |assignment| %>
-        <% if assignment.teaching_assistant.id == 1 %>
-          <% next %>
-        <% else %>
-          <% assignment.work_hours.each do|work_hour| %>
-            <tr>
-              <td><%= work_hour.dtstart %></td>
-              <td><%= work_hour.dtend %></td>
-              <td><%= work_hour.actual_working_minutes %></td>
-              <td><%= assignment.teaching_assistant.name %></td>
-              <td>帳票出力</td>
-            </tr>
-          <% end %>
+        <% assignment.work_hours.each do|work_hour| %>
+          <tr>
+            <td><%= work_hour.dtstart.to_fs(:datetime_jp) %></td>
+            <td><%= work_hour.dtend.to_fs(:datetime_jp) %></td>
+            <td><%= work_hour.actual_working_minutes %></td>
+            <td><%= assignment.teaching_assistant.name %></td>
+            <td>帳票出力</td>
+          </tr>
         <% end %>
       <% end %>
     </div>

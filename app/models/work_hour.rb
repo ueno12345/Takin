@@ -12,4 +12,8 @@ class WorkHour < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["assignment"]
   end
+
+  def calc_work_hours(sum,hour)
+    sum += hour
+  end
 end
