@@ -12,9 +12,9 @@
 <%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-info' %>
 
 <%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
-<%= link_to "帳票出力1", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:1), class: 'btn btn-info' %>
-<%= link_to "帳票出力2", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:2), class: 'btn btn-info' %>
-
+<%#= link_to "帳票出力1", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:1), class: 'btn btn-info' %>
+<%#= link_to "帳票出力2", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:2), class: 'btn btn-info' %>
+<%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
 
 <div>
   対象年度: <%= @teaching_assistant.year %>

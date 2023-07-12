@@ -8,7 +8,8 @@
     <div class="col my-auto">
       <%#= link_to "編集", edit_assignment_path(assignment, work_hour, course_id: assignment.course_id, assignment_id: assignment.id), method: :get, class: 'btn btn-danger', form: { style: 'display: inline' } %>
       <%= link_to "個人画面", teaching_assistant_path(assignment.teaching_assistant),class: 'btn btn-success', target: '_blank'%>
-      <%= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: assignment.teaching_assistant.id), class: 'btn btn-info', target: '_blank'%>
+      <%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: assignment.teaching_assistant.id), class: 'btn btn-info', target: '_blank'%>
+      <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
       <%= link_to "編集", edit_course_work_hour_path(course_id: assignment.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary', form: { style: 'display: inline' } %>
       <%= button_to "削除", destroy_course_assignments_path(@course, assignment, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %>
     </div>

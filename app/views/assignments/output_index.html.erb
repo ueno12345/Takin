@@ -1,0 +1,328 @@
+<h1 class="ms-4">帳票確認＆出力画面</h1>
+
+<%# どのTAの帳票保存画面かを示す情報 %>
+<div class="row my-5">
+	<div class="col-1"></div>
+	<div class="col-4 h2">TA名：<%= @teaching_assistant.name %></div>
+	<div class="col-2 mt-3">対象年度：<%= @teaching_assistant.year %></div>
+	<div class="col-2 mt-3">学生番号：<%= @teaching_assistant.number %></div>
+	<div class="col-2 mt-3">学年：<%= @teaching_assistant.grade %></div>
+	<div class="col-1 mt-3"></div>
+</div>
+
+<%# 帳票のダウンロードボタンを配置している %>
+<div class="row mb-5">
+	<div class="col-1"></div>
+	<div class="card col-10" style="">
+		<div class="card-body">
+			<h5 class="card-title font-weight-bold">様式ダウンロードリンク</h5>
+			<%# 様式1のダウンロードボタン %>
+			<% @output_excel1_files_name.each_with_index do |file,i| %>
+				<a class="btn btn-primary m-3" href="<%= file %>" target="_blank">様式1「<%= i+1 %>つ目」</a>
+			<% end %>
+			<%# 様式2のダウンロードボタン %>
+			<a class="btn btn-primary m-3" href="<%=  @output_excel2_file_name %>" target="_blank">様式2</a>
+		</div>
+	</div>
+	<div class="col-1"></div>
+</div>
+
+<%# 帳票の記入情報 %>
+<div class="row">
+	<div class="col-1"></div>
+	
+	<%# 帳票の情報を表示する領域 %>
+	<div class="write-detail col-10 card p-3">
+
+	<% count = 0 %>
+	<% excel_num = 1 %>
+	<%# 様式1情報 %>
+	<% @assignments.each do |assignment| %>
+		<% assignment.work_hours.where(dtstart: Date.new(@teaching_assistant.year,4,1)..)
+		.where(dtend: ..Date.new(@teaching_assistant.year+1,4,1)).order(:dtstart).each do |work_hour| %>
+			<% if count == 0 then %>
+				<%# 様式1情報 %>
+				<details class="mx-1">
+					<summary> 様式1-<%= excel_num %> </summary>
+						<div class="row mb-3">
+							<div class="col-1"></div>
+							<div class="col-10 card mt-3">
+								<div class="card-header">
+									<div> <%= @teaching_assistant.year %>年4月〜<%= @teaching_assistant.year+1%>年3月 </div>
+								</div>
+								<div class="card-body mx-3">
+									<%# 氏名を表示する START%>
+									<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">氏名</div>
+											<div class="col my-auto"><%= @teaching_assistant.name %></div>
+									</div>
+									<%# 氏名を表示する END%>
+									<%# 学生番号を表示する START%>
+									<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">学生番号</div>
+											<div class="col my-auto"><%= @teaching_assistant.number %></div>
+									</div>
+									<%# 学生番号を表示する END%>
+									<% if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then%>
+										<%# 学年を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">学年</div>
+											<div class="col my-auto">博士前期 <%= @teaching_assistant.grade%></div>
+										</div>
+										<%# 学年を表示する END%>
+										<%# 所属研究科を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">所属</div>
+											<div class="col my-auto">大学院環境生命自然科学研究科</div>
+										</div>
+										<%# 所属研究科を表示する END%>
+									<% elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then %>
+										<%# 学年を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">学年</div>
+											<div class="col my-auto">博士後期</div>
+										</div>
+										<%# 学年を表示する END%>
+										<%# 所属研究科を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">所属</div>
+											<div class="col my-auto">大学院環境生命自然科学研究科</div>
+										</div>
+										<%# 所属研究科を表示する END%>
+									<% else %>
+										<%# 学年を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">学年</div>
+											<div class="col my-auto">学部<%=@teaching_assistant.grade%>回生</div>
+										</div>
+										<%# 学年を表示する END%>
+										<%# 所属研究科を表示する START%>
+										<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">所属</div>
+											<div class="col my-auto">工学部</div>
+										</div>
+										<%# 所属研究科を表示する END%>
+									<% end %>
+									<%# 勤務情報HEADERを表示する START%>
+									<div class="row py-2 border-bottom border-dark">
+											<div class="col my-auto text-info">講義番号</div>
+											<div class="col my-auto text-info">授業科目名</div>
+											<div class="col my-auto text-info">学期</div>
+											<div class="col my-auto text-info">曜日</div>
+											<div class="col my-auto text-info">勤務開始時刻</div>
+											<div class="col my-auto text-info">勤務終了時刻</div>
+											<div class="col my-auto text-info">勤務時間数(分)</div>
+									</div>
+									<%# 勤務情報HEADERを表示する END%>
+			<% end %>
+
+			<%# 勤務情報HEADERを表示する START%>
+			<div class="row py-2 border-bottom">
+					<div class="col my-auto "><%= assignment.course.number %></div>
+					<div class="col my-auto "><%= assignment.course.name %></div>
+					<div class="col my-auto "><%= assignment.course.term %></div>
+					<div class="col my-auto "><%= datetoday(work_hour) %></div>
+					<div class="col my-auto "><%= work_hour.dtstart.strftime('%Y年%m月%d日 %H:%M') %></div>
+					<div class="col my-auto "><%= work_hour.dtend.strftime('%Y年%m月%d日 %H:%M') %></div>
+					<div class="col my-auto "><%= work_hour.actual_working_minutes %></div>
+			</div>
+			<%# 勤務情報HEADERを表示する END%>
+			<% count+=1 %>
+
+			<% if count == 15 then %>
+								</div>
+							<div class="col-1"></div>
+						</div>
+				</details>
+				<% count = 0 %>
+				<% excel_num += 1 %>
+			<% end %>
+		<% end %>	
+	<% end %>
+
+	<% if count != 0 then%>
+						</div>
+					<div class="col-1"></div>
+				</div>
+		</details>
+	<% end %>
+
+	<%# 様式2情報 %>
+	<details class="mx-1">
+		<summary> 様式2 </summary>
+		<div class="row mb-3">
+		<div class="col-1"></div>
+		<div class="col-10 card mt-3">
+			<div class="card-header">
+				<div> <%= @teaching_assistant.year %>年4月〜<%= @teaching_assistant.year+1%>年3月 </div>
+			</div>
+			<div class="card-body mx-3">
+				<%# 氏名を表示する START%>
+				<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">氏名</div>
+						<div class="col my-auto"><%= @teaching_assistant.name %></div>
+				</div>
+				<%# 氏名を表示する END%>
+				<% if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then%>
+					<%# 学年を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">博士前期・後期</div>
+						<div class="col my-auto">博士前期</div>
+					</div>
+					<%# 学年を表示する END%>
+					<%# 所属研究科を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">所属研究科名</div>
+						<div class="col my-auto">大学院環境生命自然科学研究科</div>
+					</div>
+					<%# 所属研究科を表示する END%>
+					<%# 職名を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">職名</div>
+						<div class="col my-auto">TA</div>
+					</div>
+					<%# 職名を表示する END%>
+				<% elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then %>
+					<%# 学年を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">博士前期・後期</div>
+						<div class="col my-auto">博士後期</div>
+					</div>
+					<%# 学年を表示する END%>
+					<%# 所属研究科を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">所属研究科名</div>
+						<div class="col my-auto">大学院環境生命自然科学研究科</div>
+					</div>
+					<%# 所属研究科を表示する END%>
+					<%# 職名を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">職名</div>
+						<div class="col my-auto">TA</div>
+					</div>
+					<%# 職名を表示する END%>
+				<% else %>
+					<%# 所属研究科を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">所属研究科名</div>
+						<div class="col my-auto">工学部</div>
+					</div>
+					<%# 所属研究科を表示する END%>
+					<%# 職名を表示する START%>
+					<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">職名</div>
+						<div class="col my-auto">SA</div>
+					</div>
+					<%# 職名を表示する END%>
+				<% end %>
+				<%# 学生番号を表示する START%>
+				<div class="row py-2 border-bottom border-dark">
+						<div class="col my-auto text-info">学生番号</div>
+						<div class="col my-auto"><%= @teaching_assistant.number %></div>
+				</div>
+				<%# 学生番号を表示する END%>
+				<%# 割当科目の担当教員一覧 START %>
+				<div class="row py-2 border-bottom border-dark">
+					<div class="col my-auto text-info">授業担当教員</div>
+					<div class="col my-auto">
+					<% assigment_course_teacher.each do |name| %>
+						<%= name %>　
+					<% end %>
+					</div>
+				</div>
+				<%# 割当科目の担当教員一覧 END %>
+				<%# 勤務日 START %>
+				<div class="row py-2 border-top border-dark">
+					<div class="col my-auto text-info">勤務日</div>
+					<div class="col my-auto text-info">合計勤務時間(分)</div>
+				</div>
+				<% sort.each do |data| %>
+					<div class="row py-2 border-bottom">
+						<div class="col my-auto"><%= data.month_day %></div>
+						<div class="col my-auto"><%= data.sum_work_time %></div>
+					</div>
+				<% end %>
+				<div class="row py-2 border-top border-dark">
+					<div class="col my-auto text-info">合計勤務時間(分)</div>
+					<div class="col my-auto"><%= all_work_time %></div>
+				</div>
+				<%# 勤務日 END %>
+			</div>
+		</div>
+		<div class="col-1"></div>
+	</div>
+	</details>
+	</div>
+	<div class="col-1"></div>
+</div>
+
+<div class="mb-5"></div>
+
+<style>
+summary {
+  position: relative;
+  display: block; /* 矢印を消す */
+  padding: 10px 10px 10px 30px; /* アイコンの余白を開ける */
+  cursor: pointer; /* カーソルをポインターに */
+  font-weight: bold;
+  background-color: #e2f0f7;
+  transition: 0.2s;
+}
+summary:hover {
+  background-color: #ccebfb;
+}
+summary::-webkit-details-marker {
+  display: none;　/* 矢印を消す */
+}
+
+/* 疑似要素でアイコンを表示 */
+summary:before,
+summary:after {
+  content: "";
+  margin: auto 0 auto 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+summary:before {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: #1da1ff;
+}
+summary:after {
+  left: 6px;
+  width: 5px;
+  height: 5px;
+  border: 4px solid transparent;
+  border-left: 5px solid #fff;
+  box-sizing: border-box;
+  transition: .1s;
+}
+
+/* オープン時のスタイル */
+details[open] summary {
+  background-color: #ccebfb;
+}
+details[open] summary:after {
+  transform: rotate(90deg); /* アイコンを回転 */
+  left: 4px; /* 位置を調整 */
+  top: 5px; /* 位置を調整 */
+}
+
+/* アニメーション */
+details[open] .details-content {
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>

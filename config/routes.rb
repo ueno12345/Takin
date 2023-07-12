@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # 帳票出力用の処理URL
   #post '/assignments/output', to: 'assignments#output', as: 'ta_assignment_output_csv'
   get 'ta_assignment/output_csv', to: 'assignments#output', as: 'ta_assignment_output_csv'
+  get 'ta_assignment/index_output_excel/:id', to: 'assignments#output_index', as: 'index_output_excel'
   get '/teaching_assistants/index_destroy', to: 'teaching_assistants#index_destroy', as: 'index_destroy_teaching_assistants'
   delete '/teaching_assistants/index_destroy', to: 'teaching_assistants#destroy'
   resources :teaching_assistants do
