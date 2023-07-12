@@ -123,7 +123,7 @@ class AssignmentsController < ApplicationController
   def output
     @teaching_assistant = TeachingAssistant.find(params[:teaching_assistant_id])
     date_start = Date.new(@teaching_assistant.year, 4, 1) 
-    date_end = Date.new(@teaching_assistant.year+1, 3, 31) 
+    date_end = Date.new(@teaching_assistant.year+1, 4, 1) 
 
     if params[:form] == '1'
       WriteForm1(date_start, date_end)
