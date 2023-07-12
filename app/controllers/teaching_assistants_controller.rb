@@ -62,13 +62,35 @@ class TeachingAssistantsController < ApplicationController
     end
   end
 
+  # def destroy
+  #   if params[:teaching_assistant_ids].nil?
+  #     redirect_to index_destroy_teaching_assistants_path, notice: "削除したいTAを選択してください", flash: {color: :red}
+  #   else
+  #     @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
+  #     @teaching_assistants.destroy_all
+  #     redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました", flash: {color: :green}
+  #   end
+  # end
   def destroy
     if params[:teaching_assistant_ids].nil?
       redirect_to index_destroy_teaching_assistants_path, notice: "削除したいTAを選択してください", flash: {color: :red}
     else
       @teaching_assistants = TeachingAssistant.where(id: params[:teaching_assistant_ids])
-      @teaching_assistants.destroy_all
-      redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました", flash: {color: :green}
+      assignments_exist = false
+  
+      @teaching_assistants.each do |teaching_assistant|
+        if teaching_assistant.assignments.exists?
+          assignments_exist = true
+          break
+        end
+      end
+  
+      if assignments_exist
+        redirect_to index_destroy_teaching_assistants_path, notice: "科目に候補追加しているTAが存在するため削除できません", flash: {color: :red}
+      else
+        @teaching_assistants.destroy_all
+        redirect_to index_destroy_teaching_assistants_path, notice: "TAが削除されました", flash: {color: :green}
+      end
     end
   end
 
