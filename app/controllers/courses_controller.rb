@@ -8,13 +8,13 @@ class CoursesController < ApplicationController
     @q = Course.ransack(params[:q])
     @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   # GET /courses/1 or /courses/1.json
   def show
     @course = Course.find(params[:id])
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
+    @q.sorts = "work_hours_dtstart ASC" if @q.sorts.empty?
     @assignments = @q.result(distinct: true)
   end
 
@@ -24,7 +24,6 @@ class CoursesController < ApplicationController
     @q = Course.ransack(params[:q])
     @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   # GET /courses/1/edit
@@ -37,6 +36,9 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
+    @q = Course.ransack(params[:q])
+    @courses = @q.result(distinct: true)
+    @select_years = Course.pluck(:year).uniq
     
     if @course.save
       redirect_to new_course_path, notice: "科目が追加されました", flash: {color: :green}
@@ -77,7 +79,6 @@ class CoursesController < ApplicationController
     @q = Course.ransack(params[:q])
     @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   def import

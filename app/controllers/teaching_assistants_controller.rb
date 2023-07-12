@@ -8,7 +8,6 @@ class TeachingAssistantsController < ApplicationController
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   # GET /teaching_assistants/1 or /teaching_assistants/1.json
@@ -24,7 +23,6 @@ class TeachingAssistantsController < ApplicationController
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   # GET /teaching_assistants/1/edit
@@ -37,6 +35,9 @@ class TeachingAssistantsController < ApplicationController
   # POST /teaching_assistants or /teaching_assistants.json
   def create
     @teaching_assistant = TeachingAssistant.new(teaching_assistant_params)
+    @q = TeachingAssistant.ransack(params[:q])
+    @teaching_assistants = @q.result(distinct: true)
+    @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
 
     respond_to do |format|
       if @teaching_assistant.save
@@ -75,7 +76,6 @@ class TeachingAssistantsController < ApplicationController
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   def import

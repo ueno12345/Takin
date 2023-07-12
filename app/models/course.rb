@@ -2,19 +2,26 @@ class Course < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
   validates :year,
-  numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  numericality: {only_integer: true, greater_than_or_equal_to: 0},
+  presence: true
   validates :term,
-  length: {maximum: 64}
+  length: {maximum: 64},
+  presence: true
   validates :number,
-  format: {with: /\A[a-zA-Z0-9]{6}\z/, message: "は半角英数字6文字で入力してください"}
+  format: {with: /\A[a-zA-Z0-9]{6}\z/, message: "は半角英数字6文字で入力してください"},
+  presence: true
   validates :name,
-  length: {maximum: 128}
+  length: {maximum: 128},
+  presence: true
   validates :instructor,
-  length: {maximum: 128}
+  length: {maximum: 128},
+  presence: true
   validates :time_budget,
-  numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  numericality: {only_integer: true, greater_than_or_equal_to: 0},
+  presence: true
   validates :description,
-  length: {maximum: 128} 
+  length: {maximum: 128},
+  presence: true 
 
   def self.ransackable_attributes(auth_object = nil)
     ["year", "term", "number", "name", "instructor", "description", "assignment_course_name", "assignment_course_term", "work_hour_dtstart", "work_hour_dtend"]

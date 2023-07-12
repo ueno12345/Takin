@@ -7,6 +7,7 @@ class AssignmentsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
+    @q.sorts = "work_hours_dtstart ASC" if @q.sorts.empty?
     @assignments = @q.result(distinct: true)
   end
 
@@ -24,7 +25,6 @@ class AssignmentsController < ApplicationController
     @q = TeachingAssistant.ransack(params[:q])
     @teaching_assistants = @q.result(distinct: true)
     @select_years = TeachingAssistant.where.not(id: 1).pluck(:year).uniq
-    @select_years.insert(0,"")
   end
 
   # GET /assignments/1/edit
