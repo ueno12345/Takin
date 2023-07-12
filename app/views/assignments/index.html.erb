@@ -72,12 +72,8 @@
     <%= turbo_frame_tag "new_work_hour" %>
     <div id="assignments">
     <% @assignments.each do |assignment| %>
-      <% if assignment.teaching_assistant.id == 1 %>
-        <% next %>
-      <% else %>
-        <% assignment.work_hours.each do|work_hour| %>
-          <%= render partial: 'assignment_view', locals:{ assignment: assignment,work_hour: work_hour } %>
-        <% end %>
+      <% assignment.work_hours.each do|work_hour| %>
+        <%= render partial: 'assignment_view', locals:{ assignment: assignment,work_hour: work_hour } %>
       <% end %>
     <% end %>
     </div>
