@@ -104,14 +104,33 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def output_index
+    @teaching_assistant = TeachingAssistant.find(params[:id])
+    @assignments = Assignment.where(teaching_assistant_id: params[:id])
+    date_start = Date.new(@teaching_assistant.year, 4, 1) 
+    date_end = Date.new(@teaching_assistant.year+1, 3, 31) 
+    count = WriteForm1(date_start, date_end)
+    WriteForm2(date_start, date_end)
+
+    @output_excel1_files_name = [];
+    for i in 1..count do
+      @output_excel1_files_name.push("/excel/writed_form1-#{i}.xlsx")
+    end
+    @output_excel2_file_name = "/excel/writed_form2.xlsx"
+
+  end
+
   def output
     @teaching_assistant = TeachingAssistant.find(params[:teaching_assistant_id])
+    date_start = Date.new(@teaching_assistant.year, 4, 1) 
+    date_end = Date.new(@teaching_assistant.year+1, 3, 31) 
+
     if params[:form] == '1'
-      WriteForm1()
-      file_path = Rails.root.join('public', 'excel','writed_form1.xlsx')
+      WriteForm1(date_start, date_end)
+      file_path = Rails.root.join('public', 'excel','writed_form1-1.xlsx')
       send_file file_path, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment'
     else
-      WriteForm2()
+      WriteForm2(date_start, date_end)
       file_path = Rails.root.join('public', 'excel','writed_form2.xlsx')
       send_file file_path, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment'
     end
@@ -125,7 +144,7 @@ class AssignmentsController < ApplicationController
     end
 
     # 帳票の様式1を書き込む処理を行うメソッド
-    def WriteForm1
+    def WriteForm1(date_start, date_end)
       # 書き込むファイル名 勤務予定が15個ごと書き込んだエクセルファイルを作成するので，ファイル名を変えたい．保存ファイル名の変えない部分
       first = "public/excel/writed_form1"
       # ファイル名を変更するためのマジックナンバー
@@ -170,7 +189,7 @@ class AssignmentsController < ApplicationController
 
       # 割り当てられた講義
       @assignments.each do |assignment|
-        @work_hours = WorkHour.where(assignment_id: assignment.id)
+        @work_hours = WorkHour.where(assignment_id: assignment.id).where(dtstart: date_start..).where(dtend: ..date_end).order(:dtstart)
         @course = Course.where(id: assignment.course_id)
         @work_hours.each do |work_hour|
           worksheet_form1.add_cell(36+count, 1, @course.first.number)
@@ -185,8 +204,8 @@ class AssignmentsController < ApplicationController
 
           if count == 15 then
             # とりあえず今まで作成したものを保存する
-            #workbook_form1.write("#{first}-#{file_change_count}.xlsx")
-            workbook_form1.write("#{first}.xlsx")
+            workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+            # workbook_form1.write("#{first}.xlsx")
             file_change_count +=1
             file_form1 = "public/excel/form1.xlsx"
             count = 0
@@ -221,16 +240,15 @@ class AssignmentsController < ApplicationController
       end
 
       # 複数ファイルを書き込んでいくときに最後に書き込み終了して保存するファイル
-      #workbook_form1.write("#{first}-#{file_change_count}.xlsx")
-      workbook_form1.write("#{first}.xlsx")
+      workbook_form1.write("#{first}-#{file_change_count}.xlsx")
+      # workbook_form1.write("#{first}.xlsx")
 
-      # file_path = Rails.root + "#{first}-#{file_change_count}.xlsx"
-      #send_file(file_path, filename: 'form2.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment')
+      return file_change_count
     end
 
 
     # 帳票の様式2を書き込む処理を行うメソッド
-    def WriteForm2
+    def WriteForm2(date_start, date_end)
       file_form2 = "public/excel/form2.xlsx"
       workbook_form2 = RubyXL::Parser.parse(file_form2)
       worksheet_form2 = workbook_form2[0]
@@ -272,7 +290,7 @@ class AssignmentsController < ApplicationController
 
       # 勤務時間を記入
       @assignments.each do |assignment|
-        @work_hours = WorkHour.where(assignment_id: assignment.id)
+        @work_hours = WorkHour.where(assignment_id: assignment.id).where(dtstart: date_start..).where(dtend: ..date_end).order(:dtstart)
         @course = Course.where(id: assignment.course_id)
         teachers = teachers + @course.first.instructor + "  "
 
@@ -304,5 +322,6 @@ class AssignmentsController < ApplicationController
       end
       worksheet_form2.add_cell(5, 18, teachers)
       workbook_form2.write("public/excel/writed_form2.xlsx")
+      # workbook_form2.write("public/excel/writed_form2.pdf")
     end
 end
