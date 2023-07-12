@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+    attributes:
+      course:
+        year: "対象年度"
+        term: "学期"
+        number: "科目番号"
+        name: "授業科目名"
+        instructor: "担当教員名"
+        time_budget: "可能割当総時間"
+        descriprion: "備考"
+      teaching_assistant:
+        year: "対象年度"
+        number: "学生番号"
+        name: "氏名"
+        grade: "学年"
+        labo: "研究室"
+        descriprion: "備考"
+      work_hour:
+        dtstart: "終了時刻"
+        dtend: "終了時刻"
+        actual_working_minutes: "実働時間(分)"
+    errors:
+      messages:	
+        blank: "%{attribute}を入力してください"
+        not_a_number: "%{attribute}は正整数で入力してください"
+        greater_than: "%{attribute}は正整数で入力してください"

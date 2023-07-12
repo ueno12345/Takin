@@ -40,12 +40,15 @@ class CoursesController < ApplicationController
     @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
     
-    if @course.save
-      redirect_to new_course_path, notice: "科目が追加されました", flash: {color: :green}
-      @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
-      @assignment.save
-    else
-      redirect_to new_course_path, notice: "科目が追加されませんでした", flash: {color: :red}
+    respond_to do |format|
+      if @course.save
+        redirect_to new_course_path, notice: "科目が追加されました", flash: {color: :green}
+        @assignment = Assignment.new({course_id:@course.id, teaching_assistant_id:"1", description:"dammy"})#追加行
+        @assignment.save
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
 
       #@assignment = Assignment.new({course_id:"1", teaching_assistant_id:"0", description:"dammy"})
