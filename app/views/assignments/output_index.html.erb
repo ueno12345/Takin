@@ -1,0 +1,42 @@
+<h1>帳票確認＆出力画面</h1>
+<%= @teaching_assistant.name %>
+
+<% @output_excel1_files_name.each_with_index do |file,i| %>
+	<a href="<%= file %>" target="_blank">様式1-<%= i+1 %></a>
+<% end %>
+
+<a href="<%=  @output_excel2_file_name %>" target="_blank">様式2</a>
+<%# <a href="/excel/writed_form2.pdf" target="_blank">様式2pdf</a> %>
+
+
+<% count = 0 %>
+<% course_count = 0 %>
+<% @output_excel1_files_name.each_with_index do |file,i| %>
+	<details>
+		<summary>様式1-<%= i+1 %></summary>
+		<% @assignments.each do |assignment| %>
+			<% assignment.work_hours.order(:dtstart).each do |work_hour| %>
+				<% count+=1 %>
+				<div class="block">
+					<div><%= @teaching_assistant.name %></div>
+					<div> <%= work_hour.dtstart %> </div>
+				</div>
+			<% end %>	
+		<% end %>
+	</details>
+<% end %>
+
+<details>
+	<summary> 様式2 </summary>
+	<div class="block">
+		<div class="January">
+			<div>日付ごと</div>
+			<div>合計</div>
+		</div>
+		<div class="February">
+			<div>日付ごと</div>
+			<div>合計</div>
+		</div>
+		<div></div>
+	<div>
+</details>
