@@ -15,8 +15,7 @@ class TeachingAssistant < ApplicationRecord
   length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
   presence: true
   validates :labo,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
-  presence: true
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}
   validates :description,
   length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}
 
