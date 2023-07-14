@@ -101,11 +101,15 @@ class TeachingAssistantsController < ApplicationController
   end
 
   def import
-    TeachingAssistant.import(params[:file])
-    if params[:file].nil?
-      redirect_to new_teaching_assistant_url, notice: "登録するTAマスタデータCSVファイルを選択してください", flash: {color: :red}
+    if params[:file].content_type == "text/csv"
+      TeachingAssistant.import(params[:file])
+      if params[:file].nil?
+        redirect_to new_teaching_assistant_url, notice: "登録するTAマスタデータCSVファイルを選択してください", flash: {color: :red}
+      else
+        redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました", flash: {color: :green}
+      end
     else
-      redirect_to teaching_assistants_url, notice: "新規TAマスタデータを追加しました", flash: {color: :green}
+      redirect_to new_teaching_assistant_url, notice: "CSVファイルのみを受け付けます", flash: {color: :red}
     end
   end
 
