@@ -17,9 +17,10 @@ ja:
         labo: "研究室"
         descriprion: "備考"
       work_hour:
-        dtstart: "終了時刻"
+        dtstart: "開始時刻"
         dtend: "終了時刻"
         actual_working_minutes: "実働時間(分)"
+        assignment_id: "割当TA名"
     errors:
       messages:	
         blank: "%{attribute}を入力してください"
