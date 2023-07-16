@@ -7,8 +7,6 @@
   <div><%= flash[:notice] %></div>
 <% end %>
 
-<p style="color: green"><%= notice %></p>
-
 <h1>TA時間割当(編集)</h1>
 
   <%= link_to "科目一覧画面へ", courses_path %>
@@ -61,6 +59,7 @@
   </div>
   <div class="card-body mx-3">
     <div class="row py-2">
+      <div class="col my-auto">日付</div>
       <div class="col my-auto">開始時刻</div>
       <div class="col my-auto">終了時刻</div>
       <div class="col my-auto">実働時間(分)</div>

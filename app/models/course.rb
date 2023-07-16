@@ -5,8 +5,7 @@ class Course < ApplicationRecord
   numericality: {only_integer: true, greater_than: 0},
   presence: true
   validates :term,
-  length: {maximum: 64, too_long: "%{attribute}は%{count}文字以下で入力してください"},
-  presence: true
+  length: {maximum: 64, too_long: "%{attribute}は%{count}文字以下で入力してください"}
   validates :number,
   format: {with: /\A[a-zA-Z0-9]{6}\z/, message: "%{attribute}は半角英数字6文字で入力してください"},
   presence: true

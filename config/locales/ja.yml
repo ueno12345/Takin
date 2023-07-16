@@ -21,8 +21,10 @@ ja:
         dtend: "終了時刻"
         actual_working_minutes: "実働時間(分)"
         assignment_id: "割当TA名"
+        date: "日付"
     errors:
       messages:	
         blank: "%{attribute}を入力してください"
+        required: "%{attribute}を選択してください"
         not_a_number: "%{attribute}は正整数で入力してください"
         greater_than: "%{attribute}は正整数で入力してください"

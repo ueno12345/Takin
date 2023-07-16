@@ -41,15 +41,13 @@ class WorkHoursController < ApplicationController
       if @work_hour.save
         format.html { redirect_to course_assignments_path, notice: "Work hour was successfully created." }
         format.json { render :show, status: :created, location: @work_hour }
-        # 非同期で入れ替えるコードを記入[create.turbo_frame.erb]
         format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @work_hour.errors, status: :unprocessable_entity }
-
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@work_hour, partial: "form", locals: { work_hour: @work_hour }), status: :unprocessable_entity }
       end
-    end
+    end    
   end
 
 
@@ -97,6 +95,6 @@ class WorkHoursController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_hour_params
-      params.require(:work_hour).permit(:dtstart, :dtend, :actual_working_minutes, :assignment_id)
+      params.require(:work_hour).permit(:date, :dtstart, :dtend, :actual_working_minutes, :assignment_id)
     end
 end

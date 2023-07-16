@@ -14,15 +14,28 @@
       <% end %>
 
     <div class="row py-2 border-top">
-
-      <div class="col">
-        <%#= form.label :開始時刻, style: "display: block" %>
-        <%= form.datetime_field :dtstart %>
+      <div class="col">  
+        <% if work_hour.date %>
+          <%= form.date_field :date, value: work_hour.date.to_date.strftime("%Y-%m-%d") %>
+        <% else %>
+          <%= form.date_field :date %>
+        <% end %>
       </div>
 
       <div class="col">
-        <%#= form.label :終了時刻, style: "display: block" %>
-        <%= form.datetime_field :dtend %>
+        <% if work_hour.dtstart %>
+          <%= form.time_field :dtstart, value: work_hour.dtstart.strftime("%H:%M") %>
+        <% else %>
+          <%= form.time_field :dtstart %>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <% if work_hour.dtend %>
+          <%= form.time_field :dtend, value: work_hour.dtend.strftime("%H:%M") %>
+        <% else %>
+          <%= form.time_field :dtend %>
+        <% end %>  
       </div>
 
       <div class="col">
@@ -33,7 +46,13 @@
       <div class="col">
         <%#= form.label :assignment_id, style: "display: block" %>
         <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
-        <%= form.select :assignment_id, @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+        <%= form.select :assignment_id, @assignments.map {|a| 
+          if a.teaching_assistant_id == 1 
+            ["未割当", a.id]
+          else
+            ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id]
+          end
+          }, prompt: 'Select Assignment' %>
         <%#= form.select :assignment_id, 
         @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] },
         include_blank: true %>
