@@ -1,10 +1,17 @@
 <%# 非同期処理でTA時間割当で新規追加後に登録したときに表示される登録後のレコードの表示を入れ替える部分のコード %>
 <%= turbo_frame_tag work_hour do %>
   <div class="row py-2 border-top">
-    <div class="col my-auto"><%= work_hour.dtstart %></div>
-    <div class="col my-auto"><%= work_hour.dtend %></div>
+    <div class="col my-auto"><%= work_hour.date %></div>
+    <div class="col my-auto"><%= work_hour.dtstart.strftime("%H:%M") %></div>
+    <div class="col my-auto"><%= work_hour.dtend.strftime("%H:%M") %></div>
     <div class="col my-auto"><%= work_hour.actual_working_minutes %></div>
-    <div class="col my-auto"><%= TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name %></div>
+    <div class="col my-auto">
+      <% if TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name == "ダミー君" %>
+        <%= "未割当" %>
+      <% else %>
+        <%= TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name %>
+      <% end %>
+    </div>
     <div class="col my-auto">
       <%= link_to "個人画面", teaching_assistant_path(Assignment.where(id: work_hour.assignment_id).first.teaching_assistant),class: 'btn btn-success', target: '_blank'%>
       <%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: Assignment.where(id: work_hour.assignment_id).first.teaching_assistant.id), class: 'btn btn-info', target: '_blank'%>
