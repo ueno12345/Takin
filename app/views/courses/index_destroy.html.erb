@@ -1,80 +1,123 @@
 <%# 科目マスタデータ削除画面を表示 %>
-<% if flash[:color] == "red" %>
-  <div class="red-text"><%= flash[:notice] %></div>
-<% elsif flash[:color] == "green" %>
-  <div class="green-text"><%= flash[:notice] %></div>
-<% else %>
-  <div><%= flash[:notice] %></div>
-<% end %>
+<div class="row">
+  <div class="col-1"></div>
+  <%# 科目マスタデータ削除画面の内容 タイトル 検索 %>
+  <div class="col-10">
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
+    <% end %>
 
-<h1>新規科目マスタデータ削除</h1>
+    <div class="row">
+      <%# 科目タイトルと戻る %>
+      <div class="col-3"><h2>新規科目マスタデータ削除</h2></div>
+      <div class="col-2 d-flex align-items-center">
+        <%= link_to "科目一覧に戻る", courses_path, class: "btn btn-info" %>
+      </div>
+      <div class="col-7"></div>
+    </div>
 
-<div>
-  <%= link_to "科目一覧に戻る", courses_path %>
+    <%# 検索欄 %>
+    <div class="card my-3">
+      <div class="card-header">
+        検索欄
+      </div>
+      <div class="card-body">
+        <form class="row g-3">
+          <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :year_eq, "対象年度",class: "mt-2" %></div>
+                <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"},class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :name_i_cont, "学期",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>  
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :number_i_cont, "科目番号",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :grade_i_cont, "授業科目名",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :labo_i_cont, "担当教員", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :description_i_cont, "備考", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <%= f.submit "検索", class: "btn btn-primary px-4"%>
+              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+            </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
 </div>
 
-<form class="row g-3">
-  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
-    <div class="col-md-4">
-      <%= f.label :year_eq, "対象年度" %>
-      <%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"} %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :term_i_cont, "学期" %>
-      <%= f.search_field :term_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :number_i_cont, "科目番号" %>
-      <%= f.search_field :number_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :name_i_cont, "授業科目名" %>
-      <%= f.search_field :name_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :instructor_i_cont, "担当教員" %>
-      <%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :description_i_cont, "備考" %>
-      <%= f.search_field :description_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-12">
-      <%= f.submit "検索", class: "btn btn-primary" %>
-      <%= link_to "クリア", index_destroy_courses_path, class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</form>
 
+<%# 削除選択表 %>
 <%= form_tag index_destroy_courses_path, method: :delete, data: {turbo_confirm: "選択した科目を本当に削除しますか？"} do %>
-  <%= submit_tag '選択したものをすべて削除' %>
-
-  <table class="table table-bordered">
-    <thead class="table-primary">
-      <tr>
-      <th>削除科目選択</th>
-      <th>対象年度</th>
-      <th>学期</th>
-      <th>講義番号</th>
-      <th>講義科目名</th>
-      <th>担当教員</th>
-      <th>TA可能割当総時間(分)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <div id="courses">
-        <% @courses.each do |course| %>
-          <tr>
-            <td><%= check_box_tag 'course_ids[]', course.id %></td>
-            <td><%= course.year %></td>
-            <td><%= course.term %></td>
-            <td><%= course.number %></td>
-            <td><%= course.name %></td>
-            <td><%= course.instructor %></td>
-            <td><%= course.time_budget %></td>
-          </tr>
-        <% end %>
+<div class="row mb-3">
+  <div class="col-1"></div>
+  <%# TA一覧表部分 %>
+  <div class="col-10">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-3 d-flex align-items-center">科目一覧(削除画面)</div>
+          <div class="col-9"><%= submit_tag '選択したものをすべて削除', class: "ms-5 btn btn-danger px-3" %></div>
+        </div>
       </div>
-    </tbody>
-  </table>
+      <div class="card-body m-3">
+        <%# TAのカラムのヘッダー %>
+        <div class="row border-bottom border-dark pb-3">
+          <div class="col my-auto fw-bolder h5">削除対象科目</div>
+          <div class="col my-auto fw-bolder h5">対象年度</div>
+          <div class="col my-auto fw-bolder h5">学期</div>
+          <div class="col my-auto fw-bolder h5">講義番号</div>
+          <div class="col my-auto fw-bolder h5">講義科目名</div>
+          <div class="col my-auto fw-bolder h5">担当教員</div>
+          <div class="col my-auto fw-bolder h5">TA可能割当総時間(分)</div>
+        </div>
+        <%# TAのレコードデータ %>
+        <div id="courses">
+          <% @courses.each do |course| %>
+            <div class="row border-bottom px-3 py-2">
+              <div class="col my-auto"><%= check_box_tag 'course_ids[]', course.id, class: "form-control", checked: false  %></div>
+              <div class="col my-auto"><%= course.time_budget  %></div>
+              <div class="col my-auto"><%= course.term %></div>
+              <div class="col my-auto"><%= course.number %></div>
+              <div class="col my-auto"><%= course.name %></div>
+              <div class="col my-auto"><%= course.instructor %></div>
+              <div class="col my-auto"><%= course.time_budget  %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
 <% end %>

@@ -1,93 +1,131 @@
 <%# TA一覧画面表示 %>
-<% if flash[:color] == "red" %>
-  <div class="red-text"><%= flash[:notice] %></div>
-<% elsif flash[:color] == "green" %>
-  <div class="green-text"><%= flash[:notice] %></div>
-<% else %>
-  <div><%= flash[:notice] %></div>
-<% end %>
+<div class="row">
+  <div class="col-1"></div>
+  <%# TA一覧の画面上部の内容 タイトル 検索 %>
+  <div class="col-10">
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
+    <% end %>
 
-<h1>TA一覧画面</h1>
-
-<% if session[:admin_flag] == true %>
-  <%= link_to "TAデータを追加", new_teaching_assistant_path, class: "btn btn-outline-primary" %>
-  <%= link_to "TAデータ削除", index_destroy_teaching_assistants_path, class: "btn btn-outline-danger" %>
-<% end %>
-
-<form class="row g-3">
-  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
-    <div class="col-md-4">
-      <%= f.label :year_eq, "対象年度" %>
-      <%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"} %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :name_i_cont, "TA名" %>
-      <%= f.search_field :name_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :number_i_cont, "学生番号" %>
-      <%= f.search_field :number_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :grade_i_cont, "学年" %>
-      <%= f.search_field :grade_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :labo_i_cont, "研究室" %>
-      <%= f.search_field :labo_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :description_i_cont, "備考" %>
-      <%= f.search_field :description_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-12">
-      <%= f.submit "検索", class: "btn btn-primary" %>
-      <%= link_to "クリア", teaching_assistants_path, class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</form>
-
-<br>
-<table class="table table-bordered">
-  <thead class="table-primary">
-    <tr>
-    <th>対象年度</th>
-    <th>TA名</th>
-    <th>学生番号</th>
-    <th>学年</th>
-    <th>研究室</th>
-    <th>備考</th>
-    <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <div id="courses">
-      <% @teaching_assistants.each do |teaching_assistant| %>
-        <tr>
-          <% if teaching_assistant.id == 1 %>
-            <% next %>
-          <% else %>
-            <td><%= teaching_assistant.year %></td>
-            <td><%= teaching_assistant.name %></td>
-            <td><%= teaching_assistant.number %></td>
-            <td><%= teaching_assistant.grade %></td>
-            <td><%= teaching_assistant.labo %></td>
-            <td><%= teaching_assistant.description %></td>
-            <td class="d-flex">
-              <div class="me-3">
-              <%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
-              <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
-              </div>
-              <div>
-                <%= link_to teaching_assistant_path(teaching_assistant),class: 'btn btn-success' do %>
-                  個人画面
-                <% end %>
-              </div>
-            </td>
-          <% end %>
-        </tr>
+    <div class="row ">
+    <%# TAタイトルとマスタデータ関連 %>
+      <div class="col-2"><h2>TA一覧画面</h2></div>
+      <% if session[:admin_flag] == true %>
+        <div class="col-2 d-flex align-items-center "><%= link_to "TAマスタデータ追加", new_teaching_assistant_path, class: "btn btn-outline-primary " %></div>
+        <div class="col-2 d-flex align-items-center "><%= link_to "TAマスタデータ削除", index_destroy_teaching_assistants_path, class: "btn btn-outline-danger " %></div>
       <% end %>
+      <div class="col-6"></div>
     </div>
-  </tbody>
-</table>
 
+    <%# 検索欄 %>
+    <div class="card my-3">
+      <div class="card-header">
+        検索欄
+      </div>
+      <div class="card-body">
+        <form class="row g-3">
+          <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :year_eq, "対象年度",class: "mt-2" %></div>
+                <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"},class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :name_i_cont, "TA名",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>  
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :number_i_cont, "学生番号",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :grade_i_cont, "学年",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :grade_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :labo_i_cont, "研究室", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :labo_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :description_i_cont, "備考", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <%= f.submit "検索", class: "btn btn-primary px-4"%>
+              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+            </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-1"></div>
+</div>
+
+
+<%# TA一覧画面の表部分の作成 %>
+<div class="row">
+  <div class="col-1"></div>
+  <%# TA一覧表部分 %>
+  <div class="col-10">
+    <div class="card">
+      <div class="card-header">
+        TA一覧
+      </div>
+      <div class="card-body m-3">
+        <%# TAのカラムのヘッダー %>
+        <div class="row border-bottom border-dark pb-3">
+          <div class="col my-auto fw-bolder h5">対象年度</div>
+          <div class="col my-auto fw-bolder h5">TA名</div>
+          <div class="col my-auto fw-bolder h5">学生番号</div>
+          <div class="col my-auto fw-bolder h5">学年</div>
+          <div class="col my-auto fw-bolder h5">研究室</div>
+          <div class="col my-auto fw-bolder h5">備考</div>
+          <div class="col my-auto fw-bolder h5">操作</div>
+        </div>
+        <%# TAのレコードデータ %>
+        <div id="courses">
+          <% @teaching_assistants.each do |teaching_assistant| %>
+            <div class="row border-bottom px-3 py-2">
+              <% if teaching_assistant.id == 1 %>
+                <% next %>
+              <% else %>
+                <div class="col my-auto"><%= teaching_assistant.year %></div>
+                <div class="col my-auto"><%= teaching_assistant.name %></div>
+                <div class="col my-auto"><%= teaching_assistant.number %></div>
+                <div class="col my-auto"><%= teaching_assistant.grade %></div>
+                <div class="col my-auto"><%= teaching_assistant.labo %></div>
+                <div class="col"><%= teaching_assistant.description %></div>
+                <div class="col my-auto d-flex d-grid gap-2 d-md-block">
+                  <div class="me-3">
+                    <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
+                  </div>
+                  <div>
+                    <%= link_to "個人画面", teaching_assistant_path(teaching_assistant),class: 'btn btn-success' %> 
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

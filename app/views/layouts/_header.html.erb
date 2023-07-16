@@ -1,17 +1,52 @@
-<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-info mb-3 z-50">
-  <a class="navbar-brand">TA時間管理システム</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
+<%# Header %>
+<nav class="navbar sticky-top navbar-expand-sm navbar-light mb-3 z-50 header">
+  <div>
+    <%= link_to "TA時間管理システム", top_page_path, method: :get, class: "navbar-brand text-white ms-5" %>
+  </div>
+  <div class="collapse navbar-collapse container-fluid" id="navbarNav">
     <ul class="navbar-nav">
-      <li><%= link_to "HOME", top_page_path, method: :get, class: "nav-link" %></li>
-      <li><%= link_to "TA一覧", teaching_assistants_path, method: :get, class: "nav-link" %></li>
-      <li><%= link_to "科目一覧", courses_path, method: :get, class: "nav-link" %></li>
+      <li><%= link_to "HOME", top_page_path, method: :get, class: "nav-link text-white ms-2" %></li>
+      <li><%= link_to "TA一覧", teaching_assistants_path, method: :get, class: "nav-link text-white ms-2" %></li>
+      <li><%= link_to "科目一覧", courses_path, method: :get, class: "nav-link text-white ms-2" %></li>
       <li><%#= link_to "科目TA割当追加(開発用なので後で消す)", new_assignment_path, method: :get, class: "nav-link" %></li>
       <li><%#= link_to "割当勤務時間(開発用なので後で消す)", work_hours_path, method: :get, class: "nav-link" %></li>
       <li><%#= link_to "ユーザ(開発用なので後で消す)", users_path, method: :get, class: "nav-link" %></li>
     </ul>
 
-    <%= button_to logout_path, method: :delete, class: "nav-link" do %>
-      <%= image_tag("user.jpg", alt: "ログアウト", width: 40, height: 40) %>
-    <% end %>
+    <%# ログアウト %>
+    <details class="row justify-content-end">
+      <summary style="list-style: none;" class="login-details me-3">
+        <div class="d-inline-flex align-items-center">
+          <%= image_tag("user.png", alt: "ログアウト", width: 40, height: 40 , class: "img") %>
+            <% if session[:admin_flag] == true %>
+              <div class="nav-link text-white ms-2">管理者:<%= session[:user_name] %></div>
+            <% else%>
+              <div class="nav-link text-white ms-2 ">利用者：<%= session[:user_name] %></div>
+            <% end %>
+          </div>
+      </summary>
+      <div class=" p-1">
+        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "nav-link text-white ms-5" %>
+      </div>
+    </details>
   </div>
 </nav>
+
+
+<style>
+  .header{
+    <% if session[:admin_flag] == true %>
+      background-color: #000000;
+    <% else%>
+      background-color: #0071c5;
+    <% end %>
+  }
+
+  .login_details{
+
+  }
+
+</style>
+
+<script>
+</script>

@@ -3,6 +3,13 @@
   <head>
     <title>Takin</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="module">
+      import { Toast } from "bootstrap.esm.min.js";
+
+      Array.from(document.querySelectorAll(".toast")).forEach(
+        (toastNode) => new Toast(toastNode)
+      );
+    </script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= turbo_include_tags %>
