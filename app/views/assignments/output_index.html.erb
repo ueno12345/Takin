@@ -42,8 +42,8 @@
 		.where(dtend: ..Date.new(@teaching_assistant.year+1,4,1)).order(:dtstart).each do |work_hour| %>
 			<% if count == 0 then %>
 				<%# 様式1情報 %>
-				<details class="mx-1">
-					<summary> 様式1-<%= excel_num %> </summary>
+				<details class="mx-1 output-details">
+					<summary class="output-summary"> 様式1-<%= excel_num %> </summary>
 						<div class="row mb-3">
 							<div class="col-1"></div>
 							<div class="col-10 card mt-3">
@@ -148,8 +148,8 @@
 	<% end %>
 
 	<%# 様式2情報 %>
-	<details class="mx-1">
-		<summary> 様式2 </summary>
+	<details class="mx-1 output-details">
+		<summary class="output-summary"> 様式2 </summary>
 		<div class="row mb-3">
 		<div class="col-1"></div>
 		<div class="col-10 card mt-3">
@@ -259,7 +259,7 @@
 <div class="mb-5"></div>
 
 <style>
-summary {
+.output-summary {
   position: relative;
   display: block; /* 矢印を消す */
   padding: 10px 10px 10px 30px; /* アイコンの余白を開ける */
@@ -268,16 +268,16 @@ summary {
   background-color: #e2f0f7;
   transition: 0.2s;
 }
-summary:hover {
+.output-summary:hover {
   background-color: #ccebfb;
 }
-summary::-webkit-details-marker {
+.output-summary::-webkit-details-marker {
   display: none;　/* 矢印を消す */
 }
 
 /* 疑似要素でアイコンを表示 */
-summary:before,
-summary:after {
+.output-summary:before,
+.output-summary:after {
   content: "";
   margin: auto 0 auto 10px;
   position: absolute;
@@ -285,13 +285,13 @@ summary:after {
   bottom: 0;
   left: 0;
 }
-summary:before {
+.output-summary:before {
   width: 16px;
   height: 16px;
   border-radius: 4px;
   background-color: #1da1ff;
 }
-summary:after {
+.output-summary:after {
   left: 6px;
   width: 5px;
   height: 5px;
@@ -302,17 +302,17 @@ summary:after {
 }
 
 /* オープン時のスタイル */
-details[open] summary {
+.output-details[open] .output-summary {
   background-color: #ccebfb;
 }
-details[open] summary:after {
+.output-details[open] .output-summary:after {
   transform: rotate(90deg); /* アイコンを回転 */
   left: 4px; /* 位置を調整 */
   top: 5px; /* 位置を調整 */
 }
 
 /* アニメーション */
-details[open] .details-content {
+.output-details[open] .details-content {
   animation: fadeIn 0.5s ease;
 }
 @keyframes fadeIn {
