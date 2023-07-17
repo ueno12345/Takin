@@ -105,7 +105,7 @@
         <div id="courses">
           <% @courses.each do |course| %>
             <div class="row border-bottom px-3 py-2">
-              <div class="col my-auto"><%= check_box_tag 'course_ids[]', course.id, class: "form-control", checked: false  %></div>
+              <div class="col my-auto"><%= check_box_tag 'course_ids[]', course.id %></div>
               <div class="col my-auto"><%= course.time_budget  %></div>
               <div class="col my-auto"><%= course.term %></div>
               <div class="col my-auto"><%= course.number %></div>

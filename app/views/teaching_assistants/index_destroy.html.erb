@@ -79,7 +79,7 @@
 
 <%# TA一覧画面の表部分の作成 %>
 <%= form_tag index_destroy_teaching_assistants_path, method: :delete, data: {turbo_confirm: "選択したTAを本当に削除しますか？"} do %>
-<div class="row">
+<div class="row mb-3">
   <div class="col-1"></div>
   <%# TA一覧表部分 %>
   <div class="col-10">
@@ -102,19 +102,19 @@
           <div class="col my-auto fw-bolder h5">備考</div>
         </div>
         <%# TAのレコードデータ %>
-        <div id="courses">
+        <div id="teaching_assistants">
           <% @teaching_assistants.each do |teaching_assistant| %>
             <div class="row border-bottom px-3 py-2">
               <% if teaching_assistant.id == 1 %>
                 <% next %>
               <% else %>
-                <div class="col my-auto"><%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id, class: "form-control", checked:false %></div>
+                <div class="col my-auto"><%= check_box_tag 'teaching_assistant_ids[]', teaching_assistant.id %></div>
                 <div class="col my-auto"><%= teaching_assistant.year %></div>
                 <div class="col my-auto"><%= teaching_assistant.name %></div>
                 <div class="col my-auto"><%= teaching_assistant.number %></div>
                 <div class="col my-auto"><%= teaching_assistant.grade %></div>
                 <div class="col my-auto"><%= teaching_assistant.labo %></div>
-                <div class="col"><%= teaching_assistant.description %></div>
+                <div class="col my-auto"><%= teaching_assistant.description %></div>
               <% end %>
             </div>
           <% end %>
