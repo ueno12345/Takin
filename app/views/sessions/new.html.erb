@@ -7,6 +7,7 @@
         <div class="col-lg-4 col-md-2 col-sm-0"></div>
     </div>
 
+    <%= form_with url: login_path do %>
     <div class="row">
         <div class="col-lg-4 col-md-2 col-sm-0"></div>
         <div class="col-lg-4 col-md-8 col-sm-12 text-center">
@@ -26,6 +27,7 @@
         <div class="col-lg-4 col-md-2 col-sm-0"></div>
         <div class="col-12 text-center mt-3"><%= submit_tag 'ログイン',class: "btn btn-primary px-4" %></div>
     </div>
+    <% end %>
 </div>
 
 <style>
