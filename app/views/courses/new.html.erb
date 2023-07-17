@@ -1,8 +1,8 @@
 <%# 新規科目マスタデータ追加画面表示 %>
 <div class="row">
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
   <%# 新規科目マスタデータ追加の画面上部の内容 タイトル 検索 追加 %>
-  <div class="col-10">
+  <div class="col-lg-10 col-md-12">
     <% if flash[:color] == "red" %>
       <div class="red-text"><%= flash[:notice] %></div>
     <% elsif flash[:color] == "green" %>
@@ -13,11 +13,11 @@
 
     <%# 新規科目と戻る関連 %>
     <div class="row">
-      <div class="col-3"><h2>新規科目マスタデータ追加</h2></div>
-      <div class="col-2">
-        <%= link_to "科目一覧に戻る", courses_path, class: "btn btn-info" %>
+      <div class="col-lg-4 col-md-12"><h2>新規科目マスタデータ追加</h2></div>
+      <div class="col-6"></div>
+      <div class="col-lg-2 col-md-12">
+        <%= link_to "科目一覧に戻る", courses_path, class: "btn btn-outline-danger" %>
       </div>
-      <div class="col-7"></div>
     </div>
 
     <%# 追加部分  %>
@@ -99,7 +99,7 @@
     </div>
     
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
 
 
@@ -124,9 +124,9 @@
 
 <%# 科目一覧画面の表部分の作成 %>
 <div class="row mb-3">
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
   <%# TA一覧表部分 %>
-  <div class="col-10">
+  <div class="col-lg-10 col-md-12">
     <div class="card">
       <div class="card-header">
         科目一覧
@@ -144,7 +144,7 @@
         <%# TAのレコードデータ %>
         <div id="courses">
           <% @courses.each do |course| %>
-            <div class="row border-bottom px-3 py-2">
+            <div class="row border-bottom px-3 py-4">
               <div class="col my-auto"><%= course.year %></div>
               <div class="col my-auto"><%= course.term %></div>
               <div class="col my-auto"><%= course.number %></div>
@@ -157,5 +157,5 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>

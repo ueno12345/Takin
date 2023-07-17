@@ -1,7 +1,7 @@
 <%# TA個人画面を表示 %>
 <div class="row">
-  <div class="col-1"></div>
-  <div class="col-10">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
     <% if flash[:color] == "red" %>
       <div class="red-text"><%= flash[:notice] %></div>
     <% elsif flash[:color] == "green" %>
@@ -11,12 +11,12 @@
     <% end %>
 
     <%# TAタイトルとマスタデータ関連 %>
-    <div class="row ">
-      <div class="col-4"><h2>TA個人画面 : <%= @teaching_assistant.name %></h2></div>
-      <div class="col-2 d-flex align-items-center">対象年度: <%= @teaching_assistant.year %></div>
-      <div class="col-2 d-flex align-items-center">学年: <%= @teaching_assistant.grade %></div>
-      <div class="col-2 d-flex align-items-center">学生番号: <%= @teaching_assistant.number %></div>
-      <div class="col-2 d-flex align-items-center">割当総時間: 
+    <div class="row my-2">
+      <div class="col-lg-4 col-md-12"><h2>TA個人画面 : <%= @teaching_assistant.name %></h2></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">対象年度: <%= @teaching_assistant.year %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学年: <%= @teaching_assistant.grade %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学生番号: <%= @teaching_assistant.number %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">割当総時間: 
       <% sum = 0 %>
       <% @assignments.each do|assignment| %>
         <% assignment.work_hours.each do|work_hour| %>
@@ -34,8 +34,9 @@
     <%# TA一覧画面へと帳票出力 %>
     <div class="row">
       <% if session[:admin_flag] == true %>
-        <div class="col-2 d-flex align-items-center "><%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-info' %></div>
-        <div class="col-2 d-flex align-items-center "><%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %></div>
+        <div class="col-lg-8 col-md-0"></div>
+        <div class="col-lg-2 col-md-12 d-flex align-items-center my-2"><%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-success' %></div>
+        <div class="col-lg-2 col-md-6 d-flex align-items-center my-2"><%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %></div>
       <% end %>
     </div>
 
@@ -99,7 +100,7 @@
         <div id="assignments">
           <% @assignments.each do |assignment| %>
             <% assignment.work_hours.each do|work_hour| %>
-            <div class="row border-bottom px-3 py-2">
+            <div class="row border-bottom px-3 py-3">
               <div class="col my-auto"><%= assignment.course.name %></div>
               <div class="col my-auto"><%= assignment.course.term %></div>
               <div class="col my-auto"><%= work_hour.dtstart.to_fs(:datetime_jp) %></div>
@@ -112,5 +113,5 @@
         </div>
     </div>
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>

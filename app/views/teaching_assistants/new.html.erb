@@ -1,7 +1,7 @@
 <%# 新規TAマスタデータ追加画面を表示 %>
 <div class="row">
-  <div class="col-1"></div>
-  <div class="col-10">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
     <% if flash[:color] == "red" %>
       <div class="red-text"><%= flash[:notice] %></div>
     <% elsif flash[:color] == "green" %>
@@ -12,11 +12,11 @@
 
     <%# 新規TAタイトルとマスタデータ関連 %>
     <div class="row ">
-      <div class="col-3"><h2>新規TAマスタデータ追加</h2></div>
-      <div class="col-2 d-flex align-items-center">
-        <%= link_to "TA一覧に戻る", teaching_assistants_path, class: "btn btn-info" %>
+      <div class="col-lg-4 col-md-12"><h2>新規TAマスタデータ追加</h2></div>
+      <div class="col-lg-6 col-md-0"></div>
+      <div class="col-lg-2 col-md-12 d-flex align-items-center">
+        <%= link_to "TA一覧に戻る", teaching_assistants_path, class: "btn btn-outline-danger" %>
       </div>
-      <div class="col-7"></div>
     </div>
 
     <%# TAの追加 %>
@@ -97,7 +97,7 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
 
 
@@ -122,9 +122,9 @@
 
 <%# TA一覧画面の表部分の作成 %>
 <div class="row">
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
   <%# TA一覧表部分 %>
-  <div class="col-10">
+  <div class="col-lg-10 col-md-12">
     <div class="card">
       <div class="card-header">
         TA一覧
@@ -142,7 +142,7 @@
         <%# TAのレコードデータ %>
         <div id="courses">
           <% @teaching_assistants.each do |teaching_assistant| %>
-            <div class="row border-bottom px-3 py-2">
+            <div class="row border-bottom px-3 py-4">
               <% if teaching_assistant.id == 1 %>
                 <% next %>
               <% else %>
@@ -159,5 +159,5 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
