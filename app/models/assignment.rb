@@ -10,7 +10,6 @@ class Assignment < ApplicationRecord
     ["course_id", "created_at", "description", "id", "teaching_assistant_id", "updated_at"]
   end
 
-
   def self.ransackable_associations(auth_object = nil)
     ["course","teaching_assistant", "work_hours"]
   end
