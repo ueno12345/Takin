@@ -1,8 +1,8 @@
 <%# TA候補削除画面を表示する． %>
 <div class="row">
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
   <%# TA候補削除画面の処理部分 %>
-  <div class="col-10">
+  <div class="col-lg-10 col-md-12">
     <%# メッセージ処理部分 %>
     <% if flash[:color] == "red" %>
       <div class="red-text"><%= flash[:notice] %></div>
@@ -14,9 +14,9 @@
 
     <%# TA候補削除画面 %>
     <div class="row ">
-      <div class="col-4"><h2>TA候補削除</h2></div>
-      <div class="col-6"></div>
-      <div class="col-2 d-flex align-items-center "><%= link_to "戻る", course_assignments_path, class: "ms-5 btn btn-danger px-3" %></div>
+      <div class="col-lg-4 col-md-12"><h2>TA候補削除</h2></div>
+      <div class="col-lg-6 col-md-0"></div>
+      <div class="col-lg-2 col-md-12 d-flex align-items-center "><%= link_to "戻る", course_assignments_path, class: "ms-5 btn btn-danger px-3" %></div>
     </div>
 
     <%# 検索欄 %>
@@ -73,16 +73,16 @@
     </div>
 
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
 
 
 <%# TA候補追加表 %>
 <%= form_tag index_destroy_course_assignments_path(@course), method: :delete, data: {turbo_confirm: "選択したTAを削除した場合、選択したTAの割り当て時間も消えてしまいますが、本当に削除しますか?"} do %>
 <div class="row mb-3">
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
   <%# TA候補追加表 %>
-  <div class="col-10">
+  <div class="col-lg-10 col-md-12">
     <div class="card">
       <div class="card-header">
           <div class="row">
@@ -122,6 +122,6 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
 <% end %>
