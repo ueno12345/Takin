@@ -78,7 +78,7 @@
 
 
 <%# 削除選択表 %>
-<%= form_tag index_destroy_courses_path, method: :delete, data: {turbo_confirm: "選択した科目を本当に削除しますか？"} do %>
+<%= form_tag index_destroy_courses_path, method: :delete, data: {turbo_confirm: "科目に関連する割当がある場合，割当も削除されます．選択した科目を本当に削除しますか？"} do %>
 <div class="row mb-3">
   <div class="col-lg-1 col-md-0"></div>
   <%# TA一覧表部分 %>

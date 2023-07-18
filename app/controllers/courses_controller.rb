@@ -74,22 +74,8 @@ class CoursesController < ApplicationController
       redirect_to index_destroy_courses_path, notice: "削除したい科目を選択してください", flash: {color: :red}
     else
       @courses = Course.where(id: params[:course_ids])
-      assignments_exist = false
-  
-      @courses.each do |course|
-        assignments = course.assignments.where.not(teaching_assistant_id: 1)
-        if assignments.exists?
-          assignments_exist = true
-          break
-        end
-      end
-  
-      if assignments_exist
-        redirect_to index_destroy_courses_path, notice: "科目にTA候補が存在するため削除できません", flash: {color: :red}
-      else
-        @courses.destroy_all
-        redirect_to index_destroy_courses_path, notice: "科目が削除されました", flash: {color: :green}
-      end
+      @courses.destroy_all
+      redirect_to index_destroy_courses_path, notice: "科目が削除されました", flash: {color: :green}
     end
   end
   
@@ -98,7 +84,6 @@ class CoursesController < ApplicationController
     @q = Course.ransack(params[:q])
     @courses = @q.result(distinct: true)
     @select_years = Course.pluck(:year).uniq
-
   end
 
   def import

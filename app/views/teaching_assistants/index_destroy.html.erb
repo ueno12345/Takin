@@ -78,7 +78,7 @@
 
 
 <%# TA一覧画面の表部分の作成 %>
-<%= form_tag index_destroy_teaching_assistants_path, method: :delete, data: {turbo_confirm: "選択したTAを本当に削除しますか？"} do %>
+<%= form_tag index_destroy_teaching_assistants_path, method: :delete, data: {turbo_confirm: "TAに関連する割当がある場合，割当TAは未割当となります．選択したTAを本当に削除しますか？"} do %>
 <div class="row mb-3">
   <div class="col-lg-1 col-md-0"></div>
   <%# TA一覧表部分 %>
