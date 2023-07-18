@@ -9,16 +9,19 @@ flag = true
 hashed_password = BCrypt::Password.create(password)
 
 User.create!(
-	account_name: name, 
-	password_digest: hashed_password,
-	admin_flag: flag
-)
+      account_name: name, 
+      password_digest: hashed_password,
+      admin_flag: flag
+    )
 
-# User.create!(
-# 	account_name: "admin", 
-# 	password_digest: BCrypt::Password.create("admin"),
-# 	admin_flag: true
-# )
+ TeachingAssistant.create!(
+   year: "0001",
+   number: "00000000",
+   name: "ダミー君",
+   grade:"M1", 
+   labo:"山内研究室",
+   description:"ダミーデータやで"
+ )
 
 TeachingAssistant.create!(
   year: "0001",
@@ -37,6 +40,7 @@ TeachingAssistant.create!(
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+<<<<<<< HEAD
 # 3.times do |n|
 # 	TeachingAssistant.create!(
 # 		year: 2023,
@@ -59,6 +63,30 @@ TeachingAssistant.create!(
 # 		description: "TTTT#{n}",
 # 	)
 # end
+=======
+#3.times do |n|
+#	TeachingAssistant.create!(
+#		year: 2023,
+#		number: "50M2300#{n}",
+#		name: "TA#{n}",
+#		grade: "M1",
+#		labo: "TEACHER#{n}" ,
+#		description: "TEST#{n}"
+#	)
+#end
+#
+#3.times do |n|
+#	Course.create!(
+#		year: 2023,
+#		term: "#{n}",
+#		number: "09000#{n}",
+#		name: "Course#{n}",
+#		instructor: "Teacher#{n}",
+#		time_budget: (n+1)*1000,
+#		description: "TTTT#{n}",
+#	)
+#end
+>>>>>>> 6488fe3 (Hide dammy's name)
 
 # Course1にTA1を割り当てる．
 # Assignment.create{
