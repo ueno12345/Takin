@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
-    @q.sorts = "work_hours_dtstart ASC" if @q.sorts.empty?
+    @q.sorts = "work_hours.dtstart ASC" if @q.sorts.empty?
     @assignments = @q.result(distinct: true)
   end
 

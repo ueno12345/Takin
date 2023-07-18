@@ -94,7 +94,7 @@
         </div>
         <div id="assignments">
         <% @assignments.each do |assignment| %>
-          <% assignment.work_hours.each do|work_hour| %>
+          <% assignment.work_hours.each do |work_hour| %>
             <div class="row border-bottom px-3 py-2">
               <div class="col my-auto"><%= work_hour.date %></div>
               <div class="col my-auto"><%= work_hour.dtstart.strftime("%H:%M") %></div>

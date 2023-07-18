@@ -11,8 +11,6 @@
       <div><%= flash[:notice] %></div>
     <% end %>
 
-    <p style="color: green"><%= notice %></p>
-
     <%# TAタイトルとマスタデータ関連 %>
     <div class="row">
       <div class="col-lg-4 col-md-12"><h2>TA時間割当(編集)</h2></div>
@@ -90,8 +88,6 @@
           <div class="col my-auto">割当TA名</div>
           <div class="col my-auto">操作</div>
         </div>
-        <%# 表の表示部分を他のファイルで行ってまとめました． 非同期処理のためのタグもそっちで追加 
-        tableタグではうまくいかなたったので，divタグで表を作ってます．デザイン乃村先生なので修正する． %>
         <%= turbo_frame_tag "new_work_hour" %>
         <div id="assignments">
         <% @assignments.each do |assignment| %>

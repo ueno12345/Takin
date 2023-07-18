@@ -8,11 +8,11 @@ flag = true
 
 hashed_password = BCrypt::Password.create(password)
 
-# User.create!(
-# 	account_name: name, 
-# 	password_digest: hashed_password,
-# 	admin_flag: false
-# )
+User.create!(
+	account_name: name, 
+	password_digest: hashed_password,
+	admin_flag: flag
+)
 
 # User.create!(
 # 	account_name: "admin", 
@@ -20,14 +20,14 @@ hashed_password = BCrypt::Password.create(password)
 # 	admin_flag: true
 # )
 
-# TeachingAssistant.create!(
-#   year: "0001",
-#   number: "00000000",
-#   name: "ダミー君",
-#   grade:"MZ", 
-#   labo:"山内研究室",
-#   description:"ダミーデータやで"
-# )
+TeachingAssistant.create!(
+  year: "0001",
+  number: "00000000",
+  name: "ダミー君",
+  grade:"MZ", 
+  labo:"山内研究室",
+  description:"ダミーデータやで"
+)
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
