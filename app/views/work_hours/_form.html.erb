@@ -46,16 +46,9 @@
       <div class="col">
         <%#= form.label :assignment_id, style: "display: block" %>
         <%#= form.select :assignment_id, @assignments.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
-        <%= form.select :assignment_id, @assignments.map {|a| 
-          if a.teaching_assistant_id == 1 
-            ["未割当", a.id]
-          else
-            ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id]
-          end
-          }, prompt: 'Select Assignment' %>
-        <%#= form.select :assignment_id, 
-        @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] },
-        include_blank: true %>
+        <%#= form.select :assignment_id, @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, prompt: 'Select Assignment' %>
+        <%= form.select :assignment_id, @assignments.reject { |a| a.teaching_assistant_id == 1 }.map { |a| ["#{a.teaching_assistant.name} - #{a.teaching_assistant.number}", a.id] }, include_blank: '未登録' %>
+
       </div>
 
       <div class="col">
