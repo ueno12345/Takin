@@ -1,79 +1,117 @@
 <%# TA個人画面を表示 %>
-<% if flash[:color] == "red" %>
-  <div class="red-text"><%= flash[:notice] %></div>
-<% elsif flash[:color] == "green" %>
-  <div class="green-text"><%= flash[:notice] %></div>
-<% else %>
-  <div><%= flash[:notice] %></div>
-<% end %>
-
-<h1>TA個人画面 : <%= @teaching_assistant.name %></h1>
-
-<%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-info' %>
-
-<%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id),  data: { "turbo-method": :post} ,class: 'btn btn-info' %>
-<%#= link_to "帳票出力1", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:1), class: 'btn btn-info' %>
-<%#= link_to "帳票出力2", ta_assignment_output_csv_url(teaching_assistant_id: @teaching_assistant.id, form:2), class: 'btn btn-info' %>
-<%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
-
-<div>
-  対象年度: <%= @teaching_assistant.year %>
-  学年: <%= @teaching_assistant.grade %>
-  学生番号: <%= @teaching_assistant.number %>
-  割当総時間: 
-  <% sum = 0 %>
-  <% @assignments.each do|assignment| %>
-    <% assignment.work_hours.each do|work_hour| %>
-      <% if work_hour.nil? %>
-        <% next %>
-      <% else %>
-        <% sum = work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
-      <% end %>
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
     <% end %>
-  <% end %>
-  <%= sum %>
-</div>
 
-<form class="row g-3">
-  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
-    <div class="col-md-4">
-      <%= f.label :course_name_i_cont, "講義名" %>
-      <%= f.search_field :course_name_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-md-4">
-      <%= f.label :course_term_i_cont, "対象学期" %>
-      <%= f.search_field :course_term_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-12">
-      <%= f.submit "検索", class: "btn btn-primary" %>
-      <%= link_to "クリア", teaching_assistant_path(params[:id]), class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</form>
-
-<table class="table table-bordered">
-  <thead class="table-primary">
-    <tr>
-      <th>講義名</th>
-      <th>対象学期</th>
-      <th>開始時刻</th>
-      <th>終了時刻</th>
-      <th>合計勤務時間(分)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <div id="assignments">
-      <% @assignments.each do |assignment| %>
+    <%# TAタイトルとマスタデータ関連 %>
+    <div class="row my-2">
+      <div class="col-lg-4 col-md-12"><h2>TA個人画面 : <%= @teaching_assistant.name %></h2></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">対象年度: <%= @teaching_assistant.year %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学年: <%= @teaching_assistant.grade %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学生番号: <%= @teaching_assistant.number %></div>
+      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">割当総時間: 
+      <% sum = 0 %>
+      <% @assignments.each do|assignment| %>
         <% assignment.work_hours.each do|work_hour| %>
-          <tr>
-            <td><%= assignment.course.name %></td>
-            <td><%= assignment.course.term %></td>
-            <td><%= work_hour.dtstart.to_fs(:datetime_jp) %></td>
-            <td><%= work_hour.dtend.to_fs(:datetime_jp) %></td>
-            <td><%= work_hour.actual_working_minutes %></td>
-          </tr>
+          <% if work_hour.nil? %>
+            <% next %>
+          <% else %>
+            <% sum = work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
+          <% end %>
         <% end %>
       <% end %>
+      <%= sum %>
+      </div>
     </div>
-  </table>
-</table>
+
+    <%# TA一覧画面へと帳票出力 %>
+    <div class="row">
+      <% if session[:admin_flag] == true %>
+        <div class="col-lg-8 col-md-0"></div>
+        <div class="col-lg-2 col-md-12 d-flex align-items-center my-2"><%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-success' %></div>
+        <div class="col-lg-2 col-md-6 d-flex align-items-center my-2"><%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %></div>
+      <% end %>
+    </div>
+
+    <%# 検索 %>
+    <div class="card my-3">
+      <div class="card-header">
+        検索欄
+      </div>
+      <div class="card-body">
+        <form class="row g-3">
+          <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :course_name_i_cont, "講義名" %></div>
+                <div class="col-8"><%= f.search_field :course_name_i_cont, placeholder: "条件を入力してください" %></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%= f.label :course_term_i_cont, "対象学期" %></div>
+                <div class="col-8"><%= f.search_field :course_term_i_cont, placeholder: "条件を入力してください" %></div>
+              </div>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <%= f.submit "検索", class: "btn btn-primary px-4" %>
+              <%= link_to "クリア", teaching_assistant_path(params[:id]), class: "ms-5 btn btn-danger px-3" %>
+            </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-lg-1 col-md-0"></div>
+</div>
+
+
+<%#= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-info' %>
+<%#= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
+
+<%# TA個人画面の表部分の作成 %>
+<div class="row mb-5">
+  <div class="col-lg-1 col-md-0"></div>
+  <%# TA個人画面部分 %>
+  <div class="col-lg-10 col-md-12">
+    <div class="card">
+      <div class="card-header">
+        TA一覧
+      </div>
+      <div class="card-body m-3">
+        <%# TA個人画面のカラムのヘッダー %>
+        <div class="row border-bottom border-dark pb-3">
+          <div class="col my-auto fw-bolder h5">講義名</div>
+          <div class="col my-auto fw-bolder h5">対象学期</div>
+          <div class="col my-auto fw-bolder h5">開始時刻</div>
+          <div class="col my-auto fw-bolder h5">終了時刻</div>
+          <div class="col my-auto fw-bolder h5">合計勤務時間(分)</div>
+        </div>
+        <%# TA個人画面のレコードデータ %>
+        <div id="assignments">
+          <% @assignments.each do |assignment| %>
+            <% assignment.work_hours.each do|work_hour| %>
+            <div class="row border-bottom px-3 py-3">
+              <div class="col my-auto"><%= assignment.course.name %></div>
+              <div class="col my-auto"><%= assignment.course.term %></div>
+              <div class="col my-auto"><%= work_hour.dtstart.to_fs(:datetime_jp) %></div>
+              <div class="col my-auto"><%= work_hour.dtend.to_fs(:datetime_jp) %></div>
+              <div class="col my-auto"><%= work_hour.actual_working_minutes  %></div>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-0"></div>
+</div>

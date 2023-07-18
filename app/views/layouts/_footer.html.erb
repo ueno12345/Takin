@@ -1,4 +1,4 @@
-<footer class="p-20 footer mt-auto" style="background-color: #dcdcdc; padding:30px 10px;">
+<footer class="p-20 footer mt-auto footer" style="padding:30px 10px;">
 <!-- Grid container -->
     <!-- Section: Links -->
     <section class="">
@@ -11,10 +11,10 @@
 
         <!--Grid column-->
         <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase" style="font-size:3vm; margin-bottom: 20px;">岡大関係サイトへ</h5>
+          <h5 class="text-uppercase text-light" style="font-size:3vm; margin-bottom: 20px;">岡大関係サイトへ</h5>
           <ul class="list-unstyled mb-0">
-            <li><%= link_to "岡大ホームページ", "https://www.okayama-u.ac.jp/tp/life/syllabus_link.html" ,class: "text-decoration-none me-4 link-secondary"%></li>
-            <li><%= link_to "ソフトウェア開発法ホームページ", "http://sdm.swlab.cs.okayama-u.ac.jp" ,class: "text-decoration-none me-4 link-secondary"%></li>
+            <li><%= link_to "岡大ホームページ", "https://www.okayama-u.ac.jp/tp/life/syllabus_link.html" ,class: "text-decoration-none ms-4 link-secondary"%></li>
+            <li><%= link_to "ソフトウェア開発法ホームページ", "http://sdm.swlab.cs.okayama-u.ac.jp" ,class: "text-decoration-none ms-4 link-secondary"%></li>
           <ul class="list-unstyled mb-0">
             
             </li>
@@ -24,17 +24,17 @@
 
         <!--Grid column-->
         <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase" style="font-size:3vm; margin-bottom: 20px;">サービス</h5>
+          <h5 class="text-uppercase text-light" style="font-size:3vm; margin-bottom: 20px;">サービス</h5>
 
           <ul class="list-unstyled mb-0">
-            <li><%= link_to "HOME", top_page_path ,class: "text-decoration-none me-4 link-secondary"%></li>
-            <li><%= link_to "TA一覧", teaching_assistants_path ,class: "text-decoration-none me-4 link-secondary"%></li>
-            <li><%= link_to "科目一覧", courses_path ,class: "text-decoration-none me-4 link-secondary" %></li>
+            <li><%= link_to "HOME", top_page_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+            <li><%= link_to "TA一覧", teaching_assistants_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+            <li><%= link_to "科目一覧", courses_path ,class: "text-decoration-none ms-4 link-secondary" %></li>
             <% if session[:admin_flag] == true %>
-              <li><%= link_to "新規TAマスタデータ追加", new_teaching_assistant_path ,class: "text-decoration-none me-4 link-secondary"%></li>
-              <li><%= link_to "TAマスタデータ削除", index_destroy_teaching_assistants_path ,class: "text-decoration-none me-4 link-secondary"%></li>
-              <li><%= link_to "新規科目マスタデータ追加", new_course_path ,class: "text-decoration-none me-4 link-secondary"%></li>
-              <li><%= link_to "科目マスタデータ削除", index_destroy_courses_path ,class: "text-decoration-none me-4 link-secondary"%></li>
+              <li><%= link_to "新規TAマスタデータ追加", new_teaching_assistant_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+              <li><%= link_to "TAマスタデータ削除", index_destroy_teaching_assistants_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+              <li><%= link_to "新規科目マスタデータ追加", new_course_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+              <li><%= link_to "科目マスタデータ削除", index_destroy_courses_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
             <% end %>
           </ul>
         </div>
@@ -51,3 +51,10 @@
   </div>
   <!-- Grid container -->
 </footer>
+
+<style>
+  .footer{
+    background-color: #212836;
+    /* background-color: #dcdcdc; */
+  }
+</style>

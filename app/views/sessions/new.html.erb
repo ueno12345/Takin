@@ -1,19 +1,40 @@
 <%# 利用者ログイン画面を表示 %>
-<div class="box">
-    <% provide(:title, "ログイン") %>
-    <br>
-    <h1 style="text-align:center">TA時間管理システム<br>(利用者ログイン)</h1>
-    <br>
-
-    <div class="set_center_outer">
-        <div class="red-text"><%= flash[:error] %></div>
-        <%= form_with url: login_path %>
-        <br>
-        ユーザ名 ：<%= text_field_tag :name %>
-        <br> <br>
-        パスワード：<%= password_field_tag :password %>
-        <br> <br>
-        <%= submit_tag 'ログイン' %>
+<div class="main">
+    <div class="row mb-5">
+        <% provide(:title, "ログイン") %>
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+        <div class="col-lg-4 col-md-8 col-sm-12 text-center text-primary"><h1>TA時間管理システム<br>(利用者ログイン)</h1></div>
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
     </div>
 
+    <%= form_with url: login_path do %>
+    <div class="row">
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+        <div class="col-lg-4 col-md-8 col-sm-12 text-center">
+            <div class="my-2">
+                <div class="row justify-content-center">
+                    <div class="col-4 ">ユーザ名</div>
+                    <div class="col-8"><%= text_field_tag :name %></div>
+                </div>
+            </div>
+            <div class="my-2">
+                <div class="row justify-content-center">
+                    <div class="col-4">パスワード</div>
+                    <div class="col-8"><%= password_field_tag :password %></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+        <div class="col-12 text-center mt-3"><%= submit_tag 'ログイン',class: "btn btn-primary px-4" %></div>
+    </div>
+    <% end %>
 </div>
+
+<style>
+    .main{
+        margin: 50vh auto 0;
+        transform: translateY(-50%);
+        text-align: center;
+        width: 100vw;
+    }
+</style>

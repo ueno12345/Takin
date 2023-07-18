@@ -1,78 +1,111 @@
 <%# TA時間割当(閲覧)画面 %>
-<% if flash[:color] == "red" %>
-  <div class="red-text"><%= flash[:notice] %></div>
-<% elsif flash[:color] == "green" %>
-  <div class="green-text"><%= flash[:notice] %></div>
-<% else %>
-  <div><%= flash[:notice] %></div>
-<% end %>
-
-<h1>TA時間割当(閲覧)</h1>
-
-<%= link_to "TA時間割当編集へ", course_assignments_path(@course) %>
-
-<%= link_to "科目一覧画面へ", courses_path %>
-
-
-<div>
-  <span>
-    <%= @course.name %>
-  </span>
-  担当教員: <%= @course.instructor %>
-  対象年度: <%= @course.year %>
-  開講学期: <%= @course.term %>
-  割当可能総時間: 
-  <% sum = 0 %>
-  <% @assignments.each do|assignment| %>
-    <% assignment.work_hours.each do|work_hour| %>
-      <% if work_hour.nil? %>
-        <% next %>
-      <% else %>
-        <% if @course.time_budget >= work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
-          <% sum = work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
-        <% else %>
-          <% break %>
-        <% end %>
-      <% end %>
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <%# TA時間割当閲覧上部の内容 %>
+  <div class="col-lg-10 col-md-12">
+    <%# メッセージ %>
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
     <% end %>
-  <% end %>
-  <%= @course.time_budget - sum %>
+
+    <%# TA時間割当閲覧 %>
+    <div class="row">
+      <div class="col-lg-4 col-md-12"><h2>TA時間割当(閲覧)</h2></div>
+      <div class="col-lg-4 col-md-0"></div>
+      <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "TA時間割当編集へ", course_assignments_path(@course), class: "btn btn-outline-success" %></div>
+      <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "科目一覧画面へ", courses_path, class: "btn btn-outline-danger" %></div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-3 d-flex align-items-center"><h3 class="">講義：<%= @course.name %></h3></div>
+      <div class="col-2 d-flex align-items-center">担当教員: <%= @course.instructor %></div>
+      <div class="col-2 d-flex align-items-center">対象年度: <%= @course.year %></div>
+      <div class="col-2 d-flex align-items-center">開講学期: <%= @course.term %></div>
+      <div class="col-3 d-flex align-items-center">
+        割当可能総時間: 
+        <% sum = 0 %>
+        <% @assignments.each do|assignment| %>
+          <% assignment.work_hours.each do|work_hour| %>
+            <% if work_hour.nil? %>
+              <% next %>
+            <% else %>
+              <% if @course.time_budget >= work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
+                <% sum = work_hour.calc_work_hours(sum, work_hour.actual_working_minutes) %>
+              <% else %>
+                <% break %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= @course.time_budget - sum %>
+      </div>
+    </div>
+
+    <%# 検索欄 %>
+    <div class="card my-3">
+      <div class="card-header">
+        検索欄
+      </div>
+      <div class="card-body">
+        <form class="row g-3">
+          <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-4"><%=f.label :teaching_assistant_name_i_cont, "TA名", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :teaching_assistant_name_i_cont, placeholder: "条件を入力してください",class: "form-control" %></div>
+              </div>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <%= f.submit "検索", class: "btn btn-primary px-4"%>
+              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+            </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
 
-<form class="row g-3">
-  <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
-    <div class="col-md-4">
-      <%= f.label :teaching_assistant_name_i_cont, "TA名" %>
-      <%= f.search_field :teaching_assistant_name_i_cont, placeholder: "条件を入力してください" %>
-    </div>
-    <div class="col-12">
-      <%= f.submit "検索", class: "btn btn-primary" %>
-      <%= link_to "クリア", course_path(params[:id]), class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</form>
-
-<table class="table table-bordered">
-    <tr>
-      <th>開始時刻</th>
-      <th>終了時刻</th>
-      <th>実働時間(分)</th>
-      <th>割当TA名</th>
-      <th>操作</th>
-    </tr>
-    <div id="assignments">
-      <% @assignments.each do |assignment| %>
-        <% assignment.work_hours.each do |work_hour| %>
-          <tr>
-            <td><%= work_hour.dtstart.to_fs(:datetime_jp) %></td>
-            <td><%= work_hour.dtend.to_fs(:datetime_jp) %></td>
-            <td><%= work_hour.actual_working_minutes %></td>
-            <td><%= assignment.teaching_assistant.name %></td>
-            <td>
-              <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
-            </td>
-          </tr>
+<%# TA勤務時間割当処理 %>
+<div class="row mb-3">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <div class="card my-3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-lg-4 col-md-12 d-flex align-items-center">TA勤務時間割当処理</div>
+          <div></div class="col-lg-8 col-md-0">
+        </div>
+      </div>
+      <div class="card-body mx-3">
+        <div class="row border-bottom border-dark pb-3">
+          <div class="col my-auto fw-bolder h5">開始時刻</div>
+          <div class="col my-auto fw-bolder h5">終了時刻</div>
+          <div class="col my-auto fw-bolder h5">実働時間(分)</div>
+          <div class="col my-auto fw-bolder h5">割当TA名</div>
+          <div class="col my-auto fw-bolder h5">操作</div>
+        </div>
+        <div id="assignments">
+        <% @assignments.each do |assignment| %>
+          <% assignment.work_hours.each do|work_hour| %>
+            <div class="row border-bottom px-3 py-2">
+              <div class="col my-auto"><%= work_hour.dtstart.to_fs(:datetime_jp) %></div>
+              <div class="col my-auto"><%= work_hour.dtend.to_fs(:datetime_jp) %></div>
+              <div class="col my-auto"><%= work_hour.actual_working_minutes %></div>
+              <div class="col my-auto"><%= assignment.teaching_assistant.name %></div>
+              <div class="col my-auto"><%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %></div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+        </div>
+      </div>
     </div>
-</table>
+  </div>
+  <div class="col-lg-1 col-md-0"></div>
+</div>

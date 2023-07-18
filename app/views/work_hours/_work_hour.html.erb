@@ -13,11 +13,12 @@
       <% end %>
     </div>
     <div class="col my-auto">
-      <%= link_to "個人画面", teaching_assistant_path(Assignment.where(id: work_hour.assignment_id).first.teaching_assistant),class: 'btn btn-success', target: '_blank'%>
-      <%#= link_to "帳票出力", ta_assignment_output_csv_url(teaching_assistant_id: Assignment.where(id: work_hour.assignment_id).first.teaching_assistant.id), class: 'btn btn-info', target: '_blank'%>
-      <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-info' %>
-      <%= link_to "編集", edit_course_work_hour_path(course_id: Assignment.where(id: work_hour.assignment_id).first.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary', form: { style: 'display: inline' } %>
-      <%= button_to "削除", destroy_course_assignments_path( @course=Course.where(id:Assignment.where(id: work_hour.assignment_id).first.course_id).first , assignment=Assignment.where(id: work_hour.assignment_id).first, work_hour), method: :delete, class: 'btn btn-danger', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %>
+      <div class="row">
+        <div class="col-md-12 col-lg-6"><%= link_to "編集", edit_course_work_hour_path(course_id: Assignment.where(id: work_hour.assignment_id).first.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary px-4 ms-1 my-1', form: { style: 'display: inline' } %></div>
+        <div class="col-md-12 col-lg-6"><%= button_to "削除", destroy_course_assignments_path( @course=Course.where(id:Assignment.where(id: work_hour.assignment_id).first.course_id).first , assignment=Assignment.where(id: work_hour.assignment_id).first, work_hour), method: :delete, class: 'btn btn-danger px-4 ms-1 my-1', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %></div>
+        <div class="col-md-12 col-lg-6"><%= link_to "個人画面", teaching_assistant_path(Assignment.where(id: work_hour.assignment_id).first.teaching_assistant),class: 'btn btn-success my-1', target: '_blank'%></div>
+        <div class="col-md-12 col-lg-6"><%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary my-1' %></div>
+      </div>
     </div>
   </div>
 <% end %>
