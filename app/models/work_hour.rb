@@ -12,14 +12,6 @@ class WorkHour < ApplicationRecord
     @date || dtstart.try(:to_date)
   end
 
-  def dtstart=(time)
-    self[:dtstart] = time.is_a?(String) ? Time.zone.parse(time) : time
-  end
-
-  def dtend=(time)
-    self[:dtend] = time.is_a?(String) ? Time.zone.parse(time) : time
-  end
-
   def self.ransackable_attributes(auth_object = nil)
     ["actual_working_minutes", "assignment_id", "created_at", "dtend", "dtstart", "id", "updated_at"]
   end

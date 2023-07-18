@@ -85,6 +85,7 @@
       </div>
       <div class="card-body mx-3">
         <div class="row border-bottom border-dark pb-3">
+          <div class="col my-auto fw-bolder h5">日付</div>
           <div class="col my-auto fw-bolder h5">開始時刻</div>
           <div class="col my-auto fw-bolder h5">終了時刻</div>
           <div class="col my-auto fw-bolder h5">実働時間(分)</div>
@@ -95,8 +96,9 @@
         <% @assignments.each do |assignment| %>
           <% assignment.work_hours.each do|work_hour| %>
             <div class="row border-bottom px-3 py-2">
-              <div class="col my-auto"><%= work_hour.dtstart.to_fs(:datetime_jp) %></div>
-              <div class="col my-auto"><%= work_hour.dtend.to_fs(:datetime_jp) %></div>
+              <div class="col my-auto"><%= work_hour.date %></div>
+              <div class="col my-auto"><%= work_hour.dtstart.strftime("%H:%M") %></div>
+              <div class="col my-auto"><%= work_hour.dtend.strftime("%H:%M") %></div>
               <div class="col my-auto"><%= work_hour.actual_working_minutes %></div>
               <div class="col my-auto"><%= assignment.teaching_assistant.name %></div>
               <div class="col my-auto"><%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %></div>

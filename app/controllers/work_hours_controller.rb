@@ -29,7 +29,18 @@ class WorkHoursController < ApplicationController
   # POST /work_hours or /work_hours.json
   def create
     @course = Course.find(params[:course_id])
-    @work_hour = WorkHour.new(work_hour_params)
+
+    date = params[:work_hour][:date]
+    dtstart = params[:work_hour][:dtstart]
+    dtend = params[:work_hour][:dtend]
+  
+    @work_hour = WorkHour.new(
+      date: date,
+      dtstart: "#{date}-#{dtstart}", 
+      dtend: "#{date}-#{dtend}",    
+      actual_working_minutes: params[:work_hour][:actual_working_minutes],
+      assignment_id: params[:work_hour][:assignment_id]
+    )
     @assignments = @course.assignments.includes(:teaching_assistant)
 
 
