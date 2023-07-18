@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   has_many :assignments, dependent: :destroy
+  has_many :work_hours, through: :assignments
 
   validates :year,
   numericality: {only_integer: true, greater_than: 0},

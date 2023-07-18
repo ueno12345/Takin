@@ -15,6 +15,7 @@ class TeachingAssistantsController < ApplicationController
     @teaching_assistant = TeachingAssistant.find(params[:id])
     @q = @teaching_assistant.assignments.ransack(params[:q], teaching_assistant_id_eq: @teaching_assistant.id)
     @assignments = @q.result(distinct: true)
+    @sum_actual_working_minutes = @assignments.map { |assignment| assignment.work_hours.sum(:actual_working_minutes) }.sum
   end
 
   # GET /teaching_assistants/new

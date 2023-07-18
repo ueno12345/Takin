@@ -94,7 +94,7 @@
           <div class="col my-auto fw-bolder h5">講義番号</div>
           <div class="col my-auto fw-bolder h5">講義科目名</div>
           <div class="col my-auto fw-bolder h5">担当教員</div>
-          <div class="col my-auto fw-bolder h5">TA可能割当総時間(分)</div>
+          <div class="col my-auto fw-bolder h5">割当済時間/割当可能総時間(分)</div>
           <div class="col my-auto fw-bolder h5">操作</div>
         </div>
         <%# TAのレコードデータ %>
@@ -106,7 +106,11 @@
               <div class="col my-auto"><%= course.number %></div>
               <div class="col my-auto"><%= course.name %></div>
               <div class="col my-auto"><%= course.instructor %></div>
-              <div class="col my-auto"><%= course.time_budget  %></div>
+              <div class="col my-auto">
+                <% assignments = course.assignments.includes(:work_hours) %>
+                <% sum_actual_working_minutes = assignments.map { |assignment| assignment.work_hours.sum(:actual_working_minutes) }.sum %>
+                <%= sum_actual_working_minutes %>/<%= course.time_budget %>
+              </div>
               <div class="col">
                 <div clssa="row">
                   <div class="m-1 col-md-10 col-lg-5">

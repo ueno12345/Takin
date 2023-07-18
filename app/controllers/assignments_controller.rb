@@ -9,6 +9,7 @@ class AssignmentsController < ApplicationController
     @q = @course.assignments.ransack(params[:q], course_id_eq: @course.id)
     @q.sorts = "work_hours_dtstart ASC" if @q.sorts.empty?
     @assignments = @q.result(distinct: true)
+    @sum_actual_working_minutes = @assignments.map { |assignment| assignment.work_hours.sum(:actual_working_minutes) }.sum
   end
 
   # GET /assignments/1 or /assignments/1.json
