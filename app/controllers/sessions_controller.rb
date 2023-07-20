@@ -1,4 +1,10 @@
 class SessionsController < ApplicationController
+  before_action :login, only: %i[ index]
+  
+  def index 
+  
+  end
+
   def new
     if session[:user_name]
       @notice = "#{session[:user_name]}でログインしています。"
@@ -6,7 +12,6 @@ class SessionsController < ApplicationController
   end
 
   def create
- 
     if params.key?(:name) || params.key?(:password)
       user = User.find_by_account_name(params[:name])
       if user && user.authenticate(params[:password])
@@ -29,7 +34,6 @@ class SessionsController < ApplicationController
   end
 
   def admin_create
- 
     if params.key?(:name) || params.key?(:password)
       user = User.find_by_account_name(params[:name])
       if user && user.authenticate(params[:password]) && User.where(account_name: params[:name]).first.admin_flag == true

@@ -12,7 +12,7 @@
         <%= TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name %>
       <% end %>
     </div>
-    <div class="col my-auto">
+    <div class="col my-auto" style="display:flex; align-items: center; justify-content:center;">
       <div class="row">
         <div class="col-md-12 col-lg-6"><%= link_to "編集", edit_course_work_hour_path(course_id: Assignment.where(id: work_hour.assignment_id).first.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary px-4 ms-1 my-1', form: { style: 'display: inline' } %></div>
         <div class="col-md-12 col-lg-6"><%= button_to "削除", destroy_course_assignments_path( @course=Course.where(id:Assignment.where(id: work_hour.assignment_id).first.course_id).first , assignment=Assignment.where(id: work_hour.assignment_id).first, work_hour), method: :delete, class: 'btn btn-danger px-4 ms-1 my-1', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %></div>

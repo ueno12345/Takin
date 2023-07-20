@@ -13,10 +13,15 @@
     <%# TAタイトルとマスタデータ関連 %>
     <div class="row my-2">
       <div class="col-lg-4 col-md-12"><h2>TA個人画面 : <%= @teaching_assistant.name %></h2></div>
-      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">対象年度: <%= @teaching_assistant.year %></div>
-      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学年: <%= @teaching_assistant.grade %></div>
-      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">学生番号: <%= @teaching_assistant.number %></div>
-      <div class="col-lg-2 col-md-6 d-flex align-items-center h5">割当総時間: <%= @sum_actual_working_minutes %></div>
+      <div class="col-lg-6 col-md-0"></div>
+      <div class="col-lg-2 col-md-12 my-1"><%= link_to "戻る", teaching_assistants_path, method: :get, class: "btn btn-danger" %></div>
+    </div>
+
+    <div class="row my-3">
+      <div class="col-lg-3 col-md-6 d-flex align-items-center h5">対象年度: <%= @teaching_assistant.year %></div>
+      <div class="col-lg-3 col-md-6 d-flex align-items-center h5">学年: <%= @teaching_assistant.grade %></div>
+      <div class="col-lg-3 col-md-6 d-flex align-items-center h5">学生番号: <%= @teaching_assistant.number %></div>
+      <div class="col-lg-3 col-md-6 d-flex align-items-center h5">割当総時間: <%= @sum_actual_working_minutes %></div>
     </div>
 
     <%# TA一覧画面へと帳票出力 %>
