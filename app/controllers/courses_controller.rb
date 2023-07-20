@@ -87,15 +87,15 @@ class CoursesController < ApplicationController
   end
 
   def import
-    if params[:file].content_type == "text/csv"
-      Course.import(params[:file])
-      if params[:file].nil?
-        redirect_to new_course_url, notice: "登録する科目マスタデータCSVファイルを選択してください", flash: {color: :red}
-      else
-        redirect_to courses_url, notice: "新規科目マスタデータを追加しました", flash: {color: :green}
-      end
+    Course.import(params[:file])
+    if params[:file].nil?
+      redirect_to new_course_url, notice: "登録する科目マスタデータCSVファイルを選択してください", flash: {color: :red}
     else
-      redirect_to new_teaching_assistant_url, notice: "CSVファイルのみを受け付けます", flash: {color: :red}
+      if params[:file]&.content_type == "text/csv"
+        redirect_to courses_url, notice: "新規科目マスタデータを追加しました", flash: {color: :green}
+      else
+        redirect_to new_teaching_assistant_url, notice: "CSVファイルのみを受け付けます", flash: {color: :red}
+      end
     end
   end
 
