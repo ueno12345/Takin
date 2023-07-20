@@ -7,7 +7,7 @@
     <div class="col my-auto"><%= work_hour.actual_working_minutes %></div>
     <div class="col my-auto">
       <% if TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name == "ダミー君" %>
-        <%= "未割当" %>
+        <%= "未登録" %>
       <% else %>
         <%= TeachingAssistant.where(id:Assignment.where(id: work_hour.assignment_id).first.teaching_assistant_id).first.name %>
       <% end %>
