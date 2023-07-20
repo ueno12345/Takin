@@ -4,135 +4,173 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <%# Top画面を表示 %>
-<h1>HOME</h1>
- おかえりなさい．
-「<%= session[:user_name] %>」さん．
-<br><br>
-
-<div>
-<h5 class="mb-0">
-利用マニュアル
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <div class="row">
+      <div class="col-lg-10 col-md-12">
+        <h1>HOME</h1>
+      </div>
+      <div class="col-lg-10 col-md-12 m-3">
+        おかえりなさい． 「<%= session[:user_name] %>」さん．
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-0"></div>
 </div>
-<br>
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          グローバルナビゲーション
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          ログイン・ログアウト
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+<%# マニュアル表示部 %>
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <h4 class="mt-5">利用マニュアル</h4>
+    <%# 利用者と管理者共通マニュアル %>
+    <div class="card my-3">
+      <%# カードヘッダー %>
+      <div class="card-header">
+        <h4>利用者と管理者共通マニュアル</h4>
+      </div>
+      <%# カードボディ %>
+      <div class="card-body">
+        <%# マニュアル %>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  グローバルナビゲーション
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          Home
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  ログイン・ログアウト
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          TA一覧
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  Home
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          科目一覧
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  TA一覧
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          TA個人画面
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  科目一覧
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          TA勤務割当
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  TA個人画面
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          帳票出力
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
-  </div>
-</details>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  TA勤務割当
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
 
-<details class="accordion" id="accordionExample">
-  <summary class="card">
-      <h5 class="mb-0">
-        <div class="btn btn-link">
-          マスタデータ追加・削除
-        </div>
-      </h5>
-  </summary>
-  <div id="collapseOne" class="card-body">
-    本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  帳票出力
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <% if session[:admin_flag] == true %>
+    <%# 管理者マニュアル %>
+    <div class="card my-3">
+      <%# カードヘッダー %>
+      <div class="card-header">
+        <h4>管理者マニュアル</h4>
+      </div>
+      <%# カードボディ %>
+      <div class="card-body">
+        <%# マニュアル %>
+        <details class="accordion manual-details" id="accordionExample">
+          <summary class="card manual-summary">
+              <h5 class="mb-0">
+                <div class="btn btn-link">
+                  マスタデータ追加・削除
+                </div>
+              </h5>
+          </summary>
+          <div id="collapseOne" class="card-body">
+            本システムはグローバルナビゲーションを搭載しており，どこからでも任意のページに遷移することが可能となっています．以下の図２で示される「Home」，「TA一覧」，「科目一覧」，「ログアウト」に関して，以降の節で詳細を記載します．
+          </div>
+        </details>
+      </div>
+    </div>
+    <% end %>
+    
   </div>
-</details>
+  <div class="col-lg-1 col-md-0"></div>
+</div>
 
 <style>
-summary {
+.manual-summary {
   position: relative;
   display: block; /* 矢印を消す */
   padding: 10px 10px 10px 30px; /* アイコンの余白を開ける */
@@ -141,16 +179,16 @@ summary {
   background-color: #e2f0f7;
   transition: 0.2s;
 }
-summary:hover {
+.manual-summary:hover {
   background-color: #ccebfb;
 }
-summary::-webkit-details-marker {
+.manual-summary::-webkit-details-marker {
   display: none;　/* 矢印を消す */
 }
 
 /* 疑似要素でアイコンを表示 */
-summary:before,
-summary:after {
+.manual-summary:before,
+.manual-summary:after {
   content: "";
   margin: auto 0 auto 10px;
   position: absolute;
@@ -158,13 +196,13 @@ summary:after {
   bottom: 0;
   left: 0;
 }
-summary:before {
+.manual-summary:before {
   width: 16px;
   height: 16px;
   border-radius: 4px;
   background-color: #1da1ff;
 }
-summary:after {
+.manual-summary:after {
   left: 6px;
   width: 5px;
   height: 5px;
@@ -175,10 +213,10 @@ summary:after {
 }
 
 /* オープン時のスタイル */
-details[open] summary {
+.manual-details[open] .manual-summary {
   background-color: #ccebfb;
 }
-details[open] summary:after {
+.manual-details[open] .manual-summary:after {
   transform: rotate(90deg); /* アイコンを回転 */
   left: 4px; /* 位置を調整 */
   top: 5px; /* 位置を調整 */
@@ -189,7 +227,7 @@ details[open] summary:after {
 }
 
 /* アニメーション */
-details[open] .details-content {
+.manual-details[open] .details-content {
   animation: fadeIn 0.5s ease;
 }
 @keyframes fadeIn {
