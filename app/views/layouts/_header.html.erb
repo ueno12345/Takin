@@ -8,6 +8,11 @@
       <li><%= link_to "HOME", top_page_path, method: :get, class: "nav-link text-white ms-2" %></li>
       <li><%= link_to "TA一覧", teaching_assistants_path, method: :get, class: "nav-link text-white ms-2" %></li>
       <li><%= link_to "科目一覧", courses_path, method: :get, class: "nav-link text-white ms-2" %></li>
+      <li>
+        <% if session[:admin_flag] == true %>
+          <li><%= link_to "ユーザ登録", users_path, method: :get, class: "nav-link text-white ms-2" %></li>
+        <% end %>
+      </li>
     </ul>
 
     <%# ログアウト %>

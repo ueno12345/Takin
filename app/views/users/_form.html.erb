@@ -1,7 +1,4 @@
-<%# ===================
-===  使用していない  ====
-=====================%>
-<%= form_with(model: user) do |form| %>
+<%= form_with(model: user, html: {class: "container mt-3 border p-3 bg-light rounded"}) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -14,21 +11,37 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :account_name, style: "display: block" %>
-    <%= form.text_field :account_name %>
+  <div class="row border-bottom py-2">
+    <div class="col-md-3">
+      <strong>アカウント名</strong>
+    </div>
+    <div class="col-md-7">
+      <%= form.text_field :account_name %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
+  <div class="row border-bottom py-2">
+    <div class="col-md-3">
+      <strong>パスワード</strong>
+    </div>
+    <div class="col-md-7">
+      <%= form.text_field :password %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :admin_flag, style: "display: block" %>
-    <%= form.text_field :admin_flag %>
+  <div class="row border-bottom py-2">
+    <div class="col-md-3">
+      <strong>ユーザタイプ</strong>
+    </div>
+    <div class="col-md-7">
+      <% if user.admin_flag %>
+        <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], true)%>
+      <% else %>
+        <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], false)%>
+      <% end %>
+    </div>
   </div>
-
+  
   <div>
     <%= form.submit %>
   </div>
