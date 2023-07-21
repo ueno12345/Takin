@@ -30,38 +30,38 @@
           <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :year_eq, "対象年度",class: "mt-2" %></div>
-                <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"},class: "form-control" %></div>
+                <div class="col-4"><%= f.label :year_eq, "対象年度", class: "mt-2" %></div>
+                <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"}, class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :name_i_cont, "学期",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :term_i_cont, "学期", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください", class: "form-control" %></div>
               </div>  
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :number_i_cont, "講義番号",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :number_i_cont, "講義番号", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください", class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :grade_i_cont, "授業科目名",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :name_i_cont, "科目名", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください", class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :labo_i_cont, "担当教員", class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :instructor_i_cont, "担当教員", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください", class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
                 <div class="col-4"><%= f.label :description_i_cont, "備考", class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください", class: "form-control" %></div>
               </div>
             </div>
             <div class="col-12 text-center mt-5">
@@ -97,8 +97,9 @@
           <div class="col my-auto fw-bolder h5">対象年度</div>
           <div class="col my-auto fw-bolder h5">学期</div>
           <div class="col my-auto fw-bolder h5">講義番号</div>
-          <div class="col my-auto fw-bolder h5">講義科目名</div>
+          <div class="col my-auto fw-bolder h5">科目名</div>
           <div class="col my-auto fw-bolder h5">担当教員</div>
+          <div class="col my-auto fw-bolder h5">備考</div>
           <div class="col my-auto fw-bolder h5">割当可能総時間(分)</div>
         </div>
         <%# TAのレコードデータ %>
@@ -106,12 +107,13 @@
           <% @courses.each do |course| %>
             <div class="row border-bottom px-3 py-4">
               <div class="col my-auto"><%= check_box_tag 'course_ids[]', course.id %></div>
-              <div class="col my-auto"><%= course.time_budget  %></div>
+              <div class="col my-auto"><%= course.year %></div>
               <div class="col my-auto"><%= course.term %></div>
               <div class="col my-auto"><%= course.number %></div>
               <div class="col my-auto"><%= course.name %></div>
               <div class="col my-auto"><%= course.instructor %></div>
-              <div class="col my-auto"><%= course.time_budget  %></div>
+              <div class="col my-auto"><%= course.description %></div>
+              <div class="col my-auto"><%= course.time_budget %></div>
             </div>
           <% end %>
         </div>

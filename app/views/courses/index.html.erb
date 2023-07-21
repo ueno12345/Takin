@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :name_i_cont, "授業科目名", class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :name_i_cont, "科目名", class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
@@ -92,8 +92,9 @@
           <div class="col my-auto fw-bolder h5">対象年度</div>
           <div class="col my-auto fw-bolder h5">学期</div>
           <div class="col my-auto fw-bolder h5">講義番号</div>
-          <div class="col my-auto fw-bolder h5">講義科目名</div>
+          <div class="col my-auto fw-bolder h5">科目名</div>
           <div class="col my-auto fw-bolder h5">担当教員</div>
+          <div class="col my-auto fw-bolder h5">備考</div>
           <div class="col my-auto fw-bolder h5">割当済時間/割当可能総時間(分)</div>
           <div class="col my-auto fw-bolder h5">操作</div>
         </div>
@@ -106,6 +107,7 @@
               <div class="col my-auto"><%= course.number %></div>
               <div class="col my-auto"><%= course.name %></div>
               <div class="col my-auto"><%= course.instructor %></div>
+              <div class="col my-auto"><%= course.description %></div>
               <div class="col my-auto">
                 <% assignments = course.assignments.includes(:work_hours) %>
                 <% sum_actual_working_minutes = assignments.map { |assignment| assignment.work_hours.sum(:actual_working_minutes) }.sum %>
