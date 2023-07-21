@@ -91,7 +91,7 @@ class CoursesController < ApplicationController
     if params[:file].nil?
       redirect_to new_course_url, notice: "登録する科目マスタデータCSVファイルを選択してください", flash: {color: :red}
     else
-      if params[:file]&.content_type == "text/csv"
+      if params[:file]&.content_type == "text/csv"|| params[:file].content_type == "application/vnd.ms-excel"
         redirect_to courses_url, notice: "新規科目マスタデータを追加しました", flash: {color: :green}
       else
         redirect_to new_teaching_assistant_url, notice: "CSVファイルのみを受け付けます", flash: {color: :red}

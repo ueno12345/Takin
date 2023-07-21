@@ -13,7 +13,7 @@
 
     <%# 新規科目と戻る関連 %>
     <div class="row">
-      <div class="col-lg-4 col-md-12"><h2>新規科目マスタデータ追加</h2></div>
+      <div class="col-lg-4 col-md-12"><h2>科目マスタデータ追加</h2></div>
       <div class="col-6"></div>
       <div class="col-lg-2 col-md-12">
         <%= link_to "科目一覧に戻る", courses_path, class: "btn btn-outline-danger" %>
@@ -91,7 +91,7 @@
             </div>
             <div class="col-12 text-center mt-5">
               <%= f.submit "検索", class: "btn btn-primary px-4"%>
-              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+              <%= link_to "クリア", new_course_path, class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>

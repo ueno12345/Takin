@@ -12,7 +12,7 @@
 
     <%# 新規TAタイトルとマスタデータ関連 %>
     <div class="row ">
-      <div class="col-lg-4 col-md-12"><h2>新規TAマスタデータ追加</h2></div>
+      <div class="col-lg-4 col-md-12"><h2>TAマスタデータ追加</h2></div>
       <div class="col-lg-6 col-md-0"></div>
       <div class="col-lg-2 col-md-12 d-flex align-items-center">
         <%= link_to "TA一覧に戻る", teaching_assistants_path, class: "btn btn-outline-danger" %>
@@ -37,7 +37,7 @@
           <%= form_tag import_teaching_assistants_path,  multipart: true do %>
             <div class="row">
               <div class="col-8"><%= file_field_tag :file, accept: ".csv", class: "form-control" %></div>
-              <div class="col-4"><%= submit_tag "登録",class: "ms-5 btn btn-primary px-4" %></div>
+              <div class="col-4"><%= submit_tag "登録", class: "ms-5 btn btn-primary px-4" %></div>
             </div>
           <% end %>
         </div>
@@ -90,7 +90,7 @@
             </div>
             <div class="col-12 text-center mt-5">
               <%= f.submit "検索", class: "btn btn-primary px-4"%>
-              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+              <%= link_to "クリア", new_teaching_assistant_path, class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>
