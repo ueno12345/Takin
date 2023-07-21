@@ -17,11 +17,7 @@ User.create!(
  TeachingAssistant.create!(
    year: "0001",
    number: "00000000",
-<<<<<<< HEAD
    name: "未登録",
-=======
-   name: "ダミー君",
->>>>>>> 021be627ae61ddebc57edeb69c0a953638ec8f9f
    grade:"M1", 
    labo:"山内研究室",
    description:"ダミーデータやで"
@@ -35,7 +31,6 @@ User.create!(
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-<<<<<<< HEAD
 # 3.times do |n|
 # 	TeachingAssistant.create!(
 # 		year: 2023,
@@ -58,30 +53,6 @@ User.create!(
 # 		description: "TTTT#{n}",
 # 	)
 # end
-=======
-#3.times do |n|
-#	TeachingAssistant.create!(
-#		year: 2023,
-#		number: "50M2300#{n}",
-#		name: "TA#{n}",
-#		grade: "M1",
-#		labo: "TEACHER#{n}" ,
-#		description: "TEST#{n}"
-#	)
-#end
-#
-#3.times do |n|
-#	Course.create!(
-#		year: 2023,
-#		term: "#{n}",
-#		number: "09000#{n}",
-#		name: "Course#{n}",
-#		instructor: "Teacher#{n}",
-#		time_budget: (n+1)*1000,
-#		description: "TTTT#{n}",
-#	)
-#end
->>>>>>> 021be627ae61ddebc57edeb69c0a953638ec8f9f
 
 # Course1にTA1を割り当てる．
 # Assignment.create{

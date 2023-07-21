@@ -15,7 +15,6 @@
       </li>
     </ul>
 
-<<<<<<< HEAD
     <%# ログアウト %>
     <details class="row justify-content-end">
     <summary style="list-style: none;" class="login-details me-3 header-summary">
@@ -32,12 +31,6 @@
         <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "nav-link text-white ms-5" %>
       </div>
     </details>
-=======
-    <%= button_to logout_path, method: :delete, class: "nav-link" do %>
-    <%#= link_to logout_path, method: :delete, class: "nav-link" do %>
-      <%= image_tag("user.jpg", alt: "ログアウト", width: 40, height: 40) %>
-    <% end %>
->>>>>>> 021be627ae61ddebc57edeb69c0a953638ec8f9f
   </div>
 </nav>
 
