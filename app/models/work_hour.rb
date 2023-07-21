@@ -3,8 +3,8 @@ class WorkHour < ApplicationRecord
   has_one :teaching_assistant, through: :assignment
   has_one :course, through: :assignment
   validates :dtstart, presence: true
-  validates :dtend, comparison: { greater_than: :dtstart, message: "%{attribute}は開始時刻よりも後にして下さい" }, presence: true
-  validates :actual_working_minutes, numericality: {greater_than: 0}, presence: true
+  validates :dtend, comparison: {greater_than: :dtstart, message: "%{attribute}は開始時刻よりも後にして下さい"}, presence: true
+  validates :actual_working_minutes, numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"}, presence: true
   validate :no_overlap_with_existing_times, unless: -> { teaching_assistant.id == 1 }
   before_create :check_actual_working_minutes
 
