@@ -201,6 +201,13 @@ class AssignmentsController < ApplicationController
           worksheet_form1.add_cell(36+count, 16, work_hour.dtend.strftime('%Y-%m-%d %H:%M') )
           worksheet_form1.add_cell(36+count, 20, work_hour.actual_working_minutes )
           sum_work_time = sum_work_time + work_hour.actual_working_minutes
+          (1..35).each do |col|
+            cell = worksheet_form1[36+count, col]
+            cell.change_border(:top, 'medium')
+            cell.change_border(:left, 'medium')
+            cell.change_border(:right, 'medium')
+            cell.change_border(:bottom, 'medium')
+          end
           count += 1
 
           if count == 15 then
