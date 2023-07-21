@@ -3,7 +3,7 @@ class Course < ApplicationRecord
   has_many :work_hours, through: :assignments
 
   validates :year,
-  numericality: {only_integer: true, greater_than: 0},
+  numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"},
   presence: true
   validates :term,
   length: {maximum: 64, too_long: "%{attribute}は%{count}文字以下で入力してください"}
@@ -17,7 +17,7 @@ class Course < ApplicationRecord
   length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
   presence: true
   validates :time_budget,
-  numericality: {only_integer: true, greater_than: 0},
+  numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"},
   presence: true
   validates :description,
   length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}

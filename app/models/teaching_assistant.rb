@@ -3,7 +3,7 @@ class TeachingAssistant < ApplicationRecord
   has_many :work_hours, through: :assignments
 
   validates :year,
-  numericality: {only_integer: true, greater_than: 0},
+  numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"},
   presence: true
   validates :number,
   format: {with: /\A[a-zA-Z0-9]{8}\z/, message: "%{attribute}は半角英数字8文字で入力してください"},
