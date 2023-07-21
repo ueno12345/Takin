@@ -14,7 +14,7 @@
     <div class="row my-2">
       <div class="col-lg-4 col-md-12"><h2>TA個人画面 : <%= @teaching_assistant.name %></h2></div>
       <div class="col-lg-6 col-md-0"></div>
-      <div class="col-lg-2 col-md-12 my-1"><%= link_to "戻る", teaching_assistants_path, method: :get, class: "btn btn-danger" %></div>
+      <div class="col-lg-2 col-md-12 my-1"><%= link_to "TA一覧に戻る", teaching_assistants_path, method: :get, class: "btn btn-outline-danger py-2" %></div>
     </div>
 
     <div class="row my-3">
@@ -22,15 +22,6 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-center h5">学年: <%= @teaching_assistant.grade %></div>
       <div class="col-lg-3 col-md-6 d-flex align-items-center h5">学生番号: <%= @teaching_assistant.number %></div>
       <div class="col-lg-3 col-md-6 d-flex align-items-center h5">割当総時間: <%= @sum_actual_working_minutes %></div>
-    </div>
-
-    <%# TA一覧画面へと帳票出力 %>
-    <div class="row">
-      <% if session[:admin_flag] == true %>
-        <div class="col-lg-8 col-md-0"></div>
-        <div class="col-lg-2 col-md-12 d-flex align-items-center my-2"><%= link_to "TA一覧画面へ", teaching_assistants_path, class: 'btn btn-success' %></div>
-        <div class="col-lg-2 col-md-6 d-flex align-items-center my-2"><%= link_to "帳票出力画面へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %></div>
-      <% end %>
     </div>
 
     <%# 検索 %>
@@ -76,7 +67,15 @@
   <div class="col-lg-10 col-md-12">
     <div class="card">
       <div class="card-header">
-        TA一覧
+        <div class="row">
+          <div class="col-4 d-flex align-items-center">TA一覧</div>
+          <div class="col-6"></div>
+          <div class="col-2">
+            <% if session[:admin_flag] == true %>
+              <%= link_to "帳票出力へ", index_output_excel_path(@teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary' %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="card-body m-3">
         <%# TA個人画面のカラムのヘッダー %>
