@@ -168,7 +168,7 @@ class AssignmentsController < ApplicationController
       days = ["日", "月", "火", "水", "木", "金", "土"]
 
       # 氏名追加処理
-      worksheet_form1.add_cell(9, 20, @teaching_assistant.name)
+      worksheet_form1.add_cell(9, 20, @teaching_assistant.labo[0...-1])
       # worksheet[9][20].change_border(:bottom, "medium")
       worksheet_form1.add_cell(18, 2, @teaching_assistant.name)
 

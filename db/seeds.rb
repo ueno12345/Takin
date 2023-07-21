@@ -17,7 +17,7 @@ User.create!(
  TeachingAssistant.create!(
    year: "0001",
    number: "00000000",
-   name: "ダミー君",
+   name: "未登録",
    grade:"M1", 
    labo:"山内研究室",
    description:"ダミーデータやで"

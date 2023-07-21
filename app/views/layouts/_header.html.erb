@@ -12,7 +12,7 @@
 
     <%# ログアウト %>
     <details class="row justify-content-end">
-      <summary style="list-style: none;" class="login-details me-3">
+    <summary style="list-style: none;" class="login-details me-3 header-summary">
         <div class="d-inline-flex align-items-center">
           <%= image_tag("user.png", alt: "ログアウト", width: 40, height: 40 , class: "img") %>
             <% if session[:admin_flag] == true %>
@@ -41,6 +41,10 @@
 
   .login_details{
 
+  }
+  .header-summary {
+  /* ヘッダー部分のsummaryに適用するスタイル */
+  ...
   }
 
 </style>
