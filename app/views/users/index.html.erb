@@ -1,17 +1,55 @@
 <%# ===================
 ===  使用していない  ====
 =====================%>
-<p style="color: green"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
+    <% end %>
 
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+    <div class="row">
+      <div class="col-lg-4 col-md-12"><h2>ユーザ登録</h2></div>
+    </div>
+    <br>
+    <div class="col-lg-2 col-md-12"><%= link_to '新規作成', new_user_path, class: 'btn btn-outline-primary py-2' %></div>
+  </div>
 </div>
 
-<%= link_to "New user", new_user_path %>
+
+<div id="users" class="container mt-3">
+  <div class="row border-bottom py-2 font-weight-bold">
+    <div class="col-md-3">
+     <strong>アカウント名</strong>
+    </div>
+    <div class="col-md-3">
+      <strong>ユーザータイプ</strong>
+    </div>
+    <div class="col-md-3">
+      <strong>操作</strong>
+    </div>
+  </div>
+  
+  <% @users.each do |user| %>
+    <div class="row border-bottom py-2">
+      <div class="col-md-3">
+        <%= user.account_name %>
+      </div>
+      <div class="col-md-3">
+        <% if user.admin_flag == true %>
+          <%= "管理者" %>
+        <% else %>
+          <%= "利用者" %>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to '表示', user_path(user), class: 'btn btn-secondary' %>
+        <%#= button_to '削除', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>

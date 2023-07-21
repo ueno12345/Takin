@@ -1,20 +1,30 @@
 <%# ===================
 ===  使用していない  ====
 =====================%>
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Account name:</strong>
-    <%= user.account_name %>
-  </p>
+<div id="<%= dom_id user %>" class="container mt-3 border p-3 bg-light rounded">
+      
+  <div class="row border-bottom py-2">
+    <div class="col-md-3">
+      <strong>アカウント名</strong>
+    </div>
+    <div class="col-md-7">
+      <%= user.account_name %>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
 
-  <p>
-    <strong>Password:</strong>
-    <%= user.password %>
-  </p>
 
-  <p>
-    <strong>Admin flag:</strong>
-    <%= user.admin_flag %>
-  </p>
-
+  <div class="row border-bottom py-2">
+    <div class="col-md-3">
+      <strong>ユーザタイプ</strong>
+    </div>
+    <div class="col-md-3">
+      <% if user.admin_flag == true %>
+        <%= "管理者" %>
+      <% else %>
+        <%= "利用者" %>
+      <% end %>
+    </div>
+  </div>
 </div>

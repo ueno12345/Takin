@@ -1,12 +1,23 @@
 <%# ===================
 ===  使用していない  ====
 =====================%>
-<h1>New user</h1>
+<div class="row">
+  <div class="col-lg-1 col-md-0"></div>
+  <div class="col-lg-10 col-md-12">
+    <% if flash[:color] == "red" %>
+      <div class="red-text"><%= flash[:notice] %></div>
+    <% elsif flash[:color] == "green" %>
+      <div class="green-text"><%= flash[:notice] %></div>
+    <% else %>
+      <div><%= flash[:notice] %></div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-12"><h2>新規ユーザ作成</h2></div>
+    </div>
+    <br>
+    <div class="col-lg-2 col-md-12"><%= link_to '戻る', users_path, class: 'btn btn-outline-primary py-2' %></div>
+  </div>
+</div>
 
 <%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
