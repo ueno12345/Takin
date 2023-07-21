@@ -65,7 +65,7 @@ gem "roo"
 # gem 'axlsx'
 gem 'wicked_pdf'
 
-gem 'rubyXL', '~> 3.4.3'
+gem 'rubyXL', '< 3.4.0'
 
 # For sorting
 gem "ransack"
