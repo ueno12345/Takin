@@ -1,7 +1,7 @@
-<%# TA時間割当(閲覧)画面 %>
+<%# TA勤務割当(閲覧)画面 %>
 <div class="row">
   <div class="col-lg-1 col-md-0"></div>
-  <%# TA時間割当閲覧上部の内容 %>
+  <%# TA勤務割当閲覧上部の内容 %>
   <div class="col-lg-10 col-md-12">
     <%# メッセージ %>
     <% if flash[:color] == "red" %>
@@ -12,9 +12,9 @@
       <div><%= flash[:notice] %></div>
     <% end %>
 
-    <%# TA時間割当閲覧 %>
+    <%# TA勤務割当閲覧 %>
     <div class="row">
-      <div class="col-lg-4 col-md-12"><h2>TA時間割当(閲覧)</h2></div>
+      <div class="col-lg-4 col-md-12"><h2>TA勤務割当(閲覧)</h2></div>
       <div class="col-lg-4 col-md-0"></div>
       <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "TA時間割当編集へ", course_assignments_path(@course), class: "btn btn-outline-success" %></div>
       <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "科目一覧画面へ", courses_path, class: "btn btn-outline-danger" %></div>
@@ -43,26 +43,25 @@
               </div>
             </div>
             <div class="col-12 text-center mt-5">
-              <%= f.submit "検索", class: "btn btn-primary px-4"%>
+              <%= f.submit "検索", class: "ms-5 btn btn-primary px-4"%>
               <%= link_to "クリア", course_path(@course), class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>
       </div>
     </div>
-  
   </div>
   <div class="col-lg-1 col-md-0"></div>
 </div>
 
-<%# TA勤務時間割当処理 %>
+<%# TA勤務割当処理 %>
 <div class="row mb-3">
   <div class="col-lg-1 col-md-0"></div>
   <div class="col-lg-10 col-md-12">
     <div class="card my-3">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-4 col-md-12 d-flex align-items-center">TA勤務時間割当処理</div>
+          <div class="col-lg-4 col-md-12 d-flex align-items-center">TA勤務割当処理</div>
           <div></div class="col-lg-8 col-md-0">
         </div>
       </div>
