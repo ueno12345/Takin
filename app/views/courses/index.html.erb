@@ -115,10 +115,10 @@
               </div>
               <div class="col">
                 <div clssa="row">
-                  <div class="m-1 col-md-10 col-lg-5">
+                  <div class="m-1 col-md-10 col-lg-5 no_return">
                     <%= link_to "編集", course_assignments_path(course), class: "btn btn-primary" %>
                   </div>
-                  <div class="m-1 col-md-10 col-lg-5">
+                  <div class="m-1 col-md-10 col-lg-5 no_return">
                     <%= link_to "閲覧", course_path(course), class: "btn btn-success" %>
                   </div>
                 </div>
@@ -131,3 +131,9 @@
   </div>
   <div class="col-lg-1 col-md-0"></div>
 </div>
+
+<style>
+.no_return {
+    white-space: nowrap;
+}
+</style>
