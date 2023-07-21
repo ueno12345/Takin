@@ -55,53 +55,51 @@
           <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :year_eq, "対象年度",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :year_eq, "対象年度", class: "mt-2" %></div>
                 <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"},class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :name_i_cont, "学期",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :term_i_cont, "学期", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください" ,class: "form-control", maxlength: "64" %></div>
               </div>  
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :number_i_cont, "講義番号",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :number_i_cont, "講義番号", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください" ,class: "form-control", maxlength: "6" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :name_i_cont, "科目名",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :name_i_cont, "科目名", class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control", maxlength: "128" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
                 <div class="col-4"><%= f.label :instructor_i_cont, "担当教員", class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" ,class: "form-control", maxlength: "128" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
                 <div class="col-4"><%= f.label :description_i_cont, "備考", class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-8"><%= f.search_field :description_i_cont, placeholder: "条件を入力してください" ,class: "form-control", maxlength: "128" %></div>
               </div>
             </div>
             <div class="col-12 text-center mt-5">
               <%= f.submit "検索", class: "ms-5 btn btn-primary px-4"%>
-              <%= link_to "クリア", new_course_path, class: "ms-5 btn btn-danger px-4" %>
+              <%= link_to "クリア", courses_path, class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>
       </div>
     </div>
-    
   </div>
   <div class="col-lg-1 col-md-0"></div>
 </div>
-
 
 <script>
   document.addEventListener("turbo:load", function(){
