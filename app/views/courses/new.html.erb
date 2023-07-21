@@ -1,7 +1,7 @@
 <%# 新規科目マスタデータ追加画面表示 %>
 <div class="row">
   <div class="col-lg-1 col-md-0"></div>
-  <%# 新規科目マスタデータ追加の画面上部の内容 タイトル 検索 追加 %>
+  <%# 科目マスタデータ追加の画面上部の内容 タイトル 検索 追加 %>
   <div class="col-lg-10 col-md-12">
     <% if flash[:color] == "red" %>
       <div class="red-text"><%= flash[:notice] %></div>
@@ -13,7 +13,7 @@
 
     <%# 新規科目と戻る関連 %>
     <div class="row">
-      <div class="col-lg-4 col-md-12"><h2>新規科目マスタデータ追加</h2></div>
+      <div class="col-lg-4 col-md-12"><h2>科目マスタデータ追加</h2></div>
       <div class="col-6"></div>
       <div class="col-lg-2 col-md-12">
         <%= link_to "科目一覧に戻る", courses_path, class: "btn btn-outline-danger" %>
@@ -23,7 +23,7 @@
     <%# 追加部分  %>
     <div class="card my-3">
       <div class="card-header">
-        新規科目マスタデータ追加処理部分
+        科目マスタデータ追加処理部分
       </div>
       <div class="card-body">
         <%# 登録方法を選択する %>
@@ -67,19 +67,19 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :number_i_cont, "科目番号",class: "mt-2" %></div>
-                <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
+                <div class="col-4"><%= f.label :number_i_cont, "講義番号",class: "mt-2" %></div>
+                <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :grade_i_cont, "授業科目名",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :name_i_cont, "科目名",class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :labo_i_cont, "担当教員", class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :instructor_i_cont, "担当教員", class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :instructor_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
@@ -90,8 +90,8 @@
               </div>
             </div>
             <div class="col-12 text-center mt-5">
-              <%= f.submit "検索", class: "btn btn-primary px-4"%>
-              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+              <%= f.submit "検索", class: "ms-5 btn btn-primary px-4"%>
+              <%= link_to "クリア", new_course_path, class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>

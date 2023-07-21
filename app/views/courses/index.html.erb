@@ -16,7 +16,7 @@
       <div class="col-lg-4 col-md-12"><h2>科目一覧画面</h2></div>
       <div class="col-lg-4 col-md-0"></div>
       <% if session[:admin_flag] == true %>
-        <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "新規科目データを追加", new_course_path, class: "btn btn-outline-primary" %></div>
+        <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "科目マスタデータ追加", new_course_path, class: "btn btn-outline-primary" %></div>
         <div class="col-lg-2 col-md-12 d-flex align-items-center my-1"><%= link_to "科目マスタデータ削除", index_destroy_courses_path, class: "btn btn-outline-danger" %></div>
       <% end %>
     </div>
@@ -31,25 +31,25 @@
           <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :year_eq, "対象年度",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :year_eq, "対象年度", class: "mt-2" %></div>
                 <div class="col-8"><%= f.select :year_eq, @select_years, {prompt:"対象年度を選択"},class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :term_i_cont, "学期",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :term_i_cont, "学期", class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :term_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>  
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :number_i_cont, "科目番号",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :number_i_cont, "講義番号", class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :number_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :name_i_cont, "授業科目名",class: "mt-2" %></div>
+                <div class="col-4"><%= f.label :name_i_cont, "科目名", class: "mt-2" %></div>
                 <div class="col-8"><%= f.search_field :name_i_cont, placeholder: "条件を入力してください" ,class: "form-control" %></div>
               </div>
             </div>
@@ -66,8 +66,8 @@
               </div>
             </div>
             <div class="col-12 text-center mt-5">
-              <%= f.submit "検索", class: "btn btn-primary px-4"%>
-              <%= link_to "クリア", teaching_assistants_path, class: "ms-5 btn btn-danger px-3" %>
+              <%= f.submit "検索", class: "ms-5 btn btn-primary px-4"%>
+              <%= link_to "クリア", courses_path, class: "ms-5 btn btn-danger px-4" %>
             </div>
           <% end %>
         </form>
@@ -92,8 +92,9 @@
           <div class="col my-auto fw-bolder h5">対象年度</div>
           <div class="col my-auto fw-bolder h5">学期</div>
           <div class="col my-auto fw-bolder h5">講義番号</div>
-          <div class="col my-auto fw-bolder h5">講義科目名</div>
+          <div class="col my-auto fw-bolder h5">科目名</div>
           <div class="col my-auto fw-bolder h5">担当教員</div>
+          <div class="col my-auto fw-bolder h5">備考</div>
           <div class="col my-auto fw-bolder h5">割当済時間/割当可能総時間(分)</div>
           <div class="col my-auto fw-bolder h5">操作</div>
         </div>
@@ -106,6 +107,7 @@
               <div class="col my-auto"><%= course.number %></div>
               <div class="col my-auto"><%= course.name %></div>
               <div class="col my-auto"><%= course.instructor %></div>
+              <div class="col my-auto"><%= course.description %></div>
               <div class="col my-auto">
                 <% assignments = course.assignments.includes(:work_hours) %>
                 <% sum_actual_working_minutes = assignments.map { |assignment| assignment.work_hours.sum(:actual_working_minutes) }.sum %>

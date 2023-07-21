@@ -15,48 +15,49 @@
 <div class="row">
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"><%= form.label :対象年度, style: "display: block",class: "mt-2"  %></div>
-        <div class="col-8"><%= form.number_field :year,class: "form-control" %></div>
+        <div class="col-4"><%= form.label :対象年度, style: "display: block", class: "mt-2"  %></div>
+        <div class="col-8"><%= form.number_field :year, class: "form-control" %></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"><%= form.label :学生番号, style: "display: block",class: "mt-2" %></div>
-        <div class="col-8"><%= form.text_field :number,class: "form-control" %></div>
+        <div class="col-4"><%= form.label :学生番号, style: "display: block", class: "mt-2" %></div>
+        <div class="col-8"><%= form.text_field :number, class: "form-control" %></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"><%= form.label :氏名, style: "display: block",class: "mt-2" %></div>
-        <div class="col-8"><%= form.text_field :name,class: "form-control" %></div>
+        <div class="col-4"><%= form.label :氏名, style: "display: block", class: "mt-2" %></div>
+        <div class="col-8"><%= form.text_field :name, class: "form-control" %></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"><%= form.label :学年, style: "display: block",class: "mt-2" %></div>
-        <div class="col-8"><%= form.text_field :grade,class: "form-control" %></div>
+        <div class="col-4"><%= form.label :学年, style: "display: block", class: "mt-2" %></div>
+        <div class="col-8"><%= form.text_field :grade, class: "form-control" %></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"><%= form.label :研究室, style: "display: block",class: "mt-2" %></div>
-        <div class="col-8"><%= form.text_field :labo,class: "form-control" %></div>
+        <div class="col-4"><%= form.label :研究室, style: "display: block", class: "mt-2" %></div>
+        <div class="col-8"><%= form.text_field :labo, class: "form-control" %></div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="row mb-3">
-        <div class="col-4"> <%= form.label :備考, style: "display: block",class: "mt-2" %></div>
-        <div class="col-8"><%= form.text_field :description,class: "form-control" %></div>
+        <div class="col-4"> <%= form.label :備考, style: "display: block", class: "mt-2" %></div>
+        <div class="col-8"><%= form.text_field :description, class: "form-control" %></div>
       </div> 
     </div>
 
     <div class="col-12 text-center mt-5">
       <%= form.submit "登録", class: "ms-5 btn btn-primary px-4"  %>
+      <%= link_to "クリア", new_teaching_assistant_path, class: "ms-5 btn btn-danger px-4" %>
     </div>
   <% end %>
 </div>

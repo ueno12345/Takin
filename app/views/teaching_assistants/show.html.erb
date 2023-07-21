@@ -43,7 +43,7 @@
           <%= search_form_for @q, html: {class:"row g-3"} do |f| %>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-4"><%= f.label :course_name_i_cont, "講義名" %></div>
+                <div class="col-4"><%= f.label :course_name_i_cont, "科目名" %></div>
                 <div class="col-8"><%= f.search_field :course_name_i_cont, placeholder: "条件を入力してください" %></div>
               </div>
             </div>
@@ -54,15 +54,13 @@
               </div>
             </div>
             <div class="col-12 text-center mt-5">
-              <%= f.submit "検索", class: "btn btn-primary px-4" %>
+              <%= f.submit "検索", class: "ms-5 btn btn-primary px-4" %>
               <%= link_to "クリア", teaching_assistant_path(params[:id]), class: "ms-5 btn btn-danger px-3" %>
             </div>
           <% end %>
         </form>
       </div>
     </div>
-
-
   </div>
   <div class="col-lg-1 col-md-0"></div>
 </div>

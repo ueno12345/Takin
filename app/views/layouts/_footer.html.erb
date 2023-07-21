@@ -31,9 +31,9 @@
             <li><%= link_to "TA一覧", teaching_assistants_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
             <li><%= link_to "科目一覧", courses_path ,class: "text-decoration-none ms-4 link-secondary" %></li>
             <% if session[:admin_flag] == true %>
-              <li><%= link_to "新規TAマスタデータ追加", new_teaching_assistant_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+              <li><%= link_to "TAマスタデータ追加", new_teaching_assistant_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
               <li><%= link_to "TAマスタデータ削除", index_destroy_teaching_assistants_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
-              <li><%= link_to "新規科目マスタデータ追加", new_course_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
+              <li><%= link_to "科目マスタデータ追加", new_course_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
               <li><%= link_to "科目マスタデータ削除", index_destroy_courses_path ,class: "text-decoration-none ms-4 link-secondary"%></li>
             <% end %>
           </ul>
