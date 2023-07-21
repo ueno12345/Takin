@@ -15,20 +15,7 @@
     <div class="row">
       <div class="col-lg-4 col-md-12"><h2>ユーザ情報</h2></div>
     </div>
-
-    <div class="row ">
-      <div class="col-lg-4 col-md-12"><%= link_to '編集', edit_user_path(@user), class: 'btn btn-outline-primary py-2' %></div>
-      <div class="col-lg-6 col-md-0"><%= button_to '削除', @user, method: :delete, class: 'btn btn-outline-primary py-2' %></div>
-      <div class="col-lg-2 col-md-12 d-flex align-items-center "><%= link_to '戻る', users_path, class: 'btn btn-outline-primary py-2' %></div>
-    </div>
-
+    <%= render @user %>
   </div>
 </div>
 
-<%= render @user %>
-
-<style>
-.button-margin {
-  margin-right: 2px;
-}
-</style>

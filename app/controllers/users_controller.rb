@@ -27,8 +27,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        #format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.html { redirect_to users_url, notice: "User was successfully created.",flash: {color: :green} }
+        format.html { redirect_to users_url, notice: "ユーザが作成されました",flash: {color: :green} }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +40,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_url, notice: "User was successfully updated.",flash: {color: :green} }
+        format.html { redirect_to users_url, notice: "ユーザが更新されました",flash: {color: :green} }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +54,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed.",flash: {color: :green} }
+      format.html { redirect_to users_url, notice: "ユーザが削除されました",flash: {color: :green} }
       format.json { head :no_content }
       #format.turbo_stream
 
