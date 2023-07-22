@@ -28,6 +28,7 @@ ja:
         admin_flag: "ユーザタイプ"
     errors:
       messages:	
+        taken: "この%{attribute}は既に使用されています"
         blank: "%{attribute}を入力してください"
         required: "%{attribute}を選択してください"
         not_a_number: "%{attribute}は正整数で入力してください"

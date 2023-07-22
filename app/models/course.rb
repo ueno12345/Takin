@@ -6,21 +6,21 @@ class Course < ApplicationRecord
   numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"},
   presence: true
   validates :term,
-  length: {maximum: 64, too_long: "%{attribute}は%{count}文字以下で入力してください"}
+  length: {maximum: 64, too_long: "%{attribute}は%{count}文字以内で入力してください"}
   validates :number,
   format: {with: /\A[a-zA-Z0-9]{6}\z/, message: "%{attribute}は半角英数字6文字で入力してください"},
   presence: true
   validates :name,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"},
   presence: true
   validates :instructor,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"},
   presence: true
   validates :time_budget,
   numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"},
   presence: true
   validates :description,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"}
 
   def self.ransackable_attributes(auth_object = nil)
     ["year", "term", "number", "name", "instructor", "description", "assignment_course_name", "assignment_course_term", "work_hour_dtstart", "work_hour_dtend"]

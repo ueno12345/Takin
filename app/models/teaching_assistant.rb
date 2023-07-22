@@ -13,12 +13,12 @@ class TeachingAssistant < ApplicationRecord
   format: {with: /\A[M|D]/, message: "%{attribute}はMまたはDで始まる必要があります"},
   presence: true
   validates :name,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"},
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"},
   presence: true
   validates :labo,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"}
   validates :description,
-  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以下で入力してください"}
+  length: {maximum: 128, too_long: "%{attribute}は%{count}文字以内で入力してください"}
 
   def self.ransackable_attributes(auth_object = nil)
     ["year", "name", "number", "grade", "labo", "description"]
