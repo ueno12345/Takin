@@ -186,11 +186,11 @@ class AssignmentsController < ApplicationController
 
       # 所属分岐　学年ごとに分岐されている
       if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then
-        worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+        worksheet_form1.add_cell(20, 15, @teaching_assistant.grade[-1])
         worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
         worksheet_form1.add_cell(19, 15, "前")
       elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then
-        worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+        worksheet_form1.add_cell(20, 15, @teaching_assistant.grade[-1])
         worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
         worksheet_form1.add_cell(19, 15, "後")
       else
@@ -250,12 +250,12 @@ class AssignmentsController < ApplicationController
 
             # 所属分岐
             if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then
-              worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+              worksheet_form1.add_cell(20, 15, @teaching_assistant.grade[1])
               worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
               worksheet_form1.add_cell(19, 15, "前")
 
             elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then
-              worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
+              worksheet_form1.add_cell(20, 15, @teaching_assistant.grade[1])
               worksheet_form1.add_cell(19, 2, "大学院環境生命自然科学研究科")
               worksheet_form1.add_cell(19, 15, "後")
 
@@ -292,34 +292,133 @@ class AssignmentsController < ApplicationController
 
       # 氏名追加処理
       worksheet_form2.add_cell(2, 4, @teaching_assistant.name)
-
-      # 研究室名
-      worksheet_form2.add_cell(1, 18, @teaching_assistant.labo + "研究室")
+      (4..12).each do |col|
+        cell = worksheet_form2[2][col]
+        next if cell.nil?
+        cell.change_border(:top, "thin")
+        cell.change_border(:left, "thin")
+        cell.change_border(:right, "thin")
+        cell.change_border(:bottom, "thin")
+      end
 
       # 学生番号
       worksheet_form2.add_cell(2, 18, @teaching_assistant.number)
+      (18..27).each do |col|
+        cell = worksheet_form2[2][col]
+        next if cell.nil?
+        cell.change_border(:top, "thin")
+        cell.change_border(:left, "thin")
+        cell.change_border(:right, "thin")
+        cell.change_border(:bottom, "thin")
+      end
+
+      # 指導教員
+      worksheet_form2.add_cell(6, 18, @teaching_assistant.labo[0..-2])
+      (18..27).each do |col|
+        cell = worksheet_form2[6][col]
+        next if cell.nil?
+        cell.change_border(:top, "thin")
+        cell.change_border(:left, "thin")
+        cell.change_border(:right, "thin")
+        cell.change_border(:bottom, "thin")
+      end
+
+      # 配属
+      worksheet_form2.add_cell(7, 4, "工学部（工）")
+      (4..9).each do |col|
+        cell = worksheet_form2[7][col]
+        next if cell.nil?
+        cell.change_border(:top, "thin")
+        cell.change_border(:left, "thin")
+        cell.change_border(:right, "thin")
+        cell.change_border(:bottom, "thin")
+      end
 
       # 所属分岐
       if @teaching_assistant.grade == "M1" or @teaching_assistant.grade == "M2" then
         # worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
         worksheet_form2.add_cell(1, 18, "大学院環境生命自然科学研究科")
+        (18..27).each do |col|
+          cell = worksheet_form2[1][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
         worksheet_form2.add_cell(8, 4, "TA")
+        (4..9).each do |col|
+          cell = worksheet_form2[8][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
         worksheet_form2.add_cell(3, 18, "1")
+        (18..19).each do |col|
+          cell = worksheet_form2[3][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
       elsif @teaching_assistant.grade == "D1" or @teaching_assistant.grade == "D2" or @teaching_assistant.grade == "D3" then
         # worksheet_form1.add_cell(20, 15, @teaching_assistant.grade)
         worksheet_form2.add_cell(1, 18, "大学院環境生命自然科学研究科")
+        (18..27).each do |col|
+          cell = worksheet_form2[1][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
         worksheet_form2.add_cell(8, 4, "TA")
+        (4..9).each do |col|
+          cell = worksheet_form2[8][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
         worksheet_form2.add_cell(3, 18, "2")
+        (18..19).each do |col|
+          cell = worksheet_form2[3][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
       else
         worksheet_form2.add_cell(8, 4, "SA")
+        (4..9).each do |col|
+          cell = worksheet_form2[8][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
         worksheet_form2.add_cell(3, 18, "なし")
+        (18..19).each do |col|
+          cell = worksheet_form2[3][col]
+          next if cell.nil?
+          cell.change_border(:top, "thin")
+          cell.change_border(:left, "thin")
+          cell.change_border(:right, "thin")
+          cell.change_border(:bottom, "thin")
+        end
       end
 
       # 勤務時間を記入
       @assignments.each do |assignment|
         @work_hours = WorkHour.where(assignment_id: assignment.id).where(dtstart: date_start..).where(dtend: ..date_end).order(:dtstart)
         @course = Course.where(id: assignment.course_id)
-        teachers = teachers + @course.first.instructor + "  "
+        teachers = teachers + @course.first.instructor + " "
 
         @work_hours.each do |work_hour|
           year = work_hour.dtstart.strftime('%Y').to_i
@@ -337,17 +436,28 @@ class AssignmentsController < ApplicationController
 
           line = months_start[month][0] + week_count*2
           row = months_start[month][1]+day_of_week[work_hour.dtstart.wday]
-          
-          #if  worksheet_form2[line][row].value != "" then
-          #  writed_data = worksheet_form2[line][row].value
-          #  worksheet_form2.add_cell(line, row, writed_data.to_i+work_hour.actual_working_minutes)
-          #else 
-          #  worksheet_form2.add_cell(line, row, work_hour.actual_working_minutes )
-          #end
+
+          if worksheet_form2[line][row].value != "" then
+            writed_data = worksheet_form2[line][row].value
+            total_hours = writed_data.to_i + work_hour.actual_working_minutes
+            worksheet_form2.add_cell(line, row, total_hours.to_s)
+            worksheet_form2[line][row].change_border(:top, "thin")
+          else 
+            worksheet_form2.add_cell(line, row, work_hour.actual_working_minutes.to_s )
+            worksheet_form2[line][row].change_border(:top, "thin")
+          end
           count += 1
         end
       end
       worksheet_form2.add_cell(5, 18, teachers)
+      (18..27).each do |col|
+        cell = worksheet_form2[5][col]
+        next if cell.nil?
+        cell.change_border(:top, "thin")
+        cell.change_border(:left, "thin")
+        cell.change_border(:right, "thin")
+        cell.change_border(:bottom, "thin")
+      end
       workbook_form2.write("public/excel/writed_form2.xlsx")
       # workbook_form2.write("public/excel/writed_form2.pdf")
     end
