@@ -29,20 +29,22 @@
     </div>
   </div>
 
-  <div class="row border-bottom py-2">
-    <div class="col-md-3">
-      <strong>ユーザタイプ</strong>
+  <% if user.id != 1 %>
+    <div class="row border-bottom py-2">
+      <div class="col-md-3">
+        <strong>ユーザタイプ</strong>
+      </div>
+      <div class="col-md-7">
+        <% if user.admin_flag %>
+          <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], true)%>
+        <% else %>
+          <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], false)%>
+        <% end %>
+      </div>
     </div>
-    <div class="col-md-7">
-      <% if user.admin_flag %>
-        <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], true)%>
-      <% else %>
-        <%= select_tag :admin_flag, options_for_select([['管理者', true], ['利用者', false]], false)%>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
   
-  <div>
+  <div class="mt-3">
     <%= form.submit @user.new_record? ? '登録' : '更新', class: "btn btn-primary px-4" %>
   </div>
 <% end %>

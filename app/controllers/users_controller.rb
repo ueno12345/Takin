@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(admin_flag: params[:admin_flag] == 'true'))
 
     respond_to do |format|
       if @user.save
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params.merge(admin_flag: params[:admin_flag] == 'true'))
         format.html { redirect_to users_url, notice: "ユーザが更新されました",flash: {color: :green} }
         format.json { render :show, status: :ok, location: @user }
       else
