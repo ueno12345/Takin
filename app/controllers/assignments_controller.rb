@@ -436,13 +436,16 @@ class AssignmentsController < ApplicationController
 
           line = months_start[month][0] + week_count*2
           row = months_start[month][1]+day_of_week[work_hour.dtstart.wday]
-          
-          # if  worksheet_form2[line][row].value != "" then
-          #   writed_data = worksheet_form2[line][row].value
-          #   worksheet_form2.add_cell(line, row, writed_data.to_i+work_hour.actual_working_minutes)
-          # else 
-          #   worksheet_form2.add_cell(line, row, work_hour.actual_working_minutes )
-          # end
+
+          if worksheet_form2[line][row].value != "" then
+            writed_data = worksheet_form2[line][row].value
+            total_hours = writed_data.to_i + work_hour.actual_working_minutes
+            worksheet_form2.add_cell(line, row, total_hours.to_s)
+            worksheet_form2[line][row].change_border(:top, "thin")
+          else 
+            worksheet_form2.add_cell(line, row, work_hour.actual_working_minutes.to_s )
+            worksheet_form2[line][row].change_border(:top, "thin")
+          end
           count += 1
         end
       end
