@@ -27,11 +27,6 @@
     <div class="col-md-3">
       <%= form.text_field :password %>
     </div>
-    <div class="col-md-3">
-      <% if !user.new_record? %>
-          注：空欄の場合は元パスワードになります．
-      <% end %>
-    </div>
   </div>
 
   <% if user.id != 1 %>
