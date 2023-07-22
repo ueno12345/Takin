@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
 
-  before_action :login, only: %i[ index show new create edit update deatroy]
+  before_action :login, only: %i[index show new create edit update destroy output_index]
 
   # 使用中
   # GET /assignments or /assignments.json
@@ -106,19 +106,22 @@ class AssignmentsController < ApplicationController
   end
 
   def output_index
-    @teaching_assistant = TeachingAssistant.find(params[:id])
-    @assignments = Assignment.where(teaching_assistant_id: params[:id])
-    date_start = Date.new(@teaching_assistant.year, 4, 1) 
-    date_end = Date.new(@teaching_assistant.year+1, 3, 31) 
-    count = WriteForm1(date_start, date_end)
-    WriteForm2(date_start, date_end)
+    if params[:id].to_i == 1
+      render plain: "アクセスが制限されています", status: :forbidden
+    else
+      @teaching_assistant = TeachingAssistant.find(params[:id])
+      @assignments = Assignment.where(teaching_assistant_id: params[:id])
+      date_start = Date.new(@teaching_assistant.year, 4, 1) 
+      date_end = Date.new(@teaching_assistant.year+1, 3, 31) 
+      count = WriteForm1(date_start, date_end)
+      WriteForm2(date_start, date_end)
 
-    @output_excel1_files_name = [];
-    for i in 1..count do
-      @output_excel1_files_name.push("/excel/writed_form1-#{i}.xlsx")
+      @output_excel1_files_name = [];
+      for i in 1..count do
+        @output_excel1_files_name.push("/excel/writed_form1-#{i}.xlsx")
+      end
+      @output_excel2_file_name = "/excel/writed_form2.xlsx"
     end
-    @output_excel2_file_name = "/excel/writed_form2.xlsx"
-
   end
 
   def output

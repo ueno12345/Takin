@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :login, only: %i[ index]
+  before_action :login, only: %i[index]
   
   def index 
   
