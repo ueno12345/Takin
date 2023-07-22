@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :admin_judge, only: %i[ index]
+  before_action :admin_judge, only: %i[ index new edit show ]
 
 
   # GET /users or /users.json

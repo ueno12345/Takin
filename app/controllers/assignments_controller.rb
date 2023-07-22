@@ -169,8 +169,17 @@ class AssignmentsController < ApplicationController
 
       # 氏名追加処理
       worksheet_form1.add_cell(9, 20, @teaching_assistant.labo[0...-1])
-      # worksheet[9][20].change_border(:bottom, "medium")
+      (20..28).each do |col|
+        cell = worksheet_form1[9][col]
+        next if cell.nil?
+        cell.change_border(:bottom, "thin")
+      end
       worksheet_form1.add_cell(18, 2, @teaching_assistant.name)
+      (2..12).each do |col|
+        cell = worksheet_form1[18][col]
+        next if cell.nil?
+        cell.change_border(:bottom, "thin")
+      end
 
       # 学生番号追加処理
       worksheet_form1.add_cell(18, 21, @teaching_assistant.number)
@@ -202,11 +211,12 @@ class AssignmentsController < ApplicationController
           worksheet_form1.add_cell(36+count, 20, work_hour.actual_working_minutes )
           sum_work_time = sum_work_time + work_hour.actual_working_minutes
           (1..35).each do |col|
-            cell = worksheet_form1[36+count, col]
-            cell.change_border(:top, 'medium')
-            cell.change_border(:left, 'medium')
-            cell.change_border(:right, 'medium')
-            cell.change_border(:bottom, 'medium')
+            cell = worksheet_form1[36+count][col]
+            next if cell.nil?
+            cell.change_border(:top, "thin")
+            cell.change_border(:left, "thin")
+            cell.change_border(:right, "thin")
+            cell.change_border(:bottom, "thin")
           end
           count += 1
 
@@ -222,9 +232,18 @@ class AssignmentsController < ApplicationController
             worksheet_form1 = workbook_form1[1]
 
             # 氏名追加処理
-            worksheet_form1.add_cell(9, 20, @teaching_assistant.name)
-            # worksheet[9][20].change_border(:bottom, "medium")
+            worksheet_form1.add_cell(9, 20, @teaching_assistant.labo[0...-1])
+            (20..28).each do |col|
+              cell = worksheet_form1[9][col]
+              next if cell.nil?
+              cell.change_border(:bottom, "thin")
+            end
             worksheet_form1.add_cell(18, 2, @teaching_assistant.name)
+            (2..12).each do |col|
+              cell = worksheet_form1[18][col]
+              next if cell.nil?
+              cell.change_border(:bottom, "thin")
+            end
 
             # 学生番号追加処理
             worksheet_form1.add_cell(18, 21, @teaching_assistant.number)
