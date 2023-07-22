@@ -14,19 +14,20 @@
     </div>
     <div class="col my-auto" style="display:flex; align-items: center; justify-content:center;">
       <div class="row">
-        <div class="col-md-12 col-lg-6"><%= link_to "編集", edit_course_work_hour_path(course_id: Assignment.where(id: work_hour.assignment_id).first.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary px-4 ms-1 my-1', form: { style: 'display: inline' } %></div>
-        <div class="col-md-12 col-lg-6"><%= button_to "削除", destroy_course_assignments_path( @course=Course.where(id:Assignment.where(id: work_hour.assignment_id).first.course_id).first , assignment=Assignment.where(id: work_hour.assignment_id).first, work_hour), method: :delete, class: 'btn btn-danger px-4 ms-1 my-1', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %></div>
-        <div class="col-md-12 col-lg-6">
+        <div class="col-md-12 col-lg-6 my-1"><%= link_to "編集", edit_course_work_hour_path(course_id: Assignment.where(id: work_hour.assignment_id).first.course_id, id: work_hour.id), method: :get, class: 'btn btn-primary w-auto', form: { style: 'display: inline' } %></div>
+        <div class="col-md-12 col-lg-6 my-1"><%= button_to "削除", destroy_course_assignments_path( @course=Course.where(id:Assignment.where(id: work_hour.assignment_id).first.course_id).first , assignment=Assignment.where(id: work_hour.assignment_id).first, work_hour), method: :delete, class: 'btn btn-danger w-auto', form: { style: 'display: inline' }, id:'delete-buttom', form: { data: { turbo_confirm: "本当に削除しますか？" } } %></div>
+        <div class="col-md-12 col-lg-6 my-1">
           <% if assignment.teaching_assistant.id != 1 %>
             <%= link_to "個人画面", teaching_assistant_path(assignment.teaching_assistant),class: 'btn btn-success w-auto no_return', target: '_blank'%>
             <%#= link_to "個人<br>画面".html_safe, teaching_assistant_path(assignment.teaching_assistant),class: 'btn btn-success w-auto no_return', target: '_blank'%>
           <% end %>
         </div>
+        <div class="col-md-12 col-lg-6 my-1">
           <% if assignment.teaching_assistant.id != 1 %>
             <%= link_to "帳票出力", index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary w-auto no_return' %>
             <%#= link_to "帳票<br>出力".html_safe, index_output_excel_path(@teaching_assistant = assignment.teaching_assistant), target: :_blank, rel: "noopener noreferrer"  ,class: 'btn btn-secondary w-auto no_return' %>
-          <% end %>        
-        </div>
+          <% end %>
+        </div>        
       </div>
     </div>
   </div>

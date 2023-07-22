@@ -51,6 +51,6 @@ class WorkHour < ApplicationRecord
   private
 
   def overlap?(other_time)
-    dtstart <= other_time.dtend && other_time.dtstart <= dtend
+    dtstart < other_time.dtend && other_time.dtstart < dtend
   end
 end
