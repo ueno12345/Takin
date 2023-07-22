@@ -36,13 +36,15 @@ class Course < ApplicationRecord
     CSV.foreach(file.path, headers: true) do |row|
       course = find_by(year: row[1].to_i, number: row[3])
       if course
-        course.update(year: row[1].to_i, term: row[2], number: row[3], name: row[4], instructor: row[5], time_budget: row[6], description: row[7])
+        # course.update(year: row[1].to_i, term: row[2], number: row[3], name: row[4], instructor: row[5], time_budget: row[6], description: row[7])
       else
         course = self.new(year: row[1].to_i, term: row[2], number: row[3], name: row[4], instructor: row[5], time_budget: row[6], description: row[7])
         course.save
+        @course_import_flag = true
         @assignment = Assignment.new({course_id:course.id, teaching_assistant_id:"1", description:"dammy"})
         @assignment.save
       end
     end
+    return @course_import_flag
   end
 end

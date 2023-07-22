@@ -9,6 +9,7 @@
 
     <%= form_with url: login_path do %>
     <div class="row">
+        <div class="red-text"><%= flash[:error] %></div>
         <div class="col-lg-4 col-md-2 col-sm-0"></div>
         <div class="col-lg-4 col-md-8 col-sm-12 text-center">
             <div class="my-2">
