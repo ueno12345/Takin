@@ -43,6 +43,6 @@
   </div>
   
   <div>
-    <%= form.submit %>
+    <%= form.submit @user.new_record? ? '登録' : '更新', class: "btn btn-primary px-4" %>
   </div>
 <% end %>

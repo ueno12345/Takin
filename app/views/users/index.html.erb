@@ -1,6 +1,7 @@
 <%# ===================
 ===  使用していない  ====
 =====================%>
+<p style="color: green"></p>
 <div class="row">
   <div class="col-lg-1 col-md-0"></div>
   <div class="col-lg-10 col-md-12">
@@ -15,13 +16,13 @@
     <div class="row">
       <div class="col-lg-4 col-md-12"><h2>ユーザ一覧</h2></div>
     </div>
-    <br>
-    <div class="col-lg-2 col-md-12"><%= link_to '新規作成', new_user_path, class: 'btn btn-outline-primary py-2' %></div>
   </div>
 </div>
 
 
 <div id="users" class="container mt-3">
+  <div class="col-lg-2 col-md-12"><%= link_to '新規作成', new_user_path, class: 'btn btn-outline-primary py-2' %></div>
+  <br>
   <div class="row border-bottom py-2 font-weight-bold">
     <div class="col-md-3">
      <strong>アカウント名</strong>

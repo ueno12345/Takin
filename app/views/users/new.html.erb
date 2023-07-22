@@ -1,16 +1,6 @@
-<%# ===================
-===  使用していない  ====
-=====================%>
 <div class="row">
   <div class="col-lg-1 col-md-0"></div>
   <div class="col-lg-10 col-md-12">
-    <% if flash[:color] == "red" %>
-      <div class="red-text"><%= flash[:notice] %></div>
-    <% elsif flash[:color] == "green" %>
-      <div class="green-text"><%= flash[:notice] %></div>
-    <% else %>
-      <div><%= flash[:notice] %></div>
-    <% end %>
 
     <div class="row">
       <div class="col-lg-4 col-md-12"><h2>新規ユーザ作成</h2></div>
@@ -21,3 +11,5 @@
 </div>
 
 <%= render "form", user: @user %>
+
+
