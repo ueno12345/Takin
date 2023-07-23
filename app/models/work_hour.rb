@@ -2,6 +2,7 @@ class WorkHour < ApplicationRecord
   belongs_to :assignment
   has_one :teaching_assistant, through: :assignment
   has_one :course, through: :assignment
+  validates :date, presence: true
   validates :dtstart, presence: true
   validates :dtend, comparison: {greater_than: :dtstart, message: "%{attribute}は開始時刻よりも後にして下さい"}, presence: true
   validates :actual_working_minutes, numericality: {in: 1..10000, message: "%{attribute}は1以上10000以下で入力してください"}, presence: true
