@@ -1,9 +1,8 @@
 require 'bcrypt'
 
 # ユーザ名とパスワード
-# Example から変更
-name = "Example"
-password = "Example"
+name = "SDM"
+password = "SDM"
 flag = true
 
 hashed_password = BCrypt::Password.create(password)
