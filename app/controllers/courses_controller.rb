@@ -88,7 +88,7 @@ class CoursesController < ApplicationController
 
   def import
     @course_import_flag = false
-    Course.import(params[:file])
+    @course_import_flag = Course.import(params[:file])
     if params[:file].nil?
       redirect_to new_course_url, notice: "登録する科目マスタデータCSVファイルを選択してください", flash: {color: :red}
     else

@@ -95,7 +95,7 @@ class TeachingAssistantsController < ApplicationController
 
   def import
     @teaching_assistant_import_flag = false
-    TeachingAssistant.import(params[:file])
+    @teaching_assistant_import_flag = TeachingAssistant.import(params[:file])
     if params[:file].nil?
       redirect_to new_teaching_assistant_url, notice: "登録するTAマスタデータCSVファイルを選択してください", flash: {color: :red}
     else
